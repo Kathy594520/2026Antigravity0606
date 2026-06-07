@@ -33,5 +33,6 @@ GAS/
 *.jpg
 *.jpeg
 *.pdf
+!GEMS/output/*_個人命盤天賦報告.pdf
 output/test_docx.docx
 
