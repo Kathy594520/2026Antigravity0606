@@ -33,6 +33,5 @@ GAS/
 *.jpg
 *.jpeg
 *.pdf
-!GEMS/output/陳文姿_個人命盤天賦報告.pdf
 output/test_docx.docx
 
