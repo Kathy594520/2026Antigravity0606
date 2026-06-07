@@ -7,7 +7,7 @@ GEMS Bazi Assets Generator
 2. HTML 互動式簡報 (毛玻璃感、漸層流光、含五行模擬與流年滑桿)
 3. Obsidian 筆記 (.md 格式，包含 YAML frontmatter)
 4. bazi_data.json (供前端 Web Dashboard 讀取與動態渲染)
-支援單人模式與雙人合盤模式。
+純化為單人命盤天賦報告分析。
 """
 
 import os
@@ -48,7 +48,7 @@ class BaziPDF(FPDF):
         self.set_text_color(120, 120, 120)
         self.cell(0, 10, f"第 {self.page_no()} 頁", align="C", new_x="LMARGIN", new_y="NEXT")
 
-def draw_pdf_profile(pdf, data, is_partner=False):
+def draw_pdf_profile(pdf, data):
     # 確保起點在最左側
     pdf.set_x(pdf.l_margin)
     
@@ -56,8 +56,7 @@ def draw_pdf_profile(pdf, data, is_partner=False):
     title_color = COLORS.get(data["daymaster"][0], (0, 102, 153))
     pdf.set_font("msjh", size=16)
     pdf.set_text_color(*title_color)
-    prefix = "合作夥伴：" if is_partner else "主命主："
-    pdf.cell(pdf.epw, 10, f"{prefix}{data['name']} 的命盤分析", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(pdf.epw, 10, f"{data['name']} 的命盤分析", new_x="LMARGIN", new_y="NEXT")
     pdf.ln(2)
 
     # 基本資訊區
@@ -176,12 +175,9 @@ def draw_pdf_profile(pdf, data, is_partner=False):
 
 def build_html_presentation(data, output_html_path):
     """
-    生成毛玻璃、流光色彩、極致美感的 HTML 互動式簡報
+    生成毛玻璃、流光色彩、極致美感的 HTML 互動式簡報 (純單人)
     """
-    has_partner = "partner" in data
-    
-    # 建構 HTML 內容
-    html_title = f"{data['name']} - 個人命盤天賦簡報" if not has_partner else f"{data['name']} & {data['partner']['name']} - 合作契合度命盤簡報"
+    html_title = f"{data['name']} - 個人命盤天賦簡報"
     
     # 將資料序列化為 JSON 供前端 JS 使用
     bazi_json_str = json.dumps(data, ensure_ascii=False)
@@ -487,7 +483,7 @@ def build_html_presentation(data, output_html_path):
             color: white;
         }}
 
-        /* 自訂樣式供合盤卡片 */
+        /* 自訂樣式 */
         .badge {{
             display: inline-block;
             padding: 4px 12px;
@@ -615,23 +611,6 @@ def build_html_presentation(data, output_html_path):
                 </div>
             </div>
 
-            <!-- 雙人合盤投影片 (如果有合盤數據) -->
-            {"<div class=\"slide\" id=\"slide-4\">" if has_partner else ""}
-                {"<h2 class=\"slide-title\">👥 雙人合作契合度與合盤分析</h2>" if has_partner else ""}
-                {"<div class=\"slide-grid\">" if has_partner else ""}
-                    {"<div class=\"glass-panel\">" if has_partner else ""}
-                        {"<h3>雙方能量對比</h3>" if has_partner else ""}
-                        {"<p><strong>主命主：</strong>" + data['name'] + " (" + data['daymaster'] + ")</p>" if has_partner else ""}
-                        {"<p><strong>夥伴：</strong>" + (data['partner']['name'] if has_partner else '') + " (" + (data['partner']['daymaster'] if has_partner else '') + ")</p>" if has_partner else ""}
-                        {"<div id=\"partner-bar-comparison\" style=\"margin-top: 15px;\"></div>" if has_partner else ""}
-                    {"</div>" if has_partner else ""}
-                    {"<div class=\"glass-panel\">" if has_partner else ""}
-                        {"<h3>溝通避坑與合作指南</h3>" if has_partner else ""}
-                        {"<p id=\"relation-analysis-text\" style=\"font-size:14px; line-height:1.7;\"></p>" if has_partner else ""}
-                    {"</div>" if has_partner else ""}
-                {"</div>" if has_partner else ""}
-            {"</div>" if has_partner else ""}
-
             <!-- 最後一頁：免責聲明與下載 -->
             <div class="slide" id="slide-final">
                 <h2 class="slide-title">✨ 踏上自我覺察之旅</h2>
@@ -681,7 +660,7 @@ def build_html_presentation(data, output_html_path):
                 }}
             }});
 
-            counter.textContent = `SLIDE ${{currentSlideIndex + 1}} / slide數量為 ${{slides.length}}`;
+            counter.textContent = `SLIDE ${{currentSlideIndex + 1}} / ${{slides.length}}`;
             prevBtn.disabled = currentSlideIndex === 0;
             if (currentSlideIndex === slides.length - 1) {{
                 nextBtn.textContent = 'Finish';
@@ -770,35 +749,6 @@ def build_html_presentation(data, output_html_path):
                     </div>
                 `;
             }});
-
-            // 渲染雙人合盤對比 (如果有的話)
-            const partnerComparison = document.getElementById('partner-bar-comparison');
-            if (partnerComparison && baziData.partner) {{
-                partnerComparison.innerHTML = '';
-                // 比較表渲染
-                baziData.elements.forEach((el, idx) => {{
-                    const partnerEl = baziData.partner.elements.find(e => e.name === el.name) || {{score: 0}};
-                    partnerComparison.innerHTML += `
-                        <div style="margin-bottom: 10px; font-size:13px;">
-                            <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                                <span>${{el.name}}</span>
-                                <span>${{baziData.name}}: ${{el.score}}分 | ${{baziData.partner.name}}: ${{partnerEl.score}}分</span>
-                            </div>
-                            <div style="display:flex; gap:4px;">
-                                <div style="flex:1; height:6px; background:rgba(255,255,255,0.05); border-radius:3px; overflow:hidden;">
-                                    <div style="height:100%; width:${{Math.min(el.score/2.4, 100)}}%; background-color:#38bdf8;"></div>
-                                </div>
-                                <div style="flex:1; height:6px; background:rgba(255,255,255,0.05); border-radius:3px; overflow:hidden;">
-                                    <div style="height:100%; width:${{Math.min(partnerEl.score/2.4, 100)}}%; background-color:#f43f5e;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }});
-
-                // 關係分析
-                document.getElementById('relation-analysis-text').textContent = baziData.relation_analysis || '分析合作默契、溝通模式與互補之處。';
-            }}
         }}
 
         // 流年模擬器邏輯
@@ -871,11 +821,8 @@ def build_html_presentation(data, output_html_path):
 
 def build_obsidian_markdown(data, output_md_path):
     """
-    生成 Obsidian YAML 元數據格式筆記
+    生成 Obsidian YAML 元數據格式筆記 (純單人)
     """
-    has_partner = "partner" in data
-    
-    # 建立五行 YAML 對應
     elements_yaml = {}
     for el in data.get("elements", []):
         elements_yaml[el["name"]] = el["score"]
@@ -890,17 +837,6 @@ def build_obsidian_markdown(data, output_md_path):
         "scores": elements_yaml,
         "date_analyzed": "2026-06-07"
     }
-    
-    if has_partner:
-        partner_elements_yaml = {}
-        for el in data["partner"].get("elements", []):
-            partner_elements_yaml[el["name"]] = el["score"]
-        yaml_header["partner"] = {
-            "name": data["partner"]["name"],
-            "gender": data["partner"].get("gender", "男"),
-            "daymaster": data["partner"]["daymaster"],
-            "scores": partner_elements_yaml
-        }
 
     md_content = []
     md_content.append("---")
@@ -939,16 +875,6 @@ def build_obsidian_markdown(data, output_md_path):
     for i, q in enumerate(data.get("questions", [])):
         md_content.append(f"{i+1}. {q}")
     md_content.append("")
-    
-    if has_partner:
-        md_content.append("---")
-        md_content.append(f"# 與 {data['partner']['name']} 的雙人合盤分析")
-        md_content.append("")
-        md_content.append(f"**夥伴命日元**: {data['partner']['daymaster']}")
-        md_content.append("")
-        md_content.append("## 關係分析與合作指南")
-        md_content.append(data.get("relation_analysis", ""))
-        md_content.append("")
         
     with open(output_md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md_content))
@@ -1005,24 +931,6 @@ def main():
     
     # 繪製主命盤
     draw_pdf_profile(pdf, data)
-    
-    # 如果有合盤夥伴，在第二頁繪製夥伴與關係分析
-    if "partner" in data:
-        pdf.add_page()
-        draw_pdf_profile(pdf, data["partner"], is_partner=True)
-        
-        pdf.ln(5)
-        pdf.set_x(pdf.l_margin)
-        pdf.set_font("msjh", size=13)
-        pdf.set_text_color(153, 51, 51)
-        pdf.cell(pdf.epw, 10, "雙人合盤關係分析與合作指南", new_x="LMARGIN", new_y="NEXT")
-        pdf.ln(2)
-        
-        pdf.set_font("msjh", size=10)
-        pdf.set_text_color(50, 50, 50)
-        pdf.set_x(pdf.l_margin)
-        pdf.multi_cell(pdf.epw, 7, text=data.get("relation_analysis", "無關係分析數據"))
-        pdf.ln(5)
         
     # 免責聲明
     pdf.set_x(pdf.l_margin)

@@ -583,23 +583,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 雙人合盤 (如有) -->
-                    <div class="glass-card" id="relation-card" style="display:none;">
-                        <h3 class="card-title">👥 雙人契合度與合作避坑指南</h3>
-                        <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px;">
-                            <div>
-                                <h4 style="color:var(--primary); font-size:15px; margin-bottom:12px;">主命主與夥伴五行對比</h4>
-                                <div id="relation-comparison-bars">
-                                    <!-- 雙人五行對照條 -->
-                                </div>
-                            </div>
-                            <div>
-                                <h4 style="color:var(--accent); font-size:15px; margin-bottom:12px;">合作默契與溝通方針</h4>
-                                <p id="relation-analysis-content" style="font-size:14.5px; line-height:1.7; color:#cbd5e1;"></p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -815,7 +798,7 @@
                 ],
                 "questions": [
                     "我現在所承受的壓力和責任，有多少是我真正需要扛的，又有多少是我因為怕別人失望（官殺）而硬塞給自己的？",
-                    "面對繁重的目標，今天我有沒有放下宏大的思考，只專注去完成一個小而具體的執行步驟（補木）？"
+                    "面對繁重的目標，今天我有民有放下宏大的思考，只專注去完成一個小而具體的執行步驟（補木）？"
                 ]
             }
         };
@@ -840,13 +823,11 @@
             });
             document.getElementById(tabId).classList.add('active');
             
-            // 找到觸發的按鈕並啟動其 active 樣式
             const tabBtn = Array.from(document.querySelectorAll('.nav-tab')).find(btn => 
                 btn.getAttribute('onclick').includes(tabId)
             );
             if (tabBtn) tabBtn.classList.add('active');
 
-            // 如果切換到模擬器，重設模擬狀態
             if (tabId === 'sim-tab') {
                 resetSimulation();
             }
@@ -898,14 +879,6 @@
 
         function loadDemoData(key) {
             activeBaziData = DEMO_DATA[key];
-            // 模擬合盤：如果載入陳文姿，自動將羅立宏設為 partner
-            if (key === 'chen') {
-                activeBaziData.partner = DEMO_DATA.luo;
-                activeBaziData.relation_analysis = "陳文姿（辛金）與羅立宏（庚金）同屬金命，性格皆具堅毅與講義氣的特點，能形成高度的價值觀共識。陳文姿命盤水（食傷）極旺，具備極強的引導力與教學傳播才華，能以生動靈活的方式啟發他人；而羅立宏命盤土火旺、水弱、木為0，具備厚實的資源吸收力與紀律性，但缺乏創意宣洩與實踐切片。在合作中，陳文姿的壬水傷官能為羅立宏帶來急需的智慧火花與創意引導，協助其「洩秀」並啟發思維；羅立宏強健的自律與執行架構則能為陳文姿的創意提供穩固的體制支撐。溝通時，因雙方木（財星）皆偏弱，應特別注意「將宏大構想拆解為每日具體小目標」以落實行動。";
-            } else {
-                delete activeBaziData.partner;
-                delete activeBaziData.relation_analysis;
-            }
             renderBaziDashboard();
         }
 
@@ -936,18 +909,15 @@
             const barContainer = document.getElementById('bazi-bars-container');
             barContainer.innerHTML = '';
             
-            // 獲取最大分數以作比例尺
             const scores = data.elements.map(e => e.score);
             const maxScore = Math.max(...scores, 100);
             
-            // 圓環圖 SVG 計算
             const donutSvg = document.getElementById('bazi-donut-chart');
-            // 清理舊的環形區塊
             const oldPaths = donutSvg.querySelectorAll('path');
             oldPaths.forEach(p => p.remove());
             
             let totalScore = scores.reduce((a, b) => a + b, 0);
-            let currentAngle = -90; // 從頂部開始
+            let currentAngle = -90;
             
             data.elements.forEach((el, index) => {
                 const pct = (el.score / maxScore) * 100;
@@ -971,7 +941,6 @@
                     </div>
                 `;
                 
-                // 環狀圖 SVG path 繪製 (半徑 80, 圓心 110)
                 if (totalScore > 0 && el.score > 0) {
                     const angleSweep = (el.score / totalScore) * 360;
                     const nextAngle = currentAngle + angleSweep;
@@ -985,7 +954,6 @@
                     const y2 = 110 + 80 * Math.sin(rad2);
                     
                     const largeArc = angleSweep > 180 ? 1 : 0;
-                    
                     const pathD = `M ${x1} ${y1} A 80 80 0 ${largeArc} 1 ${x2} ${y2}`;
                     
                     const pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -1028,45 +996,6 @@
                     </div>
                 `;
             });
-
-            // 6. 渲染合盤 (如果適用)
-            const relationCard = document.getElementById('relation-card');
-            if (data.partner && data.relation_analysis) {
-                relationCard.style.display = 'block';
-                const relationBars = document.getElementById('relation-comparison-bars');
-                relationBars.innerHTML = '';
-                
-                data.elements.forEach(el => {
-                    const partnerEl = data.partner.elements.find(e => e.name === el.name) || {score: 0};
-                    let color = 'var(--text-muted)';
-                    if (el.name === '水') color = 'var(--color-water)';
-                    if (el.name === '木') color = 'var(--color-wood)';
-                    if (el.name === '火') color = 'var(--color-fire)';
-                    if (el.name === '土') color = 'var(--color-earth)';
-                    if (el.name === '金') color = 'var(--color-metal)';
-
-                    relationBars.innerHTML += `
-                        <div style="margin-bottom:12px; font-size:13px;">
-                            <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                                <span>${el.name}</span>
-                                <span>${data.name}: ${el.score} | ${data.partner.name}: ${partnerEl.score}</span>
-                            </div>
-                            <div style="display:flex; gap:6px;">
-                                <div style="flex:1; height:6px; background:rgba(255,255,255,0.04); border-radius:3px; overflow:hidden;">
-                                    <div style="height:100%; width:${(el.score/maxScore)*100}%; background-color:${color};"></div>
-                                </div>
-                                <div style="flex:1; height:6px; background:rgba(255,255,255,0.04); border-radius:3px; overflow:hidden;">
-                                    <div style="height:100%; width:${(partnerEl.score/maxScore)*100}%; background-color:#ef4444;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                document.getElementById('relation-analysis-content').textContent = data.relation_analysis;
-            } else {
-                relationCard.style.display = 'none';
-            }
         }
 
         // --- 模擬器邏輯 ---
@@ -1092,7 +1021,6 @@
             document.getElementById('lbl-sim-earth').textContent = (eVal >= 0 ? '+' : '') + eVal;
             document.getElementById('lbl-sim-metal').textContent = (mVal >= 0 ? '+' : '') + mVal;
 
-            // 根據 activeBaziData 的五行能量，加上模擬值
             const simulatedElements = activeBaziData.elements.map(el => {
                 let modifier = 0;
                 if (el.name === '水') modifier = wVal;
@@ -1107,13 +1035,11 @@
                 };
             });
 
-            // 渲染模擬後圖表
             const simBars = document.getElementById('sim-bars-container');
             simBars.innerHTML = '';
             const scores = simulatedElements.map(e => e.score);
             const maxScore = Math.max(...scores, 100);
 
-            // 環形圖更新
             const simDonut = document.getElementById('sim-donut-chart');
             const oldPaths = simDonut.querySelectorAll('path');
             oldPaths.forEach(p => p.remove());
@@ -1168,7 +1094,6 @@
                 }
             });
 
-            // 輸出調和處方箋
             const adviceText = document.getElementById('sim-advice-text');
             if (fVal > 40) {
                 adviceText.innerHTML = `⚠️ <strong>檢測到火（官殺）能量過度引動：</strong><br>
@@ -1211,8 +1136,6 @@
 
             previewPane.innerHTML = "正在調用注音轉換庫，請稍候...";
 
-            // 在本機網頁端（沒有 Node.js 的環境下），我們可以使用一個輕量級的純 JavaScript 拼音-注音映射庫來模擬
-            // 為了達成完美的「雙擊開啟運作」，我們內建一個簡單的對照器
             const bopoMap = {
                 "床": "ㄔㄨㄤˊ", "前": "ㄑㄧㄢˊ", "明": "ㄇㄧㄥˊ", "月": "ㄩㄝˋ", "光": "ㄍㄨㄤ",
                 "疑": "ㄧˊ", "是": "ㄕˋ", "地": "ㄉㄧˋ", "上": "ㄕㄤˋ", "霜": "ㄕㄨㄤ",
@@ -1225,8 +1148,7 @@
             let rubyHtml = "";
             for (let char of inputText) {
                 if ('\u4e00' <= char && char <= '\u9fff') {
-                    // 如果在我們對照表中有，就顯示注音，否則顯示一個簡單的注音模擬
-                    const bopo = bopoMap[char] || "ㄗˋ"; // 預設注音
+                    const bopo = bopoMap[char] || "ㄗˋ";
                     rubyHtml += `<ruby>${char}<rt>${bopo}</rt></ruby>`;
                 } else {
                     if (char === '\n') {
@@ -1267,7 +1189,6 @@
             const activeCard = document.getElementById(`sub-card-${id}`);
             if (activeCard) activeCard.classList.add('active');
             
-            // 模擬影片時間跳轉到該字幕開始時間
             console.log(`Seek video to ${id}`);
         }
 
@@ -1284,7 +1205,6 @@
         function exportSRT() {
             let srtContent = "";
             currentSubtitles.forEach((sub, index) => {
-                // 將 00:00:01.200 轉換為 SRT 格式 00:00:01,200 (逗號隔開毫秒)
                 const startSRT = sub.start.replace('.', ',');
                 const endSRT = sub.end.replace('.', ',');
                 
@@ -1293,7 +1213,6 @@
                 srtContent += `${sub.text}\n\n`;
             });
 
-            // 建立 Blob 並觸發下載
             const blob = new Blob([srtContent], { type: "text/srt;charset=utf-8" });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -1307,7 +1226,6 @@
 
         // 初始化
         window.onload = () => {
-            // 載入預設的陳文姿資料
             loadDemoData('chen');
             renderSubtitlesTimeline();
         };
