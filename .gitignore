@@ -33,5 +33,9 @@ GAS/
 *.jpg
 *.jpeg
 *.pdf
+*.html
+!**/web_dashboard/index.html
+**/output/
 output/test_docx.docx
+
 

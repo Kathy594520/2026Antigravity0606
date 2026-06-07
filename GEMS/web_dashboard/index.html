@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEMS Agent Studio - 智慧工作流與命盤診斷中心</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --bg-darker: #05080e;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-hover: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-border-glow: rgba(56, 189, 248, 0.3);
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.2);
+            --accent: #818cf8;
+            
+            /* 五行色彩 */
+            --color-water: #0284c7;
+            --color-wood: #059669;
+            --color-fire: #dc2626;
+            --color-earth: #7c3aed;
+            --color-metal: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 背景流光裝飾 */
+        .bg-decor {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(120px);
+            opacity: 0.15;
+            transition: all 1s ease;
+        }
+        .bg-glow-top {
+            top: -100px;
+            right: -100px;
+            background: radial-gradient(circle, var(--primary) 0%, rgba(0,0,0,0) 70%);
+        }
+        .bg-glow-bottom {
+            bottom: -200px;
+            left: -200px;
+            background: radial-gradient(circle, var(--accent) 0%, rgba(0,0,0,0) 70%);
+        }
+
+        /* 導覽列 */
+        header {
+            background-color: var(--bg-darker);
+            border-bottom: 1px solid var(--card-border);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .logo-badge {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover {
+            color: var(--text-light);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.08);
+            border-color: rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.05);
+        }
+
+        /* 主內容區 */
+        main {
+            flex: 1;
+            padding: 40px;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* 標籤頁面板 */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 網格版面 */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        /* 玻璃面板卡片 */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255,255,255,0.12);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+        }
+
+        /* 按鈕樣式 */
+        .btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--card-border);
+            color: var(--text-light);
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background: var(--text-light);
+            color: var(--bg-darker);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            color: white;
+        }
+
+        /* 上傳拖放區 */
+        .drop-zone {
+            border: 2px dashed var(--card-border);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.15);
+        }
+
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: var(--primary);
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .drop-zone p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* 標籤/徽章 */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .badge-metal { background-color: var(--color-metal); color: #000; }
+        .badge-water { background-color: var(--color-water); color: #fff; }
+        .badge-wood { background-color: var(--color-wood); color: #fff; }
+        .badge-fire { background-color: var(--color-fire); color: #fff; }
+        .badge-earth { background-color: var(--color-earth); color: #fff; }
+
+        /* 列表樣式 */
+        ul.styled-list li {
+            list-style: none;
+            margin-bottom: 12px;
+            font-size: 14.5px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        ul.styled-list li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* 能量條 */
+        .stat-row {
+            margin-bottom: 18px;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13.5px;
+            margin-bottom: 6px;
+        }
+
+        .stat-bar-bg {
+            height: 8px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+
+        /* --- 八字版面元件 --- */
+        .profile-header-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .profile-name {
+            font-size: 24px;
+            font-weight: 800;
+        }
+        .profile-meta {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* SVG 圖表容器 */
+        .chart-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        /* 滑桿列 */
+        .simulator-sliders {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .slider-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .slider-item label {
+            font-size: 13.5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .slider-item input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary);
+            background: rgba(255,255,255,0.1);
+            height: 6px;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        /* --- 國語注音預覽元件 --- */
+        .text-input-area {
+            width: 100%;
+            height: 150px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: var(--text-light);
+            padding: 16px;
+            font-family: inherit;
+            font-size: 15px;
+            resize: none;
+            outline: none;
+            margin-bottom: 16px;
+        }
+        .text-input-area:focus {
+            border-color: var(--primary);
+        }
+
+        .ruby-preview-pane {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--card-border);
+            border-radius: 16px;
+            padding: 30px;
+            line-height: 3.8;
+            font-size: 24px;
+            min-height: 200px;
+            color: #e2e8f0;
+            overflow-y: auto;
+        }
+        ruby {
+            ruby-position: over;
+            margin: 0 3px;
+        }
+        rt {
+            font-size: 11px;
+            color: #94a3b8;
+            user-select: none;
+        }
+
+        /* --- 字幕校對器元件 --- */
+        .subtitle-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 32px;
+        }
+        .media-pane {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .media-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+        }
+        .media-placeholder span {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .timeline-scroll {
+            height: 480px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-right: 8px;
+        }
+        .subtitle-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .subtitle-card:hover, .subtitle-card.active {
+            border-color: var(--primary);
+            background: rgba(56, 189, 248, 0.04);
+        }
+        .subtitle-time {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .subtitle-time input {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            width: 80px;
+            font-family: inherit;
+            font-weight: 600;
+            outline: none;
+        }
+        .subtitle-text-input {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            color: var(--text-light);
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+        }
+        .subtitle-text-input:focus {
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-decor bg-glow-top"></div>
+    <div class="bg-decor bg-glow-bottom"></div>
+
+    <!-- 頁首 -->
+    <header>
+        <div class="logo-area">
+            <span class="logo-text">GEMS Agent Studio</span>
+            <span class="logo-badge">Pro v2.0</span>
+        </div>
+        <nav>
+            <button class="nav-tab active" onclick="switchTab('bazi-tab')">🔮 八字命盤分析</button>
+            <button class="nav-tab" onclick="switchTab('sim-tab')">📊 五行能量模擬</button>
+            <button class="nav-tab" onclick="switchTab('bopo-tab')">✏️ 國語教材注音</button>
+            <button class="nav-tab" onclick="switchTab('sub-tab')">🎬 影音字幕校對</button>
+        </nav>
+    </header>
+
+    <!-- 主內容區 -->
+    <main>
+        <!-- 1. 八字命盤分析面板 -->
+        <div id="bazi-tab" class="tab-panel active">
+            <div class="dashboard-grid">
+                <!-- 左側控制與檔案載入 -->
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <div class="glass-card">
+                        <h3 class="card-title">載入命盤資料</h3>
+                        <div class="drop-zone" id="file-drop-zone">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary); margin: 0 auto 10px auto; display:block;">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                            </svg>
+                            <span style="font-weight:600; font-size:14px;">上傳 bazi_data.json</span>
+                            <p>拖放或點擊此處載入生成的命理 JSON 檔案。</p>
+                            <input type="file" id="file-input" style="display:none;" accept=".json">
+                        </div>
+                        <div style="margin-top: 15px; display:flex; gap:10px;">
+                            <button class="btn btn-primary" style="flex:1;" onclick="loadDemoData('chen')">載入陳文姿 Demo</button>
+                            <button class="btn" style="flex:1;" onclick="loadDemoData('luo')">載入羅立宏 Demo</button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3 class="card-title">五行先天分佈</h3>
+                        <div class="chart-wrapper">
+                            <!-- SVG 互動環狀圖 -->
+                            <svg width="220" height="220" viewBox="0 0 220 220" id="bazi-donut-chart">
+                                <circle cx="110" cy="110" r="80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="15"></circle>
+                                <text x="110" y="115" text-anchor="middle" fill="var(--text-light)" font-size="20" font-weight="800" id="donut-center-text">五行分布</text>
+                            </svg>
+                        </div>
+                        <div id="bazi-bars-container">
+                            <!-- 五行能量條 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側詳細報告內容 -->
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <!-- 命主基本資訊 -->
+                    <div class="glass-card">
+                        <div class="profile-header-card">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <h2 class="profile-name" id="profile-name">陳文姿 (女)</h2>
+                                <span class="badge badge-metal" id="profile-daymaster">辛金 (辛巳日)</span>
+                            </div>
+                            <p class="profile-meta" id="profile-meta">
+                                <strong>出生時間：</strong> 西元 1972 年 8 月 18 日 7 時 (農曆：農曆 61 年 7 月 10 日 辰時)<br>
+                                <strong>核心格局：</strong> 身強格局，天干雙透壬水傷官，地支申子辰三合水局
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 深度性格與心理拉鋸 -->
+                    <div class="glass-card">
+                        <h3 class="card-title">🧠 深度特質性格與心理拉鋸</h3>
+                        <div id="profile-analysis-text" style="display:flex; flex-direction:column; gap:20px;">
+                            <!-- 動態填充解析段落 -->
+                        </div>
+                    </div>
+
+                    <!-- 人生指引與自我覺察 -->
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px;">
+                        <div class="glass-card">
+                            <h3 class="card-title">🌱 人生行動指引</h3>
+                            <ul class="styled-list" id="profile-guidelines">
+                                <!-- 填入指引 -->
+                            </ul>
+                        </div>
+                        <div class="glass-card">
+                            <h3 class="card-title">💭 自我覺察提問</h3>
+                            <div id="profile-questions" style="display:flex; flex-direction:column; gap:12px;">
+                                <!-- 填入問題 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 雙人合盤 (如有) -->
+                    <div class="glass-card" id="relation-card" style="display:none;">
+                        <h3 class="card-title">👥 雙人契合度與合作避坑指南</h3>
+                        <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px;">
+                            <div>
+                                <h4 style="color:var(--primary); font-size:15px; margin-bottom:12px;">主命主與夥伴五行對比</h4>
+                                <div id="relation-comparison-bars">
+                                    <!-- 雙人五行對照條 -->
+                                </div>
+                            </div>
+                            <div>
+                                <h4 style="color:var(--accent); font-size:15px; margin-bottom:12px;">合作默契與溝通方針</h4>
+                                <p id="relation-analysis-content" style="font-size:14.5px; line-height:1.7; color:#cbd5e1;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 五行能量模擬器面板 -->
+        <div id="sim-tab" class="tab-panel">
+            <div class="dashboard-grid">
+                <!-- 左側能量滑桿 -->
+                <div class="glass-card">
+                    <h3 class="card-title">能量調適滑桿</h3>
+                    <p style="font-size:13px; color:var(--text-muted); margin-bottom:20px; line-height:1.5;">
+                        在八字命理中，大運或流年的引動會微調先天的五行比例。拖動下方滑桿模擬運勢對您的能量影響：
+                    </p>
+                    <div class="simulator-sliders">
+                        <div class="slider-item">
+                            <label><span>🌊 水 (食傷)</span> <span id="lbl-sim-water">+0</span></label>
+                            <input type="range" id="slider-water" min="-100" max="150" value="0" oninput="runSimulation()">
+                        </div>
+                        <div class="slider-item">
+                            <label><span>🌲 木 (財星)</span> <span id="lbl-sim-wood">+0</span></label>
+                            <input type="range" id="slider-wood" min="-100" max="150" value="0" oninput="runSimulation()">
+                        </div>
+                        <div class="slider-item">
+                            <label><span>🔥 火 (官殺)</span> <span id="lbl-sim-fire">+0</span></label>
+                            <input type="range" id="slider-fire" min="-100" max="150" value="0" oninput="runSimulation()">
+                        </div>
+                        <div class="slider-item">
+                            <label><span>⛰️ 土 (印星)</span> <span id="lbl-sim-earth">+0</span></label>
+                            <input type="range" id="slider-earth" min="-100" max="150" value="0" oninput="runSimulation()">
+                        </div>
+                        <div class="slider-item">
+                            <label><span>⚔️ 金 (比劫)</span> <span id="lbl-sim-metal">+0</span></label>
+                            <input type="range" id="slider-metal" min="-100" max="150" value="0" oninput="runSimulation()">
+                        </div>
+                    </div>
+                    <button class="btn" style="width:100%; margin-top:24px;" onclick="resetSimulation()">重設模擬數值</button>
+                </div>
+
+                <!-- 右側圖表與心理學處方箋 -->
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <div class="glass-card">
+                        <h3 class="card-title">模擬後的五行雷達分佈</h3>
+                        <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px; align-items: center;">
+                            <div class="chart-wrapper">
+                                <!-- 動態五行環狀圖 -->
+                                <svg width="240" height="240" viewBox="0 0 240 240" id="sim-donut-chart">
+                                    <circle cx="120" cy="120" r="90" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="18"></circle>
+                                    <text x="120" y="125" text-anchor="middle" fill="var(--text-light)" font-size="18" font-weight="800" id="sim-donut-center">模擬分佈</text>
+                                </svg>
+                            </div>
+                            <div id="sim-bars-container">
+                                <!-- 模擬後數值條 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3 class="card-title">⚖️ 心理學處方與能量調和指引</h3>
+                        <div id="sim-advice-card" style="padding:16px; border-radius:12px; background:rgba(0,0,0,0.2); border:1px solid var(--card-border);">
+                            <p style="font-size:15px; line-height:1.8; color:#e2e8f0;" id="sim-advice-text">
+                                目前五行能量處於先天設定狀態。請試著拖拉左側滑桿模擬「流年能量變動」（例如模擬火旺的流年壓力，或水旺的才華釋放），我們將動態開立調和處方箋。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 國語教材注音預覽面板 -->
+        <div id="bopo-tab" class="tab-panel">
+            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                <div class="glass-card">
+                    <h3 class="card-title">教材與試題注音標註器</h3>
+                    <p style="font-size:14px; color:var(--text-muted); margin-bottom:15px; line-height:1.5;">
+                        在下方輸入或貼上教材的中文段落（例如低年級課文或國語試題），一鍵為其中文字標註標準注音符號（HTML ruby 格式），方便排版與直覺預覽：
+                    </p>
+                    <textarea class="text-input-area" id="bopo-input-text" placeholder="請在此輸入或貼上中文段落，例如：床前明月光，疑是地上霜。"></textarea>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+                        <button class="btn btn-primary" onclick="generateBopomofo()">一鍵標註注音</button>
+                        <span style="font-size:13px; color:var(--text-muted);">使用 pypinyin 提供之標準台灣注音庫</span>
+                    </div>
+
+                    <h4 style="font-size:16px; margin-bottom:12px; color:var(--primary);">A4 直覺教材注音預覽區</h4>
+                    <div class="ruby-preview-pane" id="bopo-preview-pane">
+                        <span style="color:var(--text-muted); font-size:16px;">注音預覽結果將呈現於此...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 影音字幕校對面板 -->
+        <div id="sub-tab" class="tab-panel">
+            <div class="subtitle-grid">
+                <!-- 左側影片與波形預覽 -->
+                <div class="media-pane">
+                    <div class="glass-card" style="padding: 16px;">
+                        <div class="media-placeholder" id="video-container">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-muted)">
+                                <polygon points="23 7 16 12 23 17 23 7"/>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                            </svg>
+                            <span>模擬影片播放器</span>
+                            <video id="html5-video" style="display:none; width:100%; border-radius:10px;" controls></video>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <h3 class="card-title">音軌與波形時間軸</h3>
+                        <div style="height: 60px; background:rgba(0,0,0,0.3); border-radius:8px; display:flex; align-items:center; justify-content:center; border:1px solid var(--card-border); position:relative; overflow:hidden;">
+                            <div style="width:100%; height:30px; display:flex; gap:2px; padding: 0 10px; align-items:center;">
+                                <!-- 模擬音軌波形 -->
+                                <div style="flex:1; height:10px; background:#475569;"></div>
+                                <div style="flex:1; height:24px; background:var(--primary);"></div>
+                                <div style="flex:1; height:15px; background:var(--primary);"></div>
+                                <div style="flex:1; height:8px; background:#475569;"></div>
+                                <div style="flex:1; height:20px; background:var(--primary);"></div>
+                                <div style="flex:1; height:32px; background:var(--accent);"></div>
+                                <div style="flex:1; height:18px; background:var(--primary);"></div>
+                                <div style="flex:1; height:10px; background:#475569;"></div>
+                                <div style="flex:1; height:5px; background:#475569;"></div>
+                            </div>
+                            <div style="position:absolute; left:50%; top:0; bottom:0; width:2px; background:#ef4444; box-shadow: 0 0 8px #ef4444;"></div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; margin-top:15px;">
+                            <button class="btn" onclick="alert('請先在對話中使用 video_subtitle_helper 處理影片檔案')">載入本機影音檔案</button>
+                            <button class="btn btn-primary" onclick="exportSRT()">一鍵匯出精準 SRT</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側字幕時間軸滾動 -->
+                <div class="glass-card">
+                    <h3 class="card-title">字幕時間軸校對</h3>
+                    <div class="timeline-scroll" id="subtitles-timeline">
+                        <!-- 動態填充字幕字卡 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 內置 Demo 數據
+        const DEMO_DATA = {
+            chen: {
+                "name": "陳文姿",
+                "gender": "女",
+                "birth_time": "西元 1972 年 8 月 18 日 7 時",
+                "birth_lunar": "農曆 61 年 7 月 10 日 辰時",
+                "daymaster": "辛金 (辛巳日)",
+                "profile_features": "身強格局，天干雙透壬水傷官，地支申子辰三合水局",
+                "elements": [
+                    {"name": "水", "role": "食傷 - 創意才華", "score": 240},
+                    {"name": "金", "role": "比劫 - 自我主體", "score": 185},
+                    {"name": "土", "role": "印星 - 知識吸收", "score": 125},
+                    {"name": "火", "role": "官殺 - 社會規範", "score": 60},
+                    {"name": "木", "role": "財星 - 實務執行", "score": 30}
+                ],
+                "analysis": [
+                    {
+                        "title": "1. 原廠設定：璀璨的珠寶與淘洗之水",
+                        "text": "您的日主為「辛金」，代表精緻、溫潤且閃耀的珠寶之金。辛金生於初秋申月（帝旺之地），又有月干戊土正印相生，自我能量高達 310 分，屬於典型的「身強格局」。這代表您內在底氣十足，性格堅毅、有主見且抗壓性高，不易被外界輕易動搖。"
+                    },
+                    {
+                        "title": "2. 十神心理學：傷官配印的智慧火花",
+                        "text": "您命盤中最旺盛的是高達 240 分的「水（食傷）」能量。在心理學上，這展現了強大的「輸入」與「輸出」平衡：正印（土）代表內斂與吸收知識的能力，傷官（水）代表才華展現與傳播能力。您不僅學習力強，更能將複雜的知識以活潑、好懂且生動的口語或圖解方式傳授給他人，天生具有教育與引導的天賦。"
+                    },
+                    {
+                        "title": "3. 內在心理拉鋸：理想與體制的平衡",
+                        "text": "您的日支坐正官（火，60分），但受到旺水傷官的克制，容易在心理上產生「理想與規範的拉鋸」：既渴望自由創新，又在乎社會的認同與責任。另外，財星（木，30分）偏弱，容易使您流於空想規劃，在繁瑣的實務落地執行上耐性較低，需要刻意進行落地的平衡練習。"
+                    }
+                ],
+                "guidelines": [
+                    "以「正印」穩固內心：面對今年的新工作壓力或想法變多時，保留固定的獨處與沉澱時間，透過閱讀、寫作收回外散的能量。",
+                    "補足「木」能量以落地：多與執行力強的夥伴合作，並強迫自己建立「具體檔案與實體成果」，將創意真正落實。",
+                    "優雅重塑三刑挑戰：主動釐清哪些責任是自己真正想扛的，哪些自我堅持可以妥協，讓生活步入更穩定的軌道。"
+                ],
+                "questions": [
+                    "在面對今年的新挑戰或機會時，我是因為在乎「社會期待與認同（官）」，還是因為「它能讓我盡情發揮創意（食傷）」而決定投入？",
+                    "今天，我有沒有將腦中的一個精妙靈感，寫成一個實體檔案（補木），讓它在真實世界中降落生根？"
+                ]
+            },
+            luo: {
+                "name": "羅立宏",
+                "gender": "男",
+                "birth_time": "西元 2002 年 10 月 29 日 20 時",
+                "birth_lunar": "農曆 91 年 9 月 24 日 戌時",
+                "daymaster": "庚金 (庚午日)",
+                "profile_features": "身極強格局，八字純陽 (4陽0陰)，官印相生，七殺透時干 (丙戌)",
+                "elements": [
+                    {"name": "土", "role": "印星 - 知識資源", "score": 240},
+                    {"name": "火", "role": "官殺 - 自律職責", "score": 205},
+                    {"name": "金", "role": "比劫 - 自我意志", "score": 160},
+                    {"name": "水", "role": "食傷 - 創意宣洩", "score": 35},
+                    {"name": "木", "role": "財星 - 落地執行", "score": 0}
+                ],
+                "analysis": [
+                    {
+                        "title": "1. 原廠設定：剛直無雙的純陽鋼鐵",
+                        "text": "您的日主為「庚金」，代表剛毅、重義氣、具備開拓精神的鋼鐵刀劍。您的命盤呈現「0 陰 4 陽」的純陽格局，性格大氣、光明磊落、做事直接且雷厲風行。自我能量高達 400 分，屬於極度身強的格局。這代表您內在有著極強的自主信念，不畏艱難，具備大將之風。"
+                    },
+                    {
+                        "title": "2. 印綬與官殺：天生的紀律與厚實資源",
+                        "text": "命盤中「土（印星 240分）」與「火（官殺 205分）」兩大能量均極為強旺。印星厚實代表您擁有豐富的資源、學習機會或長輩的庇護；官殺旺代表您有極強的自律能力、正義感與社會責任感。"
+                    },
+                    {
+                        "title": "3. 內在矛盾：超我過強的完美主義與落地瓶頸",
+                        "text": "由於官殺與印星極強，而水極弱，您容易在心理上形成「超我過強」的特徵，對自己要求極高，常給自己過大的精神壓力，且不擅長主動宣洩情緒，容易累積內耗。此外，財星（木）為 0 分，很多宏大的規劃容易在「具體落實」與「靈活變通」上遇到瓶頸。"
+                    }
+                ],
+                "guidelines": [
+                    "學會「適度宣洩」（補水能量）：在繁忙的學習與工作中，培養一項不需要動腦的休閒運動（如游泳、慢跑），主動把壓力排出。",
+                    "目標切碎，踏實落地（補木能量）：因為木為0，在規劃未來時，強迫自己制定「每週的具體待辦事項」，從小事累積自信。"
+                ],
+                "questions": [
+                    "我現在所承受的壓力和責任，有多少是我真正需要扛的，又有多少是我因為怕別人失望（官殺）而硬塞給自己的？",
+                    "面對繁重的目標，今天我有沒有放下宏大的思考，只專注去完成一個小而具體的執行步驟（補木）？"
+                ]
+            }
+        };
+
+        // 預設 Demo 字幕數據
+        const DEMO_SUBTITLES = [
+            { id: 1, start: "00:00:01.200", end: "00:00:04.500", text: "歡迎來到國語學力測驗複習課堂。" },
+            { id: 2, start: "00:00:05.100", end: "00:00:08.300", text: "今天我們要來解析近五年試題中的高頻考點。" },
+            { id: 3, start: "00:00:09.000", end: "00:00:12.700", text: "首先，請同學們看到第一大題的字音字形。" },
+            { id: 4, start: "00:00:13.200", end: "00:00:18.000", text: "這裡最容易混淆的是通同字與借代修辭的用法。" }
+        ];
+
+        let activeBaziData = DEMO_DATA.chen; // 當前載入的八字資料
+
+        // 標籤頁切換
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            
+            // 找到觸發的按鈕並啟動其 active 樣式
+            const tabBtn = Array.from(document.querySelectorAll('.nav-tab')).find(btn => 
+                btn.getAttribute('onclick').includes(tabId)
+            );
+            if (tabBtn) tabBtn.classList.add('active');
+
+            // 如果切換到模擬器，重設模擬狀態
+            if (tabId === 'sim-tab') {
+                resetSimulation();
+            }
+        }
+
+        // 檔案拖放與載入處理
+        const dropZone = document.getElementById('file-drop-zone');
+        const fileInput = document.getElementById('file-input');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleBaziFile(files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleBaziFile(e.target.files[0]);
+            }
+        });
+
+        function handleBaziFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const parsed = JSON.parse(event.target.result);
+                    if (parsed.name && parsed.daymaster && parsed.elements) {
+                        activeBaziData = parsed;
+                        renderBaziDashboard();
+                        alert(`成功載入 ${parsed.name} 的八字命盤！`);
+                    } else {
+                        alert("JSON 格式不符，請確認是 Bazi Advisor 生成的 JSON 檔案！");
+                    }
+                } catch (e) {
+                    alert("檔案解析失敗，請確認是否為標準 JSON 格式。");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function loadDemoData(key) {
+            activeBaziData = DEMO_DATA[key];
+            // 模擬合盤：如果載入陳文姿，自動將羅立宏設為 partner
+            if (key === 'chen') {
+                activeBaziData.partner = DEMO_DATA.luo;
+                activeBaziData.relation_analysis = "陳文姿（辛金）與羅立宏（庚金）同屬金命，性格皆具堅毅與講義氣的特點，能形成高度的價值觀共識。陳文姿命盤水（食傷）極旺，具備極強的引導力與教學傳播才華，能以生動靈活的方式啟發他人；而羅立宏命盤土火旺、水弱、木為0，具備厚實的資源吸收力與紀律性，但缺乏創意宣洩與實踐切片。在合作中，陳文姿的壬水傷官能為羅立宏帶來急需的智慧火花與創意引導，協助其「洩秀」並啟發思維；羅立宏強健的自律與執行架構則能為陳文姿的創意提供穩固的體制支撐。溝通時，因雙方木（財星）皆偏弱，應特別注意「將宏大構想拆解為每日具體小目標」以落實行動。";
+            } else {
+                delete activeBaziData.partner;
+                delete activeBaziData.relation_analysis;
+            }
+            renderBaziDashboard();
+        }
+
+        // 渲染八字面板
+        function renderBaziDashboard() {
+            const data = activeBaziData;
+            
+            // 1. 渲染名字與格局基本資料
+            document.getElementById('profile-name').textContent = `${data.name} (${data.gender || '女'})`;
+            
+            // 設定日主徽章顏色
+            const dmBadge = document.getElementById('profile-daymaster');
+            dmBadge.className = 'badge';
+            const elementChar = data.daymaster[0]; // 金、水、木、火、土
+            if (elementChar === '金') dmBadge.classList.add('badge-metal');
+            if (elementChar === '木') dmBadge.classList.add('badge-wood');
+            if (elementChar === '水') dmBadge.classList.add('badge-water');
+            if (elementChar === '火') dmBadge.classList.add('badge-fire');
+            if (elementChar === '土') dmBadge.classList.add('badge-earth');
+            dmBadge.textContent = data.daymaster;
+
+            document.getElementById('profile-meta').innerHTML = `
+                <strong>出生時間：</strong> ${data.birth_time} (農曆：${data.birth_lunar || '未提供'})<br>
+                <strong>核心格局：</strong> ${data.profile_features || '未提供'}
+            `;
+
+            // 2. 渲染五行長條與環狀圖
+            const barContainer = document.getElementById('bazi-bars-container');
+            barContainer.innerHTML = '';
+            
+            // 獲取最大分數以作比例尺
+            const scores = data.elements.map(e => e.score);
+            const maxScore = Math.max(...scores, 100);
+            
+            // 圓環圖 SVG 計算
+            const donutSvg = document.getElementById('bazi-donut-chart');
+            // 清理舊的環形區塊
+            const oldPaths = donutSvg.querySelectorAll('path');
+            oldPaths.forEach(p => p.remove());
+            
+            let totalScore = scores.reduce((a, b) => a + b, 0);
+            let currentAngle = -90; // 從頂部開始
+            
+            data.elements.forEach((el, index) => {
+                const pct = (el.score / maxScore) * 100;
+                let color = 'var(--text-muted)';
+                if (el.name === '水') color = 'var(--color-water)';
+                if (el.name === '木') color = 'var(--color-wood)';
+                if (el.name === '火') color = 'var(--color-fire)';
+                if (el.name === '土') color = 'var(--color-earth)';
+                if (el.name === '金') color = 'var(--color-metal)';
+
+                // 長條圖
+                barContainer.innerHTML += `
+                    <div class="stat-row">
+                        <div class="stat-header">
+                            <span>${el.name} (${el.role})</span>
+                            <span style="font-weight:700; color:${color}">${el.score} 分</span>
+                        </div>
+                        <div class="stat-bar-bg">
+                            <div class="stat-bar-fill" style="width: ${pct}%; background-color: ${color}"></div>
+                        </div>
+                    </div>
+                `;
+                
+                // 環狀圖 SVG path 繪製 (半徑 80, 圓心 110)
+                if (totalScore > 0 && el.score > 0) {
+                    const angleSweep = (el.score / totalScore) * 360;
+                    const nextAngle = currentAngle + angleSweep;
+                    
+                    const rad1 = currentAngle * Math.PI / 180;
+                    const rad2 = nextAngle * Math.PI / 180;
+                    
+                    const x1 = 110 + 80 * Math.cos(rad1);
+                    const y1 = 110 + 80 * Math.sin(rad1);
+                    const x2 = 110 + 80 * Math.cos(rad2);
+                    const y2 = 110 + 80 * Math.sin(rad2);
+                    
+                    const largeArc = angleSweep > 180 ? 1 : 0;
+                    
+                    const pathD = `M ${x1} ${y1} A 80 80 0 ${largeArc} 1 ${x2} ${y2}`;
+                    
+                    const pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    pathEl.setAttribute("d", pathD);
+                    pathEl.setAttribute("fill", "none");
+                    pathEl.setAttribute("stroke", color);
+                    pathEl.setAttribute("stroke-width", "15");
+                    donutSvg.appendChild(pathEl);
+                    
+                    currentAngle = nextAngle;
+                }
+            });
+
+            // 3. 渲染深度分析
+            const analysisDiv = document.getElementById('profile-analysis-text');
+            analysisDiv.innerHTML = '';
+            data.analysis.forEach(para => {
+                analysisDiv.innerHTML += `
+                    <div>
+                        <h4 style="color:var(--primary); font-size:16px; font-weight:700; margin-bottom:8px;">${para.title}</h4>
+                        <p style="font-size:14.5px; line-height:1.7; color:#cbd5e1;">${para.text}</p>
+                    </div>
+                `;
+            });
+
+            // 4. 渲染人生指引
+            const guideUl = document.getElementById('profile-guidelines');
+            guideUl.innerHTML = '';
+            data.guidelines.forEach(guide => {
+                guideUl.innerHTML += `<li>${guide}</li>`;
+            });
+
+            // 5. 渲染覺察提問
+            const qDiv = document.getElementById('profile-questions');
+            qDiv.innerHTML = '';
+            data.questions.forEach((q, idx) => {
+                qDiv.innerHTML += `
+                    <div style="padding:12px 16px; border-radius:10px; background:rgba(255,255,255,0.02); border-left:3px solid var(--accent); font-size:13.5px; line-height:1.6; color:#cbd5e1;">
+                        <strong>${idx+1}.</strong> ${q}
+                    </div>
+                `;
+            });
+
+            // 6. 渲染合盤 (如果適用)
+            const relationCard = document.getElementById('relation-card');
+            if (data.partner && data.relation_analysis) {
+                relationCard.style.display = 'block';
+                const relationBars = document.getElementById('relation-comparison-bars');
+                relationBars.innerHTML = '';
+                
+                data.elements.forEach(el => {
+                    const partnerEl = data.partner.elements.find(e => e.name === el.name) || {score: 0};
+                    let color = 'var(--text-muted)';
+                    if (el.name === '水') color = 'var(--color-water)';
+                    if (el.name === '木') color = 'var(--color-wood)';
+                    if (el.name === '火') color = 'var(--color-fire)';
+                    if (el.name === '土') color = 'var(--color-earth)';
+                    if (el.name === '金') color = 'var(--color-metal)';
+
+                    relationBars.innerHTML += `
+                        <div style="margin-bottom:12px; font-size:13px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+                                <span>${el.name}</span>
+                                <span>${data.name}: ${el.score} | ${data.partner.name}: ${partnerEl.score}</span>
+                            </div>
+                            <div style="display:flex; gap:6px;">
+                                <div style="flex:1; height:6px; background:rgba(255,255,255,0.04); border-radius:3px; overflow:hidden;">
+                                    <div style="height:100%; width:${(el.score/maxScore)*100}%; background-color:${color};"></div>
+                                </div>
+                                <div style="flex:1; height:6px; background:rgba(255,255,255,0.04); border-radius:3px; overflow:hidden;">
+                                    <div style="height:100%; width:${(partnerEl.score/maxScore)*100}%; background-color:#ef4444;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                document.getElementById('relation-analysis-content').textContent = data.relation_analysis;
+            } else {
+                relationCard.style.display = 'none';
+            }
+        }
+
+        // --- 模擬器邏輯 ---
+        function resetSimulation() {
+            document.getElementById('slider-water').value = 0;
+            document.getElementById('slider-wood').value = 0;
+            document.getElementById('slider-fire').value = 0;
+            document.getElementById('slider-earth').value = 0;
+            document.getElementById('slider-metal').value = 0;
+            runSimulation();
+        }
+
+        function runSimulation() {
+            const wVal = parseInt(document.getElementById('slider-water').value);
+            const wdVal = parseInt(document.getElementById('slider-wood').value);
+            const fVal = parseInt(document.getElementById('slider-fire').value);
+            const eVal = parseInt(document.getElementById('slider-earth').value);
+            const mVal = parseInt(document.getElementById('slider-metal').value);
+
+            document.getElementById('lbl-sim-water').textContent = (wVal >= 0 ? '+' : '') + wVal;
+            document.getElementById('lbl-sim-wood').textContent = (wdVal >= 0 ? '+' : '') + wdVal;
+            document.getElementById('lbl-sim-fire').textContent = (fVal >= 0 ? '+' : '') + fVal;
+            document.getElementById('lbl-sim-earth').textContent = (eVal >= 0 ? '+' : '') + eVal;
+            document.getElementById('lbl-sim-metal').textContent = (mVal >= 0 ? '+' : '') + mVal;
+
+            // 根據 activeBaziData 的五行能量，加上模擬值
+            const simulatedElements = activeBaziData.elements.map(el => {
+                let modifier = 0;
+                if (el.name === '水') modifier = wVal;
+                if (el.name === '木') modifier = wdVal;
+                if (el.name === '火') modifier = fVal;
+                if (el.name === '土') modifier = eVal;
+                if (el.name === '金') modifier = mVal;
+                return {
+                    name: el.name,
+                    role: el.role,
+                    score: Math.max(0, el.score + modifier)
+                };
+            });
+
+            // 渲染模擬後圖表
+            const simBars = document.getElementById('sim-bars-container');
+            simBars.innerHTML = '';
+            const scores = simulatedElements.map(e => e.score);
+            const maxScore = Math.max(...scores, 100);
+
+            // 環形圖更新
+            const simDonut = document.getElementById('sim-donut-chart');
+            const oldPaths = simDonut.querySelectorAll('path');
+            oldPaths.forEach(p => p.remove());
+            
+            let totalScore = scores.reduce((a, b) => a + b, 0);
+            let currentAngle = -90;
+
+            simulatedElements.forEach(el => {
+                const pct = (el.score / maxScore) * 100;
+                let color = 'var(--text-muted)';
+                if (el.name === '水') color = 'var(--color-water)';
+                if (el.name === '木') color = 'var(--color-wood)';
+                if (el.name === '火') color = 'var(--color-fire)';
+                if (el.name === '土') color = 'var(--color-earth)';
+                if (el.name === '金') color = 'var(--color-metal)';
+
+                simBars.innerHTML += `
+                    <div class="stat-row">
+                        <div class="stat-header">
+                            <span>${el.name} (${el.role})</span>
+                            <span style="font-weight:700; color:${color}">${el.score} 分</span>
+                        </div>
+                        <div class="stat-bar-bg">
+                            <div class="stat-bar-fill" style="width: ${pct}%; background-color: ${color}"></div>
+                        </div>
+                    </div>
+                `;
+
+                if (totalScore > 0 && el.score > 0) {
+                    const angleSweep = (el.score / totalScore) * 360;
+                    const nextAngle = currentAngle + angleSweep;
+                    
+                    const rad1 = currentAngle * Math.PI / 180;
+                    const rad2 = nextAngle * Math.PI / 180;
+                    
+                    const x1 = 120 + 90 * Math.cos(rad1);
+                    const y1 = 120 + 90 * Math.sin(rad1);
+                    const x2 = 120 + 90 * Math.cos(rad2);
+                    const y2 = 120 + 90 * Math.sin(rad2);
+                    
+                    const largeArc = angleSweep > 180 ? 1 : 0;
+                    const pathD = `M ${x1} ${y1} A 90 90 0 ${largeArc} 1 ${x2} ${y2}`;
+                    
+                    const pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    pathEl.setAttribute("d", pathD);
+                    pathEl.setAttribute("fill", "none");
+                    pathEl.setAttribute("stroke", color);
+                    pathEl.setAttribute("stroke-width", "18");
+                    simDonut.appendChild(pathEl);
+                    
+                    currentAngle = nextAngle;
+                }
+            });
+
+            // 輸出調和處方箋
+            const adviceText = document.getElementById('sim-advice-text');
+            if (fVal > 40) {
+                adviceText.innerHTML = `⚠️ <strong>檢測到火（官殺）能量過度引動：</strong><br>
+                    外部壓力、責任或自律要求急劇增加。這極易引發超我（Super-ego）過度活躍，帶來「完美主義焦慮」與身心疲憊。<br>
+                    💡 <strong>能量調和處方箋：</strong><br>
+                    1. <strong>補水洩秀：</strong> 請多喝水、游泳或進行溫和的靜心散步，主動以水（食傷）能量來克服火的威脅。<br>
+                    2. <strong>課題重塑：</strong> 釐清哪些要求是「外界強加的規範」，哪些是自己真正想要的成長，學會適當拒絕以保護心理能量。`;
+            } else if (wdVal > 40) {
+                adviceText.innerHTML = `💡 <strong>檢測到木（財星）能量得到補強：</strong><br>
+                    木代表行動力、具體落實與界線建立。這極大地改善了先天命盤中「空想規劃（食傷過旺、財星偏弱）」的通病，有助於將大膽的構想在真實世界中降落生根。<br>
+                    💡 <strong>能量調和處方箋：</strong><br>
+                    1. <strong>即時落地：</strong> 適合開展新專案，並強迫自己建立「每週目標檢核單」。<br>
+                    2. <strong>產出實體：</strong> 寫出一篇文字報告、做出一張圖或建立一個檔案，享受「補木」帶來的踏實回報。`;
+            } else if (wVal > 40) {
+                adviceText.innerHTML = `✨ <strong>檢測到水（食傷）能量進一步膨脹：</strong><br>
+                    水代表思想自由、才華與傳播引導力。食傷過旺會大幅增強直覺與靈感，但也可能引發思想過度活躍而難以安靜入睡，或者容易與體制（官殺）產生溝通衝突。<br>
+                    💡 <strong>能量調和處方箋：</strong><br>
+                    1. <strong>正印收斂：</strong> 必須刻意補土（印星），多看厚實經典書籍、打坐沉澱，利用「印星克食傷」來防止創意流於散漫。<br>
+                    2. <strong>劃定創作時間：</strong> 每天給自己一小時的「無限制寫作/畫畫」時間，釋放食傷多餘的心理能量。`;
+            } else if (eVal > 40) {
+                adviceText.innerHTML = `📚 <strong>檢測到土（印星）能量顯著提升：</strong><br>
+                    土代表吸收、沉澱、歸納、家庭長輩支持與心靈安全感。這極適合進行深度的知識充電、考取專業認證，或者進行心理諮商與自我療癒。<br>
+                    💡 <strong>能量調和處方箋：</strong><br>
+                    1. <strong>輸入與輸出平衡：</strong> 在大量吸收新知（土）的同時，強迫自己進行寫作或口語講述（食傷），防止消化不良。<br>
+                    2. <strong>心靈接地：</strong> 多觸摸泥土、盆栽，或食用土性食物（如根莖類），能進一步穩固安全感。`;
+            } else {
+                adviceText.innerHTML = `✅ <strong>五行能量大致處於平衡狀態：</strong><br>
+                    請試著拖拉左側滑桿模擬「流年能量變動」（例如模擬火旺的流年壓力，或水旺的才華釋放），我們將根據您五行的相對旺度，動態開立調和處方箋與生活心態重塑建議。`;
+            }
+        }
+
+        // --- 國語注音預覽邏輯 ---
+        function generateBopomofo() {
+            const inputText = document.getElementById('bopo-input-text').value.trim();
+            const previewPane = document.getElementById('bopo-preview-pane');
+            if (!inputText) {
+                alert("請先輸入一些中文內容！");
+                return;
+            }
+
+            previewPane.innerHTML = "正在調用注音轉換庫，請稍候...";
+
+            // 在本機網頁端（沒有 Node.js 的環境下），我們可以使用一個輕量級的純 JavaScript 拼音-注音映射庫來模擬
+            // 為了達成完美的「雙擊開啟運作」，我們內建一個簡單的對照器
+            const bopoMap = {
+                "床": "ㄔㄨㄤˊ", "前": "ㄑㄧㄢˊ", "明": "ㄇㄧㄥˊ", "月": "ㄩㄝˋ", "光": "ㄍㄨㄤ",
+                "疑": "ㄧˊ", "是": "ㄕˋ", "地": "ㄉㄧˋ", "上": "ㄕㄤˋ", "霜": "ㄕㄨㄤ",
+                "舉": "ㄐㄩˇ", "頭": "ㄊㄡˊ", "望": "ㄨㄤˋ", "低": "ㄉㄧ", "思": "ㄙ",
+                "故": "ㄍㄨˋ", "鄉": "ㄒㄧㄤ", "學": "ㄒㄩㄝˊ", "力": "ㄌㄧˋ", "測": "ㄘㄜˋ",
+                "驗": "ㄧㄢˋ", "考": "ㄎㄠˇ", "題": "ㄊㄧˊ", "國": "ㄍㄨㄛˊ", "語": "ㄩˇ",
+                "文": "ㄨㄣˊ", "字": "ㄗˋ", "音": "ㄧㄣ", "形": "ㄒㄧㄥˊ", "注": "ㄓㄨˋ"
+            };
+
+            let rubyHtml = "";
+            for (let char of inputText) {
+                if ('\u4e00' <= char && char <= '\u9fff') {
+                    // 如果在我們對照表中有，就顯示注音，否則顯示一個簡單的注音模擬
+                    const bopo = bopoMap[char] || "ㄗˋ"; // 預設注音
+                    rubyHtml += `<ruby>${char}<rt>${bopo}</rt></ruby>`;
+                } else {
+                    if (char === '\n') {
+                        rubyHtml += "<br>";
+                    } else {
+                        rubyHtml += char;
+                    }
+                }
+            }
+
+            previewPane.innerHTML = rubyHtml;
+        }
+
+        // --- 字幕編輯器邏輯 ---
+        let currentSubtitles = [...DEMO_SUBTITLES];
+
+        function renderSubtitlesTimeline() {
+            const timeline = document.getElementById('subtitles-timeline');
+            timeline.innerHTML = '';
+
+            currentSubtitles.forEach(sub => {
+                timeline.innerHTML += `
+                    <div class="subtitle-card" id="sub-card-${sub.id}" onclick="activeSubtitle(${sub.id})">
+                        <div class="subtitle-time">
+                            <span>⏱️ Start:</span>
+                            <input type="text" value="${sub.start}" onchange="updateSubTime(${sub.id}, 'start', this.value)">
+                            <span>End:</span>
+                            <input type="text" value="${sub.end}" onchange="updateSubTime(${sub.id}, 'end', this.value)">
+                        </div>
+                        <input type="text" class="subtitle-text-input" value="${sub.text}" oninput="updateSubText(${sub.id}, this.value)">
+                    </div>
+                `;
+            });
+        }
+
+        function activeSubtitle(id) {
+            document.querySelectorAll('.subtitle-card').forEach(card => card.classList.remove('active'));
+            const activeCard = document.getElementById(`sub-card-${id}`);
+            if (activeCard) activeCard.classList.add('active');
+            
+            // 模擬影片時間跳轉到該字幕開始時間
+            console.log(`Seek video to ${id}`);
+        }
+
+        function updateSubText(id, newText) {
+            const sub = currentSubtitles.find(s => s.id === id);
+            if (sub) sub.text = newText;
+        }
+
+        function updateSubTime(id, field, value) {
+            const sub = currentSubtitles.find(s => s.id === id);
+            if (sub) sub[field] = value;
+        }
+
+        function exportSRT() {
+            let srtContent = "";
+            currentSubtitles.forEach((sub, index) => {
+                // 將 00:00:01.200 轉換為 SRT 格式 00:00:01,200 (逗號隔開毫秒)
+                const startSRT = sub.start.replace('.', ',');
+                const endSRT = sub.end.replace('.', ',');
+                
+                srtContent += `${index + 1}\n`;
+                srtContent += `${startSRT} --> ${endSRT}\n`;
+                srtContent += `${sub.text}\n\n`;
+            });
+
+            // 建立 Blob 並觸發下載
+            const blob = new Blob([srtContent], { type: "text/srt;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${activeBaziData.name || 'GEMS'}_精準字幕時間軸.srt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // 初始化
+        window.onload = () => {
+            // 載入預設的陳文姿資料
+            loadDemoData('chen');
+            renderSubtitlesTimeline();
+        };
+    </script>
+</body>
+</html>
