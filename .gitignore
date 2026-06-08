@@ -36,6 +36,7 @@ GAS/
 *.html
 !**/web_dashboard/index.html
 !**/web_dashboard_bazi/index.html
+!**/output/*_個人命盤天賦簡報.html
 .netlify/
 **/output/
 output/test_docx.docx

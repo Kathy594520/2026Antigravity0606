@@ -879,9 +879,72 @@ def build_obsidian_markdown(data, output_md_path):
     with open(output_md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md_content))
 
+def find_chinese_font():
+    """跨平台尋找可用中文字型，回傳 (font_path, is_ttc) 或 (None, None)"""
+    candidates = [
+        # Windows
+        ("C:/Windows/Fonts/msjh.ttc", True),
+        ("C:/Windows/Fonts/mingliu.ttc", True),
+        ("C:/Windows/Fonts/kaiu.ttf", False),
+        # macOS
+        ("/System/Library/Fonts/PingFang.ttc", True),
+        ("/System/Library/Fonts/STHeiti Light.ttc", True),
+        ("/Library/Fonts/NotoSansCJKtc-Regular.otf", False),
+        # Linux
+        ("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc", True),
+        ("/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc", True),
+        ("/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc", True),
+        ("/usr/share/fonts/wqy-microhei/wqy-microhei.ttc", True),
+    ]
+    for path, is_ttc in candidates:
+        if os.path.exists(path):
+            return path, is_ttc
+    return None, None
+
+def build_image_prompts(data):
+    """根據八字五行數據生成生圖 Prompt 列表"""
+    daymaster = data.get("daymaster", "")
+    elements = {el["name"]: el.get("score", 0) for el in data.get("elements", [])}
+    features = data.get("profile_features", "")
+
+    dominant = max(elements, key=elements.get) if elements else "水"
+    weakest = min(elements, key=elements.get) if elements else "木"
+
+    element_en = {"水": "water/flow", "木": "wood/trees", "火": "fire/light", "土": "earth/mountain", "金": "metal/crystal"}
+    element_vis = {"水": "flowing water, deep blue ocean", "木": "ancient forest, tall bamboo", "火": "warm candlelight, phoenix flame", "土": "vast earth, sacred mountain", "金": "polished crystal, golden light"}
+
+    prompts = []
+    # Prompt 1: 五行能量意象圖
+    prompts.append({
+        "label": "五行能量意象圖",
+        "prompt": (
+            f"Abstract Chinese five-elements energy portrait. Dominant element: {dominant} ({element_vis.get(dominant, '')}), "
+            f"complemented by subtle {element_vis.get(weakest, '')} in the background. "
+            f"Inspired by '{features}'. Ink wash painting style combined with modern glowing aura, "
+            f"zen atmosphere, minimalist, vertical scroll composition, 9:16 aspect ratio, soft ethereal lighting."
+        ),
+        "purpose": "用於 HTML 簡報首頁背景或封面圖"
+    })
+    # Prompt 2: RPG 角色意象圖
+    prompts.append({
+        "label": "命主天賦角色意象",
+        "prompt": (
+            f"Anime-style character portrait embodying the {daymaster} spirit. "
+            f"Clothing and accessories reflect {dominant} element ({element_en.get(dominant, '')}). "
+            f"Character aura radiates {daymaster[0]}-type energy. "
+            f"Standing in a dreamlike landscape where {element_vis.get(dominant, '')} meets {element_vis.get(weakest, '')}. "
+            f"Beautiful detailed concept art, soft rim lighting, fantasy RPG style, elegant, ethereal, "
+            f"9:16 aspect ratio, cinematic composition, divine glow."
+        ),
+        "purpose": "用於命盤分析角色視覺化"
+    })
+    return prompts
+
 def main():
     parser = argparse.ArgumentParser(description="GEMS Bazi Assets Generator")
     parser.add_argument("json_file", help="Path to input JSON file containing Bazi details")
+    parser.add_argument("--output", "-o", default=None,
+                        help="Output directory (default: <script_dir>/../output)")
     args = parser.parse_args()
     
     if not os.path.exists(args.json_file):
@@ -892,7 +955,13 @@ def main():
         data = json.load(f)
         
     name = data["name"]
-    output_dir = "c:/2026Antigravity0606/GEMS/output"
+
+    if args.output:
+        output_dir = args.output
+    else:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        output_dir = os.path.normpath(os.path.join(script_dir, "..", "output"))
+        output_dir = os.path.abspath(output_dir)
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
         
@@ -906,19 +975,17 @@ def main():
     pdf = BaziPDF(title_text=f"{name} - 個人命盤天賦與心理測算報告")
     pdf.alias_nb_pages()
     
-    # 註冊中文字型
-    font_path = "C:/Windows/Fonts/msjh.ttc"
-    if not os.path.exists(font_path):
-        # 尋找替代的中文字型
-        font_path = "C:/Windows/Fonts/mingliu.ttc"
-    if os.path.exists(font_path):
+    # 註冊中文字型（跨平台）
+    font_path, is_ttc = find_chinese_font()
+    if font_path:
+        print(f"使用字型: {font_path}")
         pdf.add_font("msjh", "", font_path)
         pdf.add_font("msjh", "B", font_path)
     else:
-        # 使用預設字型
-        print("Warning: Chinese font not found, falling back to default Arial")
-        pdf.add_font("msjh", "", "Arial")
-        pdf.add_font("msjh", "B", "Arial")
+        print("Warning: 找不到中文字型，PDF 中文將無法正確顯示。")
+        print("請安裝中文字型，例如 Noto Sans TC (https://fonts.google.com/noto/specimen/Noto+Sans+TC)")
+        pdf.add_font("msjh", "", "Helvetica")
+        pdf.add_font("msjh", "B", "Helvetica")
         
     pdf.add_page()
     
@@ -959,12 +1026,26 @@ def main():
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     print("✓ bazi_data.json updated successfully")
-    
-    print("\n[SUCCESS] All Bazi assets generated successfully!")
+
+    # 5. 生成生圖 Prompt
+    image_prompts_path = os.path.join(output_dir, f"{name}_生圖prompts.json")
+    prompts = build_image_prompts(data)
+    with open(image_prompts_path, "w", encoding="utf-8") as f:
+        json.dump(prompts, f, ensure_ascii=False, indent=2)
+    print(f"✓ Image prompts saved: {image_prompts_path}")
+
+    print("\n===== 生圖 Prompt 建議 =====")
+    for i, p in enumerate(prompts):
+        print(f"\n[{p['label']}] ({p['purpose']})")
+        print(p["prompt"])
+    print("==============================\n")
+
+    print("[SUCCESS] All Bazi assets generated successfully!")
     print(f"PDF: {pdf_path}")
     print(f"HTML: {html_path}")
     print(f"Markdown: {md_path}")
     print(f"JSON: {json_path}")
+    print(f"Image Prompts: {image_prompts_path}")
 
 if __name__ == "__main__":
     main()
