@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GEMS Agent Studio - 智慧工作流與命盤診斷中心</title>
+    <title>GEMS Agent Studio - 本機安全命盤診斷中心</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -98,9 +98,9 @@
         }
 
         .logo-badge {
-            background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            color: var(--primary);
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
             font-size: 11px;
             font-weight: 700;
             padding: 2px 8px;
@@ -168,7 +168,7 @@
         /* 網格版面 */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 350px 1fr;
+            grid-template-columns: 380px 1fr;
             gap: 32px;
             align-items: start;
         }
@@ -215,6 +215,7 @@
             justify-content: center;
             gap: 8px;
             font-size: 15px;
+            text-decoration: none;
         }
 
         .btn:hover {
@@ -233,11 +234,21 @@
             color: white;
         }
 
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }
+        .btn-danger:hover {
+            background: #ef4444;
+            color: white;
+        }
+
         /* 上傳拖放區 */
         .drop-zone {
             border: 2px dashed var(--card-border);
             border-radius: 16px;
-            padding: 30px;
+            padding: 24px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -250,9 +261,9 @@
         }
 
         .drop-zone p {
-            font-size: 14px;
+            font-size: 13.5px;
             color: var(--text-muted);
-            margin-top: 10px;
+            margin-top: 8px;
             line-height: 1.5;
         }
 
@@ -272,6 +283,38 @@
         .badge-wood { background-color: var(--color-wood); color: #fff; }
         .badge-fire { background-color: var(--color-fire); color: #fff; }
         .badge-earth { background-color: var(--color-earth); color: #fff; }
+
+        /* 表單輸入控制 */
+        .form-group {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .form-control {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: var(--text-light);
+            font-size: 14.5px;
+            font-family: inherit;
+            outline: none;
+        }
+        .form-control:focus {
+            border-color: var(--primary);
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
 
         /* 列表樣式 */
         ul.styled-list li {
@@ -367,7 +410,7 @@
             outline: none;
         }
 
-        /* --- 國語注音預覽元件 --- */
+        /* 國語注音 */
         .text-input-area {
             width: 100%;
             height: 150px;
@@ -407,7 +450,7 @@
             user-select: none;
         }
 
-        /* --- 字幕校對器元件 --- */
+        /* 字幕校對器 */
         .subtitle-grid {
             display: grid;
             grid-template-columns: 1fr 400px;
@@ -486,6 +529,48 @@
         .subtitle-text-input:focus {
             border-color: var(--primary);
         }
+
+        /* --- 列印專用樣式 (@media print) --- */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            header, nav, .bg-decor, .btn, .drop-zone, .glass-card:first-child, .nav-controls, input, select, textarea, .slider-control {
+                display: none !important;
+            }
+            main {
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr !important;
+                gap: 0 !important;
+            }
+            .glass-card {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin-bottom: 30px !important;
+                page-break-inside: avoid;
+            }
+            .card-title {
+                border-left: 4px solid black !important;
+                color: black !important;
+            }
+            p, li {
+                color: #222 !important;
+            }
+            .stat-bar-bg {
+                border: 1px solid #ccc !important;
+            }
+            .stat-bar-fill {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
     </style>
 </head>
 <body>
@@ -495,11 +580,11 @@
     <!-- 頁首 -->
     <header>
         <div class="logo-area">
-            <span class="logo-text">GEMS Agent Studio</span>
-            <span class="logo-badge">Pro v2.0</span>
+            <span class="logo-text">GEMS Studio</span>
+            <span class="logo-badge">本地安全版</span>
         </div>
         <nav>
-            <button class="nav-tab active" onclick="switchTab('bazi-tab')">🔮 八字命盤分析</button>
+            <button class="nav-tab active" onclick="switchTab('bazi-tab')">🔮 八字天賦報告</button>
             <button class="nav-tab" onclick="switchTab('sim-tab')">📊 五行能量模擬</button>
             <button class="nav-tab" onclick="switchTab('bopo-tab')">✏️ 國語教材注音</button>
             <button class="nav-tab" onclick="switchTab('sub-tab')">🎬 影音字幕校對</button>
@@ -511,77 +596,183 @@
         <!-- 1. 八字命盤分析面板 -->
         <div id="bazi-tab" class="tab-panel active">
             <div class="dashboard-grid">
-                <!-- 左側控制與檔案載入 -->
+                <!-- 左側控制與資料輸入 -->
                 <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <!-- 檔案上傳載入 -->
                     <div class="glass-card">
-                        <h3 class="card-title">載入命盤資料</h3>
+                        <h3 class="card-title">載入已有命盤 JSON</h3>
                         <div class="drop-zone" id="file-drop-zone">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary); margin: 0 auto 10px auto; display:block;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary); margin: 0 auto 8px auto; display:block;">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
                             </svg>
-                            <span style="font-weight:600; font-size:14px;">上傳 bazi_data.json</span>
-                            <p>拖放或點擊此處載入生成的命理 JSON 檔案。</p>
+                            <span style="font-weight:600; font-size:13.5px;">上傳 bazi_data.json</span>
+                            <p>拖放或點擊此處載入產生的 JSON。</p>
                             <input type="file" id="file-input" style="display:none;" accept=".json">
-                        </div>
-                        <div style="margin-top: 15px; display:flex; gap:10px;">
-                            <button class="btn btn-primary" style="flex:1;" onclick="loadDemoData('chen')">載入陳文姿 Demo</button>
-                            <button class="btn" style="flex:1;" onclick="loadDemoData('luo')">載入羅立宏 Demo</button>
                         </div>
                     </div>
 
+                    <!-- 手動輸入命盤 -->
                     <div class="glass-card">
-                        <h3 class="card-title">五行先天分佈</h3>
-                        <div class="chart-wrapper">
-                            <!-- SVG 互動環狀圖 -->
-                            <svg width="220" height="220" viewBox="0 0 220 220" id="bazi-donut-chart">
-                                <circle cx="110" cy="110" r="80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="15"></circle>
-                                <text x="110" y="115" text-anchor="middle" fill="var(--text-light)" font-size="20" font-weight="800" id="donut-center-text">五行分布</text>
-                            </svg>
-                        </div>
-                        <div id="bazi-bars-container">
-                            <!-- 五行能量條 -->
+                        <h3 class="card-title">手動輸入命盤資料</h3>
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <div class="form-group">
+                                <label>姓名</label>
+                                <input type="text" id="in-name" class="form-control" placeholder="請輸入姓名">
+                            </div>
+                            <div class="grid-2col">
+                                <div class="form-group">
+                                    <label>性別</label>
+                                    <select id="in-gender" class="form-control">
+                                        <option value="女">女</option>
+                                        <option value="男">男</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>日主天干</label>
+                                    <select id="in-daymaster" class="form-control">
+                                        <option value="甲木">甲木</option>
+                                        <option value="乙木">乙木</option>
+                                        <option value="丙火">丙火</option>
+                                        <option value="丁火">丁火</option>
+                                        <option value="戊土">戊土</option>
+                                        <option value="己土">己土</option>
+                                        <option value="庚金">庚金</option>
+                                        <option value="辛金">辛金</option>
+                                        <option value="壬水">壬水</option>
+                                        <option value="癸水">癸水</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>西元出生時間</label>
+                                <input type="text" id="in-birth-time" class="form-control" placeholder="例：西元 2001 年 1 月 11 日 20 時">
+                            </div>
+                            <div class="form-group">
+                                <label>農曆時間</label>
+                                <input type="text" id="in-lunar" class="form-control" placeholder="例：農曆 89 年 12 月 17 日 戌時">
+                            </div>
+                            <div class="form-group">
+                                <label>格局特徵描述</label>
+                                <input type="text" id="in-features" class="form-control" placeholder="例：身弱財旺，正財透干">
+                            </div>
+                            
+                            <h4 style="font-size:14px; color:var(--primary); font-weight:700; margin-top:8px;">五行先天分數</h4>
+                            <div class="grid-2col">
+                                <div class="form-group">
+                                    <label>🌊 水 (印星/食傷)</label>
+                                    <input type="number" id="in-score-water" class="form-control" value="60">
+                                </div>
+                                <div class="form-group">
+                                    <label>🌲 木 (比劫/財星)</label>
+                                    <input type="number" id="in-score-wood" class="form-control" value="70">
+                                </div>
+                                <div class="form-group">
+                                    <label>🔥 火 (食傷/官殺)</label>
+                                    <input type="number" id="in-score-fire" class="form-control" value="80">
+                                </div>
+                                <div class="form-group">
+                                    <label>⛰️ 土 (財星/印星)</label>
+                                    <input type="number" id="in-score-earth" class="form-control" value="100">
+                                </div>
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label>⚔️ 金 (官殺/比劫)</label>
+                                    <input type="number" id="in-score-metal" class="form-control" value="90">
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary" style="width:100%; margin-top:10px;" onclick="generateManualReport()">動態生成測算報告</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 右側詳細報告內容 -->
+                <!-- 右側詳細報告書呈現 -->
                 <div style="display: flex; flex-direction: column; gap: 24px;">
-                    <!-- 命主基本資訊 -->
-                    <div class="glass-card">
-                        <div class="profile-header-card">
-                            <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <h2 class="profile-name" id="profile-name">陳文姿 (女)</h2>
-                                <span class="badge badge-metal" id="profile-daymaster">辛金 (辛巳日)</span>
-                            </div>
-                            <p class="profile-meta" id="profile-meta">
-                                <strong>出生時間：</strong> 西元 1972 年 8 月 18 日 7 時 (農曆：農曆 61 年 7 月 10 日 辰時)<br>
-                                <strong>核心格局：</strong> 身強格局，天干雙透壬水傷官，地支申子辰三合水局
+                    <!-- 報告狀態提示 -->
+                    <div class="glass-card" id="empty-state-notice">
+                        <div style="text-align: center; padding: 40px 0;">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-muted); margin-bottom: 16px;">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                            <h3 style="font-size:18px; margin-bottom:8px;">無正在顯示的命盤資料</h3>
+                            <p style="font-size:14.5px; color:var(--text-muted); max-width:400px; margin: 0 auto 24px auto;">
+                                本系統符合個人隱私保護：**報告書與命盤資料僅在您的瀏覽器本機內處理與渲染，絕不會上傳或存儲於任何雲端資料庫中。**
+                            </p>
+                            <p style="font-size:14px; color:var(--primary); font-weight:600;">
+                                請於左側「上傳 bazi_data.json」或「手動輸入數值」以立即製作專屬命盤天賦報告書。
                             </p>
                         </div>
                     </div>
 
-                    <!-- 深度性格與心理拉鋸 -->
-                    <div class="glass-card">
-                        <h3 class="card-title">🧠 深度特質性格與心理拉鋸</h3>
-                        <div id="profile-analysis-text" style="display:flex; flex-direction:column; gap:20px;">
-                            <!-- 動態填充解析段落 -->
-                        </div>
-                    </div>
-
-                    <!-- 人生指引與自我覺察 -->
-                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px;">
-                        <div class="glass-card">
-                            <h3 class="card-title">🌱 人生行動指引</h3>
-                            <ul class="styled-list" id="profile-guidelines">
-                                <!-- 填入指引 -->
-                            </ul>
-                        </div>
-                        <div class="glass-card">
-                            <h3 class="card-title">💭 自我覺察提問</h3>
-                            <div id="profile-questions" style="display:flex; flex-direction:column; gap:12px;">
-                                <!-- 填入問題 -->
+                    <!-- 報告呈現區 (預設隱藏，載入資料後顯示) -->
+                    <div id="report-view-container" style="display: none; flex-direction: column; gap: 24px;">
+                        
+                        <!-- 頂部操作按鈕 -->
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-size:13.5px; color:#10b981; font-weight:700; display:flex; align-items:center; gap:6px;">
+                                <span style="width:8px; height:8px; border-radius:50%; background:#10b981; display:inline-block;"></span>
+                                本地安全沙盒運作中 (資料不離港)
+                            </span>
+                            <div style="display:flex; gap:10px;">
+                                <button class="btn btn-primary" onclick="window.print()">🖨️ 列印 / 儲存為 PDF</button>
+                                <button class="btn" onclick="exportDataJSON()">💾 匯出本地 JSON 檔</button>
+                                <button class="btn btn-danger" onclick="clearBaziData()">❌ 清除此筆資料</button>
                             </div>
                         </div>
+
+                        <!-- 命主資訊 -->
+                        <div class="glass-card">
+                            <div class="profile-header-card">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <h2 class="profile-name" id="profile-name">姓名 (性別)</h2>
+                                    <span class="badge badge-metal" id="profile-daymaster">日元天干</span>
+                                </div>
+                                <p class="profile-meta" id="profile-meta">
+                                    載入中...
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 五行分佈圖 -->
+                        <div class="glass-card">
+                            <h3 class="card-title">五行先天能量數據</h3>
+                            <div class="dashboard-grid" style="grid-template-columns: 240px 1fr; gap:24px; align-items: center;">
+                                <div class="chart-wrapper">
+                                    <svg width="200" height="200" viewBox="0 0 200 200" id="bazi-donut-chart">
+                                        <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="12"></circle>
+                                        <text x="100" y="105" text-anchor="middle" fill="var(--text-light)" font-size="16" font-weight="800">先天分佈</text>
+                                    </svg>
+                                </div>
+                                <div id="bazi-bars-container">
+                                    <!-- 動態生成能量條 -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 深度解析 -->
+                        <div class="glass-card">
+                            <h3 class="card-title">🧠 深度特質性格與心理拉鋸</h3>
+                            <div id="profile-analysis-text" style="display:flex; flex-direction:column; gap:20px;">
+                                <!-- 動態填充解析段落 -->
+                            </div>
+                        </div>
+
+                        <!-- 行動指引與覺察 -->
+                        <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px;">
+                            <div class="glass-card">
+                                <h3 class="card-title">🌱 人生行動指引</h3>
+                                <ul class="styled-list" id="profile-guidelines">
+                                    <!-- 填入指引 -->
+                                </ul>
+                            </div>
+                            <div class="glass-card">
+                                <h3 class="card-title">💭 自我覺察提問</h3>
+                                <div id="profile-questions" style="display:flex; flex-direction:column; gap:12px;">
+                                    <!-- 填入問題 -->
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -598,23 +789,23 @@
                     </p>
                     <div class="simulator-sliders">
                         <div class="slider-item">
-                            <label><span>🌊 水 (食傷)</span> <span id="lbl-sim-water">+0</span></label>
+                            <label><span>🌊 水 (印星/食傷)</span> <span id="lbl-sim-water">+0</span></label>
                             <input type="range" id="slider-water" min="-100" max="150" value="0" oninput="runSimulation()">
                         </div>
                         <div class="slider-item">
-                            <label><span>🌲 木 (財星)</span> <span id="lbl-sim-wood">+0</span></label>
+                            <label><span>🌲 木 (比劫/財星)</span> <span id="lbl-sim-wood">+0</span></label>
                             <input type="range" id="slider-wood" min="-100" max="150" value="0" oninput="runSimulation()">
                         </div>
                         <div class="slider-item">
-                            <label><span>🔥 火 (官殺)</span> <span id="lbl-sim-fire">+0</span></label>
+                            <label><span>🔥 火 (食傷/官殺)</span> <span id="lbl-sim-fire">+0</span></label>
                             <input type="range" id="slider-fire" min="-100" max="150" value="0" oninput="runSimulation()">
                         </div>
                         <div class="slider-item">
-                            <label><span>⛰️ 土 (印星)</span> <span id="lbl-sim-earth">+0</span></label>
+                            <label><span>⛰️ 土 (財星/印星)</span> <span id="lbl-sim-earth">+0</span></label>
                             <input type="range" id="slider-earth" min="-100" max="150" value="0" oninput="runSimulation()">
                         </div>
                         <div class="slider-item">
-                            <label><span>⚔️ 金 (比劫)</span> <span id="lbl-sim-metal">+0</span></label>
+                            <label><span>⚔️ 金 (官殺/比劫)</span> <span id="lbl-sim-metal">+0</span></label>
                             <input type="range" id="slider-metal" min="-100" max="150" value="0" oninput="runSimulation()">
                         </div>
                     </div>
@@ -624,13 +815,12 @@
                 <!-- 右側圖表與心理學處方箋 -->
                 <div style="display: flex; flex-direction: column; gap: 24px;">
                     <div class="glass-card">
-                        <h3 class="card-title">模擬後的五行雷達分佈</h3>
-                        <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px; align-items: center;">
+                        <h3 class="card-title">模擬後的五行分佈</h3>
+                        <div class="dashboard-grid" style="grid-template-columns: 240px 1fr; gap:24px; align-items: center;">
                             <div class="chart-wrapper">
-                                <!-- 動態五行環狀圖 -->
-                                <svg width="240" height="240" viewBox="0 0 240 240" id="sim-donut-chart">
-                                    <circle cx="120" cy="120" r="90" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="18"></circle>
-                                    <text x="120" y="125" text-anchor="middle" fill="var(--text-light)" font-size="18" font-weight="800" id="sim-donut-center">模擬分佈</text>
+                                <svg width="200" height="200" viewBox="0 0 200 200" id="sim-donut-chart">
+                                    <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="12"></circle>
+                                    <text x="100" y="105" text-anchor="middle" fill="var(--text-light)" font-size="16" font-weight="800">模擬分佈</text>
                                 </svg>
                             </div>
                             <div id="sim-bars-container">
@@ -643,7 +833,7 @@
                         <h3 class="card-title">⚖️ 心理學處方與能量調和指引</h3>
                         <div id="sim-advice-card" style="padding:16px; border-radius:12px; background:rgba(0,0,0,0.2); border:1px solid var(--card-border);">
                             <p style="font-size:15px; line-height:1.8; color:#e2e8f0;" id="sim-advice-text">
-                                目前五行能量處於先天設定狀態。請試著拖拉左側滑桿模擬「流年能量變動」（例如模擬火旺的流年壓力，或水旺的才華釋放），我們將動態開立調和處方箋。
+                                目前五行能量處於先天設定狀態。請試著拖拉左側滑桿模擬「流年能量變動」，系統將動態開立調和處方箋。
                             </p>
                         </div>
                     </div>
@@ -724,85 +914,6 @@
     </main>
 
     <script>
-        // 內置 Demo 數據
-        const DEMO_DATA = {
-            chen: {
-                "name": "陳文姿",
-                "gender": "女",
-                "birth_time": "西元 1972 年 8 月 18 日 7 時",
-                "birth_lunar": "農曆 61 年 7 月 10 日 辰時",
-                "daymaster": "辛金 (辛巳日)",
-                "profile_features": "身強格局，天干雙透壬水傷官，地支申子辰三合水局",
-                "elements": [
-                    {"name": "水", "role": "食傷 - 創意才華", "score": 240},
-                    {"name": "金", "role": "比劫 - 自我主體", "score": 185},
-                    {"name": "土", "role": "印星 - 知識吸收", "score": 125},
-                    {"name": "火", "role": "官殺 - 社會規範", "score": 60},
-                    {"name": "木", "role": "財星 - 實務執行", "score": 30}
-                ],
-                "analysis": [
-                    {
-                        "title": "1. 原廠設定：璀璨的珠寶與淘洗之水",
-                        "text": "您的日主為「辛金」，代表精緻、溫潤且閃耀的珠寶之金。辛金生於初秋申月（帝旺之地），又有月干戊土正印相生，自我能量高達 310 分，屬於典型的「身強格局」。這代表您內在底氣十足，性格堅毅、有主見且抗壓性高，不易被外界輕易動搖。"
-                    },
-                    {
-                        "title": "2. 十神心理學：傷官配印的智慧火花",
-                        "text": "您命盤中最旺盛的是高達 240 分的「水（食傷）」能量。在心理學上，這展現了強大的「輸入」與「輸出」平衡：正印（土）代表內斂與吸收知識的能力，傷官（水）代表才華展現與傳播能力。您不僅學習力強，更能將複雜的知識以活潑、好懂且生動的口語或圖解方式傳授給他人，天生具有教育與引導的天賦。"
-                    },
-                    {
-                        "title": "3. 內在心理拉鋸：理想與體制的平衡",
-                        "text": "您的日支坐正官（火，60分），但受到旺水傷官的克制，容易在心理上產生「理想與規範的拉鋸」：既渴望自由創新，又在乎社會的認同與責任。另外，財星（木，30分）偏弱，容易使您流於空想規劃，在繁瑣的實務落地執行上耐性較低，需要刻意進行落地的平衡練習。"
-                    }
-                ],
-                "guidelines": [
-                    "以「正印」穩固內心：面對今年的新工作壓力或想法變多時，保留固定的獨處與沉澱時間，透過閱讀、寫作收回外散的能量。",
-                    "補足「木」能量以落地：多與執行力強的夥伴合作，並強迫自己建立「具體檔案與實體成果」，將創意真正落實。",
-                    "優雅重塑三刑挑戰：主動釐清哪些責任是自己真正想扛的，哪些自我堅持可以妥協，讓生活步入更穩定的軌道。"
-                ],
-                "questions": [
-                    "在面對今年的新挑戰或機會時，我是因為在乎「社會期待與認同（官）」，還是因為「它能讓我盡情發揮創意（食傷）」而決定投入？",
-                    "今天，我有沒有將腦中的一個精妙靈感，寫成一個實體檔案（補木），讓它在真實世界中降落生根？"
-                ]
-            },
-            luo: {
-                "name": "羅立宏",
-                "gender": "男",
-                "birth_time": "西元 2002 年 10 月 29 日 20 時",
-                "birth_lunar": "農曆 91 年 9 月 24 日 戌時",
-                "daymaster": "庚金 (庚午日)",
-                "profile_features": "身極強格局，八字純陽 (4陽0陰)，官印相生，七殺透時干 (丙戌)",
-                "elements": [
-                    {"name": "土", "role": "印星 - 知識資源", "score": 240},
-                    {"name": "火", "role": "官殺 - 自律職責", "score": 205},
-                    {"name": "金", "role": "比劫 - 自我意志", "score": 160},
-                    {"name": "水", "role": "食傷 - 創意宣洩", "score": 35},
-                    {"name": "木", "role": "財星 - 落地執行", "score": 0}
-                ],
-                "analysis": [
-                    {
-                        "title": "1. 原廠設定：剛直無雙的純陽鋼鐵",
-                        "text": "您的日主為「庚金」，代表剛毅、重義氣、具備開拓精神的鋼鐵刀劍。您的命盤呈現「0 陰 4 陽」的純陽格局，性格大氣、光明磊落、做事直接且雷厲風行。自我能量高達 400 分，屬於極度身強的格局。這代表您內在有著極強的自主信念，不畏艱難，具備大將之風。"
-                    },
-                    {
-                        "title": "2. 印綬與官殺：天生的紀律與厚實資源",
-                        "text": "命盤中「土（印星 240分）」與「火（官殺 205分）」兩大能量均極為強旺。印星厚實代表您擁有豐富的資源、學習機會或長輩的庇護；官殺旺代表您有極強的自律能力、正義感與社會責任感。"
-                    },
-                    {
-                        "title": "3. 內在矛盾：超我過強的完美主義與落地瓶頸",
-                        "text": "由於官殺與印星極強，而水極弱，您容易在心理上形成「超我過強」的特徵，對自己要求極高，常給自己過大的精神壓力，且不擅長主動宣洩情緒，容易累積內耗。此外，財星（木）為 0 分，很多宏大的規劃容易在「具體落實」與「靈活變通」上遇到瓶頸。"
-                    }
-                ],
-                "guidelines": [
-                    "學會「適度宣洩」（補水能量）：在繁忙的學習與工作中，培養一項不需要動腦的休閒運動（如游泳、慢跑），主動把壓力排出。",
-                    "目標切碎，踏實落地（補木能量）：因為木為0，在規劃未來時，強迫自己制定「每週的具體待辦事項」，從小事累積自信。"
-                ],
-                "questions": [
-                    "我現在所承受的壓力和責任，有多少是我真正需要扛的，又有多少是我因為怕別人失望（官殺）而硬塞給自己的？",
-                    "面對繁重的目標，今天我有民有放下宏大的思考，只專注去完成一個小而具體的執行步驟（補木）？"
-                ]
-            }
-        };
-
         // 預設 Demo 字幕數據
         const DEMO_SUBTITLES = [
             { id: 1, start: "00:00:01.200", end: "00:00:04.500", text: "歡迎來到國語學力測驗複習課堂。" },
@@ -811,7 +922,7 @@
             { id: 4, start: "00:00:13.200", end: "00:00:18.000", text: "這裡最容易混淆的是通同字與借代修辭的用法。" }
         ];
 
-        let activeBaziData = DEMO_DATA.chen; // 當前載入的八字資料
+        let activeBaziData = null; // 當前載入的八字資料 (預設為空)
 
         // 標籤頁切換
         function switchTab(tabId) {
@@ -866,7 +977,7 @@
                     if (parsed.name && parsed.daymaster && parsed.elements) {
                         activeBaziData = parsed;
                         renderBaziDashboard();
-                        alert(`成功載入 ${parsed.name} 的八字命盤！`);
+                        alert(`成功載入 ${parsed.name} 的八字命盤！報告已生成於本機。`);
                     } else {
                         alert("JSON 格式不符，請確認是 Bazi Advisor 生成的 JSON 檔案！");
                     }
@@ -877,22 +988,152 @@
             reader.readAsText(file);
         }
 
-        function loadDemoData(key) {
-            activeBaziData = DEMO_DATA[key];
+        // 手動輸入並動態產生報告書
+        function generateManualReport() {
+            const name = document.getElementById('in-name').value.trim();
+            const gender = document.getElementById('in-gender').value;
+            const daymaster = document.getElementById('in-daymaster').value;
+            const birthTime = document.getElementById('in-birth-time').value.trim() || "未提供";
+            const lunar = document.getElementById('in-lunar').value.trim() || "未提供";
+            const features = document.getElementById('in-features').value.trim() || `${daymaster}命主`;
+
+            const scoreWater = parseInt(document.getElementById('in-score-water').value) || 0;
+            const scoreWood = parseInt(document.getElementById('in-score-wood').value) || 0;
+            const scoreFire = parseInt(document.getElementById('in-score-fire').value) || 0;
+            const scoreEarth = parseInt(document.getElementById('in-score-earth').value) || 0;
+            const scoreMetal = parseInt(document.getElementById('in-score-metal').value) || 0;
+
+            if (!name) {
+                alert("請輸入姓名！");
+                return;
+            }
+
+            // 1. 日元解析模板
+            const dmChar = daymaster[0];
+            const dmMap = {
+                "甲": "參天大樹，正直仁慈，向上生長，具備責任感與開拓精神，但也容易面臨過重的現實挑戰。",
+                "乙": "藤蔓花草，柔順堅韌，適應力強，擅長人際協調與靈活變通，在逆境中不易折斷。",
+                "丙": "太陽之火，熱情光明，大氣豪放，喜好表現，具備領導力與感染力，照亮身邊的人。",
+                "丁": "燭光燈火，溫暖內斂，細心體貼，具備極強的洞察力與犧牲奉獻精神，在黑暗中帶來指引。",
+                "戊": "磐石高山，穩重寬厚，講誠信，守護他人，做事沉穩，但有時較為固執，需多點靈活性。",
+                "己": "田園之土，包容孕育，適應力強，擅長規劃、多才多藝，具備極佳的奉獻精神與親和力。",
+                "庚": "鋼鐵刀劍，剛毅果斷，重義氣，具備強大執行力與開拓精神，直率敢言，不怕困難。",
+                "辛": "珠寶首飾，精緻溫潤，閃耀自信，注重細節，自尊心強，具有獨特的品味與心靈追求。",
+                "壬": "江河大水，奔放有智慧，眼光長遠，適應力極強，喜歡自由，才華橫溢，能包容萬物。",
+                "癸": "雨露之水，溫柔細膩，直覺強，富有想像力與同理心，擅長幕後策劃與情感引導。"
+            };
+            const dmDesc = dmMap[dmChar] || "格局溫和，命元健康。";
+
+            // 2. 五行最強與最弱分析
+            const elScores = [
+                { name: "水", score: scoreWater },
+                { name: "木", score: scoreWood },
+                { name: "火", score: scoreFire },
+                { name: "土", score: scoreEarth },
+                { name: "金", score: scoreMetal }
+            ];
+            elScores.sort((a, b) => b.score - a.score);
+            const strongest = elScores[0];
+            const weakest = elScores[4];
+
+            const strongMap = {
+                "土": "土代表財星與物質標準。在心理學上，這展現了強大的現實感、對安全感與成就標準的追求，但也容易帶來完美主義的焦慮，使自我感到被外部期待淹沒。",
+                "金": "金代表官殺與自律紀律。在心理學上，這意味著您自律性極強，遵守社會規則，注重名譽，但也容易對自己過於苛刻，產生過度自省與心理壓抑。",
+                "水": "水代表食傷與智慧流動。在心理學上，這展現了思維敏捷、創意豐富的特質，渴望自由與表達，但也容易想得多、做得少，流於情緒起伏。",
+                "木": "木代表比劫與自我意識。在心理學上，這意味著您主體意識強，有同理心與生長渴望，但也可能較為自我中心或主觀，需要學習協調與妥協。",
+                "火": "火代表食傷與熱情釋放。在心理學上，這代表熱情洋溢、執行力與表達欲旺盛，但有時容易急躁、缺乏耐心，需要水性力量靜心沉澱。"
+            };
+
+            const weakMap = {
+                "木": "木能量偏弱：代表您在繁瑣事務的執行落地與目標管理上容易遇到瓶頸，容易流於宏大規劃而缺乏耐心，需要建立具體每日清單來補強木的落地能量。",
+                "水": "水能量偏弱：代表您不擅長放鬆與宣洩壓力，容易累積內耗，需要培養不帶目的性的興趣（如游泳、放空、冥想）來滋養身心。",
+                "火": "火能量偏弱：代表您的熱情表達與創新突破力在先天設定中較為含蓄，有時缺乏衝勁，需要刻意培養熱情，多接觸陽光或活躍的事物。",
+                "土": "土能量偏弱：代表您的心理踏實感、穩定度容易受到外界環境波折的影響，需要建立穩定的生活作息與信任的避風港來培土。",
+                "金": "金能量偏弱：代表您的心理防線較弱，不擅長建立邊界，容易被他人情緒干擾，需要學習溫和而堅定地拒絕不合理的期待。"
+            };
+
+            const analysis = [
+                {
+                    "title": `1. 原廠設定：${dmChar}日主的心智代碼`,
+                    "text": `您的日主為「${daymaster}」，代表您性格核心中具備『${dmDesc}』的特徵。這是您的先天設定與天賦藍圖，指引您以此心智模式去探索與回應世界的變化。`
+                },
+                {
+                    "title": `2. 十神心理學：五行最強能量的驅動力`,
+                    "text": `您命盤中五行能量以「${strongest.name}」最強，高達 ${strongest.score} 分。${strongMap[strongest.name]}`
+                },
+                {
+                    "title": `3. 內在心理拉鋸：五行偏弱的挑戰與重塑`,
+                    "text": `您命盤中偏弱的五行為「${weakest.name}」，分數為 ${weakest.score} 分。${weakMap[weakest.name]}`
+                }
+            ];
+
+            const guidelines = [
+                `補足能量弱項：透過具體的生活引導，特別是增加五行中「${weakest.name}」的特質，例如透過特定的活動或心態調適。`,
+                `建立心理防火牆：當超我與責任感過大時，主動給自己留出無功利性的時間。`,
+                `結合天賦：運用日主「${daymaster}」的正直與堅韌，將大腦的創意轉化為現實的產出。`
+            ];
+
+            const questions = [
+                `當我感到焦慮或疲憊時，我是因為做錯了什麼，還是因為我承擔了不屬於我的責任？`,
+                `今天，我有沒有哪一個瞬間是完全為了『取悅自己』而做某件事，而不是為了完成任務？`
+            ];
+
+            activeBaziData = {
+                "name": name,
+                "gender": gender,
+                "birth_time": birthTime,
+                "birth_lunar": lunar,
+                "daymaster": daymaster,
+                "profile_features": features,
+                "elements": [
+                    {"name": "水", "role": "印星/食傷", "score": scoreWater},
+                    {"name": "木", "role": "比劫/財星", "score": scoreWood},
+                    {"name": "火", "role": "食傷/官殺", "score": scoreFire},
+                    {"name": "土", "role": "財星/印星", "score": scoreEarth},
+                    {"name": "金", "role": "官殺/比劫", "score": scoreMetal}
+                ],
+                "analysis": analysis,
+                "guidelines": guidelines,
+                "questions": questions
+            };
+
             renderBaziDashboard();
+        }
+
+        // 清除當前資料
+        function clearBaziData() {
+            activeBaziData = null;
+            document.getElementById('report-view-container').style.display = 'none';
+            document.getElementById('empty-state-notice').style.display = 'block';
+            resetSimulation();
+        }
+
+        // 匯出 JSON 檔案
+        function exportDataJSON() {
+            if (!activeBaziData) return;
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(activeBaziData, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `${activeBaziData.name}_bazi_data.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
         }
 
         // 渲染八字面板
         function renderBaziDashboard() {
             const data = activeBaziData;
+            if (!data) return;
+
+            document.getElementById('empty-state-notice').style.display = 'none';
+            document.getElementById('report-view-container').style.display = 'flex';
             
-            // 1. 渲染名字與格局基本資料
+            // 姓名與日主
             document.getElementById('profile-name').textContent = `${data.name} (${data.gender || '女'})`;
             
-            // 設定日主徽章顏色
             const dmBadge = document.getElementById('profile-daymaster');
             dmBadge.className = 'badge';
-            const elementChar = data.daymaster[0]; // 金、水、木、火、土
+            const elementChar = data.daymaster[0];
             if (elementChar === '金') dmBadge.classList.add('badge-metal');
             if (elementChar === '木') dmBadge.classList.add('badge-wood');
             if (elementChar === '水') dmBadge.classList.add('badge-water');
@@ -901,11 +1142,12 @@
             dmBadge.textContent = data.daymaster;
 
             document.getElementById('profile-meta').innerHTML = `
-                <strong>出生時間：</strong> ${data.birth_time} (農曆：${data.birth_lunar || '未提供'})<br>
+                <strong>出生時間：</strong> ${data.birth_time}<br>
+                <strong>農曆時間：</strong> ${data.birth_lunar || '未提供'}<br>
                 <strong>核心格局：</strong> ${data.profile_features || '未提供'}
             `;
 
-            // 2. 渲染五行長條與環狀圖
+            // 五行長條與圓環
             const barContainer = document.getElementById('bazi-bars-container');
             barContainer.innerHTML = '';
             
@@ -919,7 +1161,7 @@
             let totalScore = scores.reduce((a, b) => a + b, 0);
             let currentAngle = -90;
             
-            data.elements.forEach((el, index) => {
+            data.elements.forEach(el => {
                 const pct = (el.score / maxScore) * 100;
                 let color = 'var(--text-muted)';
                 if (el.name === '水') color = 'var(--color-water)';
@@ -928,7 +1170,6 @@
                 if (el.name === '土') color = 'var(--color-earth)';
                 if (el.name === '金') color = 'var(--color-metal)';
 
-                // 長條圖
                 barContainer.innerHTML += `
                     <div class="stat-row">
                         <div class="stat-header">
@@ -948,26 +1189,26 @@
                     const rad1 = currentAngle * Math.PI / 180;
                     const rad2 = nextAngle * Math.PI / 180;
                     
-                    const x1 = 110 + 80 * Math.cos(rad1);
-                    const y1 = 110 + 80 * Math.sin(rad1);
-                    const x2 = 110 + 80 * Math.cos(rad2);
-                    const y2 = 110 + 80 * Math.sin(rad2);
+                    const x1 = 100 + 75 * Math.cos(rad1);
+                    const y1 = 100 + 75 * Math.sin(rad1);
+                    const x2 = 100 + 75 * Math.cos(rad2);
+                    const y2 = 100 + 75 * Math.sin(rad2);
                     
                     const largeArc = angleSweep > 180 ? 1 : 0;
-                    const pathD = `M ${x1} ${y1} A 80 80 0 ${largeArc} 1 ${x2} ${y2}`;
+                    const pathD = `M ${x1} ${y1} A 75 75 0 ${largeArc} 1 ${x2} ${y2}`;
                     
                     const pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
                     pathEl.setAttribute("d", pathD);
                     pathEl.setAttribute("fill", "none");
                     pathEl.setAttribute("stroke", color);
-                    pathEl.setAttribute("stroke-width", "15");
+                    pathEl.setAttribute("stroke-width", "12");
                     donutSvg.appendChild(pathEl);
                     
                     currentAngle = nextAngle;
                 }
             });
 
-            // 3. 渲染深度分析
+            // 深度解析
             const analysisDiv = document.getElementById('profile-analysis-text');
             analysisDiv.innerHTML = '';
             data.analysis.forEach(para => {
@@ -979,14 +1220,14 @@
                 `;
             });
 
-            // 4. 渲染人生指引
+            // 人生指引
             const guideUl = document.getElementById('profile-guidelines');
             guideUl.innerHTML = '';
             data.guidelines.forEach(guide => {
                 guideUl.innerHTML += `<li>${guide}</li>`;
             });
 
-            // 5. 渲染覺察提問
+            // 覺察提問
             const qDiv = document.getElementById('profile-questions');
             qDiv.innerHTML = '';
             data.questions.forEach((q, idx) => {
@@ -1009,6 +1250,10 @@
         }
 
         function runSimulation() {
+            if (!activeBaziData) {
+                document.getElementById('sim-bars-container').innerHTML = '<span style="color:var(--text-muted)">請先載入或生成一份八字資料</span>';
+                return;
+            }
             const wVal = parseInt(document.getElementById('slider-water').value);
             const wdVal = parseInt(document.getElementById('slider-wood').value);
             const fVal = parseInt(document.getElementById('slider-fire').value);
@@ -1075,19 +1320,19 @@
                     const rad1 = currentAngle * Math.PI / 180;
                     const rad2 = nextAngle * Math.PI / 180;
                     
-                    const x1 = 120 + 90 * Math.cos(rad1);
-                    const y1 = 120 + 90 * Math.sin(rad1);
-                    const x2 = 120 + 90 * Math.cos(rad2);
-                    const y2 = 120 + 90 * Math.sin(rad2);
+                    const x1 = 100 + 75 * Math.cos(rad1);
+                    const y1 = 100 + 75 * Math.sin(rad1);
+                    const x2 = 100 + 75 * Math.cos(rad2);
+                    const y2 = 100 + 75 * Math.sin(rad2);
                     
                     const largeArc = angleSweep > 180 ? 1 : 0;
-                    const pathD = `M ${x1} ${y1} A 90 90 0 ${largeArc} 1 ${x2} ${y2}`;
+                    const pathD = `M ${x1} ${y1} A 75 75 0 ${largeArc} 1 ${x2} ${y2}`;
                     
                     const pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
                     pathEl.setAttribute("d", pathD);
                     pathEl.setAttribute("fill", "none");
                     pathEl.setAttribute("stroke", color);
-                    pathEl.setAttribute("stroke-width", "18");
+                    pathEl.setAttribute("stroke-width", "12");
                     simDonut.appendChild(pathEl);
                     
                     currentAngle = nextAngle;
@@ -1096,32 +1341,23 @@
 
             const adviceText = document.getElementById('sim-advice-text');
             if (fVal > 40) {
-                adviceText.innerHTML = `⚠️ <strong>檢測到火（官殺）能量過度引動：</strong><br>
-                    外部壓力、責任或自律要求急劇增加。這極易引發超我（Super-ego）過度活躍，帶來「完美主義焦慮」與身心疲憊。<br>
-                    💡 <strong>能量調和處方箋：</strong><br>
-                    1. <strong>補水洩秀：</strong> 請多喝水、游泳或進行溫和的靜心散步，主動以水（食傷）能量來克服火的威脅。<br>
-                    2. <strong>課題重塑：</strong> 釐清哪些要求是「外界強加的規範」，哪些是自己真正想要的成長，學會適當拒絕以保護心理能量。`;
+                adviceText.innerHTML = `⚠️ <strong>檢測到火（食傷/官殺）能量過旺：</strong><br>
+                    外部壓力、責任或自律要求急劇增加。這極易引發完美主義焦慮與身心疲憊。<br>
+                    💡 <strong>能量調和建議：</strong><br>
+                    請多喝水、游泳或進行溫和的靜心散步，主動以水（印星）能量來克制火的烈氣。`;
             } else if (wdVal > 40) {
-                adviceText.innerHTML = `💡 <strong>檢測到木（財星）能量得到補強：</strong><br>
-                    木代表行動力、具體落實與界線建立。這極大地改善了先天命盤中「空想規劃（食傷過旺、財星偏弱）」的通病，有助於將大膽的構想在真實世界中降落生根。<br>
-                    💡 <strong>能量調和處方箋：</strong><br>
-                    1. <strong>即時落地：</strong> 適合開展新專案，並強迫自己建立「每週目標檢核單」。<br>
-                    2. <strong>產出實體：</strong> 寫出一篇文字報告、做出一張圖或建立一個檔案，享受「補木」帶來的踏實回報。`;
+                adviceText.innerHTML = `💡 <strong>檢測到木（比劫/財星）能量得到補強：</strong><br>
+                    木代表行動力、具體落實與界線建立。有助於將大膽的構想在真實世界中降落生根。<br>
+                    💡 <strong>能量調和建議：</strong><br>
+                    制定具體每週目標檢核單，享受踏實的落實感。`;
             } else if (wVal > 40) {
-                adviceText.innerHTML = `✨ <strong>檢測到水（食傷）能量進一步膨脹：</strong><br>
-                    水代表思想自由、才華與傳播引導力。食傷過旺會大幅增強直覺與靈感，但也可能引發思想過度活躍而難以安靜入睡，或者容易與體制（官殺）產生溝通衝突。<br>
-                    💡 <strong>能量調和處方箋：</strong><br>
-                    1. <strong>正印收斂：</strong> 必須刻意補土（印星），多看厚實經典書籍、打坐沉澱，利用「印星克食傷」來防止創意流於散漫。<br>
-                    2. <strong>劃定創作時間：</strong> 每天給自己一小時的「無限制寫作/畫畫」時間，釋放食傷多餘的心理能量。`;
-            } else if (eVal > 40) {
-                adviceText.innerHTML = `📚 <strong>檢測到土（印星）能量顯著提升：</strong><br>
-                    土代表吸收、沉澱、歸納、家庭長輩支持與心靈安全感。這極適合進行深度的知識充電、考取專業認證，或者進行心理諮商與自我療癒。<br>
-                    💡 <strong>能量調和處方箋：</strong><br>
-                    1. <strong>輸入與輸出平衡：</strong> 在大量吸收新知（土）的同時，強迫自己進行寫作或口語講述（食傷），防止消化不良。<br>
-                    2. <strong>心靈接地：</strong> 多觸摸泥土、盆栽，或食用土性食物（如根莖類），能進一步穩固安全感。`;
+                adviceText.innerHTML = `✨ <strong>檢測到水（印星/食傷）能量膨脹：</strong><br>
+                    水代表思想自由、才華與情感滋養。過旺可能引發思緒過度活躍而難以安靜，或與外界秩序產生溝通衝突。<br>
+                    💡 <strong>能量調和建議：</strong><br>
+                    多進行歸納整理或與信任的長輩交流（土印），收斂心神。`;
             } else {
-                adviceText.innerHTML = `✅ <strong>五行能量大致處於平衡狀態：</strong><br>
-                    請試著拖拉左側滑桿模擬「流年能量變動」（例如模擬火旺的流年壓力，或水旺的才華釋放），我們將根據您五行的相對旺度，動態開立調和處方箋與生活心態重塑建議。`;
+                adviceText.innerHTML = `✅ <strong>五行能量調整中：</strong><br>
+                    您可以拖拉左側滑桿模擬「流年能量變動」，觀察圓環的變動，尋求生活心態上的和諧指引。`;
             }
         }
 
@@ -1134,7 +1370,7 @@
                 return;
             }
 
-            previewPane.innerHTML = "正在調用注音轉換庫，請稍候...";
+            previewPane.innerHTML = "正在標註注音符號...";
 
             const bopoMap = {
                 "床": "ㄔㄨㄤˊ", "前": "ㄑㄧㄢˊ", "明": "ㄇㄧㄥˊ", "月": "ㄩㄝˋ", "光": "ㄍㄨㄤ",
@@ -1173,9 +1409,9 @@
                 timeline.innerHTML += `
                     <div class="subtitle-card" id="sub-card-${sub.id}" onclick="activeSubtitle(${sub.id})">
                         <div class="subtitle-time">
-                            <span>⏱️ Start:</span>
+                            <span>⏱️ 開始:</span>
                             <input type="text" value="${sub.start}" onchange="updateSubTime(${sub.id}, 'start', this.value)">
-                            <span>End:</span>
+                            <span>結束:</span>
                             <input type="text" value="${sub.end}" onchange="updateSubTime(${sub.id}, 'end', this.value)">
                         </div>
                         <input type="text" class="subtitle-text-input" value="${sub.text}" oninput="updateSubText(${sub.id}, this.value)">
@@ -1188,8 +1424,6 @@
             document.querySelectorAll('.subtitle-card').forEach(card => card.classList.remove('active'));
             const activeCard = document.getElementById(`sub-card-${id}`);
             if (activeCard) activeCard.classList.add('active');
-            
-            console.log(`Seek video to ${id}`);
         }
 
         function updateSubText(id, newText) {
@@ -1217,7 +1451,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${activeBaziData.name || 'GEMS'}_精準字幕時間軸.srt`;
+            a.download = `字幕時間軸.srt`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -1226,7 +1460,6 @@
 
         // 初始化
         window.onload = () => {
-            loadDemoData('chen');
             renderSubtitlesTimeline();
         };
     </script>
