@@ -35,6 +35,7 @@ GAS/
 *.pdf
 *.html
 !**/web_dashboard/index.html
+!**/web_dashboard_bazi/index.html
 .netlify/
 **/output/
 output/test_docx.docx
