@@ -1721,6 +1721,15 @@
     function submitExam() {
       if (examSubmitted) return;
 
+      const sClass = document.getElementById('student-class').value.trim();
+      const sSeat = document.getElementById('student-seat').value.trim();
+      const sName = document.getElementById('student-name').value.trim();
+
+      if (!sClass || !sSeat || !sName) {
+        alert('請先填寫班級、座號與姓名，再提交考卷！');
+        return;
+      }
+
       const cards = document.querySelectorAll('.question-card');
       let unanswered = [];
       let score = 0;
@@ -1811,7 +1820,8 @@
       
       const elapsedMins = Math.floor(timeElapsed / 60);
       const elapsedSecs = timeElapsed % 60;
-      timeSpent.textContent = `${elapsedMins.toString().padStart(2, '0')}:${elapsedSecs.toString().padStart(2, '0')}`;
+      const formattedTimeSpent = `${elapsedMins.toString().padStart(2, '0')}:${elapsedSecs.toString().padStart(2, '0')}`;
+      timeSpent.textContent = formattedTimeSpent;
       scoreGrade.textContent = grade;
       document.getElementById('score-title').textContent = title;
       document.getElementById('score-message').textContent = msg;
@@ -1819,6 +1829,44 @@
       setScoreProgress(score);
       scoreOverlay.style.display = 'flex';
       submitBtn.style.display = 'none';
+
+      // Send to Google Sheets if URL is configured
+      if (GOOGLE_SCRIPT_URL) {
+        const studentData = {
+          studentClass: sClass,
+          studentSeat: sSeat,
+          studentName: sName,
+          score: score,
+          correctCount: `${correctAnswersCount}/15`,
+          timeSpent: formattedTimeSpent,
+          details: Array.from(cards).map(card => {
+            const qindex = card.dataset.qindex;
+            const selected = card.querySelector(`input[name="q${qindex}"]:checked`);
+            return `Q${qindex}:${selected ? selected.value : '未答'}(答${selected && selected.value === card.dataset.correct ? '對' : '錯'})`;
+          }).join(', ')
+        };
+        submitToGoogleSheet(studentData);
+      }
+    }
+
+    // Submit to Google Sheets via Apps Script Web App
+    function submitToGoogleSheet(studentData) {
+      showToast('📤 正在傳送成績至表單...');
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(studentData)
+      })
+      .then(() => {
+        showToast('✅ 成績已成功傳送至老師的表單！');
+      })
+      .catch(err => {
+        console.error('Error submitting to Google Sheets:', err);
+        showToast('❌ 成績傳送失敗，請向老師反映。');
+      });
     }
 
     submitBtn.addEventListener('click', submitExam);
