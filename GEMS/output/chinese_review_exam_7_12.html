@@ -1602,6 +1602,9 @@
 
   <!-- --- Interactive JS Logic --- -->
   <script>
+    // --- Google Sheets Apps Script 整合配置 ---
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0c9V4L99cfR3PO_u7RsMF5ZiqdK9a-0MhZFQ-Gk6fV-Q-YIU9ZetaVihO9gGki3pS/exec'; 
+
     // Timer Variables
     let timeRemaining = 40 * 60; // 40 minutes in seconds
     let timerInterval = null;
@@ -1833,6 +1836,7 @@
       // Send to Google Sheets if URL is configured
       if (GOOGLE_SCRIPT_URL) {
         const studentData = {
+          action: 'saveReviewExam',
           studentClass: sClass,
           studentSeat: sSeat,
           studentName: sName,
