@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>四年級下學期國語科期末複習評量（第7-12課） - 翰林版</title>
+  <meta name="description" content="國小四年級下學期國語科第7至12課期末複習線上互動評量與列印試卷，包含字音字形、字詞義、成語修辭、課文理解與閱讀素養，對齊108課綱。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* --- CSS Variables & Design Tokens --- */
+    :root {
+      /* Light Academic Theme */
+      --bg-primary: #f5f7fa;
+      --bg-secondary: #ffffff;
+      --text-primary: #2d3748;
+      --text-secondary: #718096;
+      --accent-color: #3182ce;
+      --accent-hover: #2b6cb0;
+      --accent-light: #ebf8ff;
+      --success-color: #38a169;
+      --success-light: #f0fff4;
+      --error-color: #e53e3e;
+      --error-light: #fff5f5;
+      --warning-color: #dd6b20;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.02);
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode Settings */
+    body.dark-mode {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent-color: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --accent-light: #0c4a6e;
+      --success-color: #4ade80;
+      --success-light: #064e3b;
+      --error-color: #f87171;
+      --error-light: #7f1d1d;
+      --border-color: #334155;
+      --card-bg: rgba(30, 41, 59, 0.9);
+      --shadow-sm: 0 2px 4px rgba(0,0,0,1);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.15);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3);
+    }
+
+    /* --- Base Resets --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding-bottom: 80px;
+      transition: var(--transition);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* --- Top Navigation Header --- */
+    header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .header-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* --- Button Styles --- */
+    .btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: var(--bg-primary);
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    .btn-primary {
+      background: var(--accent-color);
+      color: #ffffff;
+      border-color: var(--accent-color);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      color: #ffffff;
+      border-color: var(--accent-hover);
+    }
+
+    .btn-active {
+      background: var(--accent-light);
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    /* --- Main Banner / Cover Card --- */
+    .exam-hero {
+      background: linear-gradient(135deg, var(--accent-color) 0%, #4299e1 100%);
+      color: #ffffff;
+      padding: 36px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .exam-hero::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .exam-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .exam-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .exam-subtitle {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* --- Student Info & Info Panel --- */
+    .info-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    .info-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .info-input-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .info-input-group input {
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .info-input-group input:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      background: var(--bg-secondary);
+    }
+
+    .status-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--accent-light);
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .timer-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* --- Question Section & Cards --- */
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 32px 0 16px 0;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .question-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .question-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .question-number {
+      background: var(--accent-light);
+      color: var(--accent-color);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      flex-grow: 1;
+    }
+
+    /* Options Styling */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .option-item {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: var(--bg-secondary);
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .option-item:hover {
+      border-color: var(--accent-color);
+      background: var(--accent-light);
+    }
+
+    .option-item input[type="radio"] {
+      display: none;
+    }
+
+    .option-marker {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--text-secondary);
+      border-radius: 50%;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .option-item:hover .option-marker {
+      border-color: var(--accent-color);
+    }
+
+    .option-item input[type="radio"]:checked + .option-marker {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      color: #ffffff;
+    }
+
+    /* Reading Comprehension Box */
+    .reading-passage {
+      background: var(--bg-secondary);
+      border: 2px dashed var(--accent-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .reading-passage h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 12px;
+      color: var(--accent-color);
+    }
+
+    .reading-passage p {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      text-indent: 2em;
+      color: var(--text-primary);
+      white-space: pre-wrap;
+    }
+
+    /* --- Teacher Answer & Explanation Panel (Collapsible) --- */
+    .explanation-panel {
+      display: none; /* Controlled via JS or Mode Class */
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--success-color);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .explanation-content {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      background: var(--bg-primary);
+      padding: 12px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .explanation-badge {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* --- Interactive Grading & Colors --- */
+    .submitted .option-item {
+      pointer-events: none; /* Disable selection after submit */
+    }
+
+    /* Correct selected and unselected options */
+    .submitted .option-item.correct {
+      border-color: var(--success-color);
+      background: var(--success-light);
+    }
+
+    .submitted .option-item.correct .option-marker {
+      background: var(--success-color) !important;
+      border-color: var(--success-color) !important;
+      color: #ffffff !important;
+    }
+
+    /* Wrong selected options */
+    .submitted .option-item.wrong {
+      border-color: var(--error-color);
+      background: var(--error-light);
+    }
+
+    .submitted .option-item.wrong .option-marker {
+      background: var(--error-color) !important;
+      border-color: var(--error-color) !important;
+      color: #ffffff !important;
+    }
+
+    /* Feedback Icon */
+    .feedback-icon {
+      position: absolute;
+      right: 16px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: none;
+    }
+
+    .submitted .correct .feedback-icon {
+      display: block;
+      color: var(--success-color);
+    }
+
+    .submitted .wrong .feedback-icon {
+      display: block;
+      color: var(--error-color);
+    }
+
+    /* Show Expanations when Submitted or in Teacher Mode */
+    .submitted .explanation-panel,
+    .teacher-mode .explanation-panel {
+      display: block;
+    }
+
+    /* --- Bottom Submit Actions --- */
+    .exam-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .exam-actions .btn {
+      padding: 12px 36px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 30px;
+    }
+
+    /* --- Score Summary Overlay Panel --- */
+    .score-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .score-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      padding: 32px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes scaleUp {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .score-radial {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 20px auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-radial svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .score-radial circle {
+      fill: none;
+      stroke-width: 10;
+    }
+
+    .score-radial .circle-bg {
+      stroke: var(--border-color);
+    }
+
+    .score-radial .circle-progress {
+      stroke: var(--accent-color);
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s ease-out;
+    }
+
+    .score-radial .score-text {
+      position: absolute;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .score-radial .score-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 36px;
+    }
+
+    .score-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .score-message {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .score-details {
+      display: flex;
+      justify-content: space-around;
+      background: var(--bg-primary);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+    }
+
+    .score-detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .score-detail-value {
+      font-weight: 700;
+      color: var(--accent-color);
+    }
+
+    .score-card-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+
+    /* --- Notification Toast --- */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-secondary);
+      border-left: 4px solid var(--accent-color);
+      color: var(--text-primary);
+      padding: 12px 20px;
+      border-radius: 4px;
+      box-shadow: var(--shadow-lg);
+      z-index: 300;
+      font-weight: 600;
+      display: none;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* --- Print Stylesheet (@media print) --- */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding-bottom: 0 !important;
+        font-size: 11pt !important;
+      }
+
+      header, 
+      .exam-actions, 
+      .score-overlay, 
+      .toast, 
+      .status-panel,
+      #toggle-dark-mode,
+      #toggle-view-mode,
+      #submit-exam-btn {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      /* Transform Hero Banner into a simple, professional school header */
+      .exam-hero {
+        background: none !important;
+        color: #000000 !important;
+        border: 2px solid #000000 !important;
+        border-radius: 0 !important;
+        padding: 15px !important;
+        margin-bottom: 20px !important;
+        box-shadow: none !important;
+        text-align: center;
+      }
+
+      .exam-badge {
+        border: 1px solid #000000 !important;
+        color: #000000 !important;
+        background: none !important;
+        border-radius: 0 !important;
+      }
+
+      .exam-title {
+        font-size: 1.6rem !important;
+        margin-bottom: 5px !important;
+      }
+
+      .exam-subtitle {
+        font-size: 0.95rem !important;
+      }
+
+      /* Format Student Info Box for writing */
+      .info-card {
+        border: 1px solid #000000 !important;
+        border-radius: 0 !important;
+        background: #ffffff !important;
+        box-shadow: none !important;
+        padding: 10px !important;
+        margin-bottom: 20px !important;
+        grid-template-columns: repeat(3, 1fr) 100px !important;
+      }
+
+      /* Add Grade Score box for teachers to write on */
+      .info-card::after {
+        content: "得分：_______";
+        font-weight: 700;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .info-input-group label {
+        color: #000000 !important;
+      }
+
+      .info-input-group input {
+        border: none !important;
+        border-bottom: 1px solid #000000 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        padding: 2px !important;
+      }
+
+      /* Format Reading Passage */
+      .reading-passage {
+        border: 1.5px dashed #000000 !important;
+        background: #ffffff !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 15px !important;
+      }
+
+      .reading-passage h4 {
+        color: #000000 !important;
+      }
+
+      /* Question cards layout for physical print */
+      .question-card {
+        background: #ffffff !important;
+        border: none !important;
+        border-bottom: 1px dashed #666666 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 12px 0 !important;
+        margin-bottom: 12px !important;
+        page-break-inside: avoid;
+      }
+
+      .question-number {
+        background: none !important;
+        color: #000000 !important;
+        border: 1px solid #000000 !important;
+        border-radius: 2px !important;
+        padding: 1px 5px !important;
+      }
+
+      .option-item {
+        background: #ffffff !important;
+        border: none !important;
+        padding: 4px 0 !important;
+        cursor: default !important;
+      }
+
+      /* Custom print marker circles to write answers in */
+      .option-marker {
+        border: 1px solid #000000 !important;
+        color: #000000 !important;
+        background: transparent !important;
+        width: 18px !important;
+        height: 18px !important;
+      }
+
+      /* If printing answers (Teacher mode print) */
+      body.teacher-mode .option-item.correct .option-marker {
+        background: #333333 !important;
+        color: #ffffff !important;
+      }
+
+      body.teacher-mode .explanation-panel {
+        display: block !important;
+        border-top: 1px dashed #000000 !important;
+        margin-top: 8px !important;
+        padding-top: 8px !important;
+      }
+
+      body.teacher-mode .explanation-content {
+        background: #f0f0f0 !important;
+        color: #000000 !important;
+        border: 1px solid #cccccc !important;
+      }
+
+      /* Hide answers if not in teacher print mode */
+      body:not(.teacher-mode) .explanation-panel {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- --- Header / Control Center --- -->
+  <header>
+    <div class="header-content">
+      <div class="brand-title">
+        <span>📖 四下國語期末複習卷</span>
+      </div>
+      <div class="toolbar-buttons">
+        <button id="toggle-view-mode" class="btn" title="切換學生答題/教師解答模式">
+          <span>⚙️ 教師解析關閉</span>
+        </button>
+        <button id="toggle-dark-mode" class="btn" title="切換深色/淺色主題">
+          <span>🌙 暗黑模式</span>
+        </button>
+        <button id="print-exam-btn" class="btn btn-primary" title="開啟列印預覽">
+          <span>🖨️ 列印考卷</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- --- Main Exam Page Container --- -->
+  <main class="container">
+
+    <!-- --- Hero Section --- -->
+    <div class="exam-hero">
+      <span class="exam-badge">翰林版適用</span>
+      <h1 class="exam-title">四年級下學期國語科期末段考複習卷</h1>
+      <p class="exam-subtitle">測驗範圍：第七課至第十二課（字音字形、字詞義、修辭成語、課文理解與閱讀素養綜合評量）</p>
+    </div>
+
+    <!-- --- Student Info & Info Panel --- -->
+    <div class="info-card">
+      <div class="info-input-group">
+        <label for="student-class">班級</label>
+        <input type="text" id="student-class" placeholder="四年 ___ 班">
+      </div>
+      <div class="info-input-group">
+        <label for="student-seat">座號</label>
+        <input type="number" id="student-seat" min="1" max="50" placeholder="號碼">
+      </div>
+      <div class="info-input-group">
+        <label for="student-name">姓名</label>
+        <input type="text" id="student-name" placeholder="請輸入姓名">
+      </div>
+      <div class="status-panel">
+        <div class="timer-container">
+          <span>⏳ 剩餘時間：</span>
+          <span id="timer-display">40:00</span>
+        </div>
+      </div>
+    </div>
+
+    <form id="exam-form" onsubmit="return false;">
+
+      <!-- ==================== PART 1: 字音字形 ==================== -->
+      <h3 class="section-title">
+        <span>壹、字音字形辨析（每題 7 分，共 14 分）</span>
+      </h3>
+
+      <!-- Question 1 -->
+      <div class="question-card" data-qindex="1" data-correct="D">
+        <div class="question-header">
+          <span class="question-number">第 1 題</span>
+          <div class="question-text">下列句子「」中的注音，哪一個選項是**完全正確**的？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q1" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 為了贏得比賽，他「拚」命往前衝：ㄆㄧㄣ</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q1" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 喬安看著窗外「薄」霧籠罩的磚牆：ㄅㄛˋ</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q1" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 孫悟空「悄」悄變成小蟲子飛進洞裡：ㄑㄧㄠ</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q1" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 房東請人把老畫家的家具搬上車「載」走：ㄗㄞˋ</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(D)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>字音辨析與常見易錯字音（拼、薄、悄、載）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              (A) 「拚命」的「拚」讀音為「ㄆㄢˋ」，不是「ㄆㄧㄣ」（「拼」才是讀「ㄆㄧㄣ」）。
+              (B) 「薄霧」的「薄」讀音為「ㄅㄛˊ」，當微小、少解釋；當植物「薄荷」時才讀「ㄅㄛˋ」。
+              (C) 「悄悄」的「悄」讀音為「ㄑㄧㄠˇ」，不讀「ㄑㄧㄠ」。
+              (D) 「載走」的「載」表示裝運，讀音為「ㄗㄞˋ」，正確；若是記錄或年份（如刊載、三年五載）則讀「ㄗㄞˇ」。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              本題四個生字均為教案明確指出的「容易誤讀字詞」。特別是「拚命」常與「拼命」混淆，學生極易誤選 ㄆㄧㄣ；「薄」和「載」是常見多音字，考查學生在具體文意脈絡下的字音判斷力。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question-card" data-qindex="2" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 2 題</span>
+          <div class="question-text">下列文句「」中的字形，哪一個選項**完全正確**？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q2" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 觀眾在看台上為球隊大聲「鼓燥」，氣氛熱烈。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q2" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 喬安因為感染「肺」炎，在蘇西的「照料」下漸漸康復。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q2" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 日月潭的湖水「倒印」著藍天白雲，美得像一幅畫。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q2" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 秀秀將整理好的舊玩具捐給需要的人，這種「犧聲」奉獻的精神值得讚揚。</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>字形辨析與錯別字修正（噪、肺、映、犧牲）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              (A) 大聲「鼓燥」應改為口部的「鼓噪」，因為是用聲音叫嚷、喧嘩。
+              (B) 「肺」與「照料」字形皆完全正確（注意：「肺」右半部為「巿」ㄈㄟˋ，不可寫成「市」ㄕˋ，且第八筆為豎，不可鉤，此處正確）。
+              (C) 湖水「倒印」應改為日部的「倒映」，指影像倒現出來。
+              (D) 「犧聲」應改為牛部的「犧牲」，表示捨棄、奉獻。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              本題針對新課本各課生字書寫指導的字形陷阱進行設計。如「噪」常被誤寫為火部的「燥」（乾燥）；「映」常被同音字「印」替代；「犧牲」則是學生常因偏旁筆畫複雜而寫錯的生字。
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ==================== PART 2: 字詞義辨析 ==================== -->
+      <h3 class="section-title">
+        <span>貳、字詞義理解辨析（每題 7 分，共 14 分）</span>
+      </h3>
+
+      <!-- Question 3 -->
+      <div class="question-card" data-qindex="3" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 3 題</span>
+          <div class="question-text">在《單車遊日月潭》中：「其中，從水社到向山遊客中心，沿著潭水而行，景色美不勝收。」句中「美不勝收」的意思為何？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q3" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 美麗的風景被全部沒收了</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q3" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 形容美好的事物非常多，無法一一收存欣賞</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q3" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 指美麗的風景只在特定的時間出現</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q3" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 比喻雖然美麗，但對身體健康沒有用處</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>字詞義理解（第九課：單車遊日月潭）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              「美不勝收」中的「勝」為「盡、承受」之意（ㄕㄥ）。整個詞表示美好的事物太多，來不及一一欣賞，在此指日月潭沿途風光美麗動人，令人目不暇給。
+            </div>
+            <div><span class="explanation-badge">【干擾項設計】</span>
+              (A) 選項是故意從字面「沒收」去誤導學生的錯誤解釋；(C) 和 (D) 則是無關的延伸干擾項，考驗學生是否能藉由教案詞彙教學理解成語。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question-card" data-qindex="4" data-correct="A">
+        <div class="question-header">
+          <span class="question-number">第 4 題</span>
+          <div class="question-text">《最後一片葉子》中提到：「蘇西聽了非常難過，但她連忙擦乾眼淚，細心的照料喬安。」下列選項中的「照料」，哪一個意思與它**相同**？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q4" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 爸爸媽媽每天辛苦的工作，為了「照料」我們全家的生活。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q4" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 金黃色的陽光「照料」著大地，讓花草長得非常茂盛。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q4" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 妹妹看著鏡子裡的自己，露出了「照料」的微笑。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q4" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 這次旅遊活動，完全是按照學校原先的「照料」進行的。</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(A)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>字詞多義性與上下文情境應用（第十一課：最後一片葉子）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              課本的「照料」意為「照顧、料理解決」。
+              (A) 「照料全家生活」是指照顧、維持生活，意思相同。
+              (B) 陽光普照大地，應使用「照耀」或「照射」。
+              (C) 看著鏡子微笑，此處不合邏輯，可能是「照鏡子」或「拍照」之誤用。
+              (D) 指計畫，應使用「規劃」或「安排」。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              本題旨在測驗學生是否僅憑「照」的字形去做直覺判斷，干擾項 (B)(C)(D) 分別混淆了照耀、照鏡子以及計畫的用法，能檢測學生是否具備文意脈絡邏輯。
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ==================== PART 3: 成語與修辭 ==================== -->
+      <h3 class="section-title">
+        <span>參、成語與修辭判斷（每題 6 分，共 18 分）</span>
+      </h3>
+
+      <!-- Question 5 -->
+      <div class="question-card" data-qindex="5" data-correct="D">
+        <div class="question-header">
+          <span class="question-number">第 5 題</span>
+          <div class="question-text">在《夢幻全壘打》中，主角擊出全壘打後，祖孫在球場上演了逗趣的追逐戰。如果要形容祖孫兩人情感深厚，但互動好笑、調皮的家庭氛圍，下列成語何者**最不適合**？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q5" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 天倫之樂</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q5" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 享樂天倫</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q5" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 祖孫情深</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q5" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 貌合神離</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(D)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>成語運用（第七、八課：棒球與家庭情感）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              「貌合神離」是指表面上看起來很和睦，但內心想法完全不同、互不同心。故事中祖母雖然氣喘如牛地追上來要主角回家吃飯，但實際上是非常疼愛、關心孫子的，兩人感情極深，絕非「貌合神離」。
+              (A)(B)(C) 均適合形容家庭和睦、祖孫情感親密。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              學生容易被「逃跑、求饒」的字面衝突誤導，以為祖孫「感情不好」而選錯。本題考查學生對課文「刀子嘴豆腐心」深層情感的解讀。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="question-card" data-qindex="6" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 6 題</span>
+          <div class="question-text">在《孫悟空三借芭蕉扇》的故事中，孫悟空與鐵扇公主進行了多次智取與鬥法，雙方本領高強、互不相讓。下列哪一個成語最適合形容這種「實力相當、難分高下」的競爭情況？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q6" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 兩敗俱傷</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q6" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 棋逢敵手</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q6" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 捨己為人</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q6" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 拔刀相助</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>成語語義辨析（第十課：孫悟空三借芭蕉扇）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              「棋逢敵手」比喻雙方本領相當，難分高下。悟空與鐵扇公主、牛魔王等人鬥智鬥勇，正是本領高強的對手相遇，故 (B) 最為貼切。
+              (A) 兩敗俱傷指雙方都受到傷害。(C) 捨己為人是指犧牲自己幫助他人。(D) 拔刀相助指正義感十足地幫助他人。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (A) 容易因為故事中有激烈的爭鬥而誤導學生；(C) 和 (D) 則是與主角對抗的情境相反的正面助人成語，用以篩選未理解成語本義的學生。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="question-card" data-qindex="7" data-correct="A">
+        <div class="question-header">
+          <span class="question-number">第 7 題</span>
+          <div class="question-text">課文劇：「一搧熄火，二搧生風，三搧可下雨。」這句話在句型結構上使用了哪一種修辭法？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q7" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 排比</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q7" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 擬人</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q7" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 設問</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q7" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 譬喻</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(A)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>常用修辭法判斷（排比）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              「一搧...二搧...三搧...」結構相同、語意相關、語氣一致，且有三個分句連續排列，這是非常標準的「排比」修辭。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              本題考查劇本文字的結構分析。排比在四年級是重點學習修辭，需特別辨識其「三個以上相似分句」的對稱特色。
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ==================== PART 4: 課文理解 ==================== -->
+      <h3 class="section-title">
+        <span>肆、課文大意與主旨理解（每題 6 分，共 30 分）</span>
+      </h3>
+
+      <!-- Question 8 -->
+      <div class="question-card" data-qindex="8" data-correct="C">
+        <div class="question-header">
+          <span class="question-number">第 8 題</span>
+          <div class="question-text">關於《棒球英雄夢》與《夢幻全壘打》這兩課的敘述，下列哪一個選項是**錯誤**的？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q8" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 主角小時候非常熱愛棒球，夢想有一天能代表國家出國比賽。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q8" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 祖母一開始反對主角打棒球，是因為希望他能認真讀書成為「有用的人」。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q8" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 主角能打出全壘打，完全是因為他平常都不練習，純粹靠運氣。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q8" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 故事結尾祖孫在球場上追跑，展現出祖母關愛孫子的溫馨情感。</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(C)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>課文內容理解與分析（第七、八課）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              (C) 敘述錯誤。主角在第七課中提到，雖然他年紀小常被排擠，上場機會少，但他依然「天天練習，等待機會」。全壘打的揮棒雖然閉上了眼睛帶有運氣，但能擊中球也是平時累積練習的成果，不能說他「平常都不練習」。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (C) 選項中的「閉眼揮棒」容易讓學生誤以為主角是靠運氣、沒實力；但文章前半段描述了主角對棒球的熱忱與私下的刻苦練習。這考驗學生是否能整合前後文。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="question-card" data-qindex="9" data-correct="D">
+        <div class="question-header">
+          <span class="question-number">第 9 題</span>
+          <div class="question-text">在《單車遊日月潭》中，作者提到日月潭的「水社—向山」車道。下列哪一個**不是**作者在文中介紹這條自行車道的特點？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q9" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 沿途有水社壩堰堤公園，是個熱門的拍照打卡點。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q9" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 可以一邊騎單車，一邊欣賞漂亮的湖光山色。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q9" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 終點有向山遊客中心，建築物設計特殊，能與自然融合。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q9" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 這是台灣唯一一條完全建在水面上的高速鐵路軌道。</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(D)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>說明文訊息擷取（第九課：單車遊日月潭）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              本課所介紹的「水社—向山」段是「自行車道」，提供遊客騎單車休閒使用，並非「高速鐵路軌道」。其餘 (A)(B)(C) 均是課文中提到的景點特色與騎單車的樂趣。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (D) 出現了「高速鐵路」這種明顯與「單車道」相悖的詞彙，用以測試學生是否粗心、未看清題目就作答。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 10 -->
+      <div class="question-card" data-qindex="10" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 10 題</span>
+          <div class="question-text">在《孫悟空三借芭蕉扇》故事中，鐵扇公主第一次見到孫悟空時，為什麼死也不肯把芭蕉扇借給他？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q10" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 鐵扇公主當時不在芭蕉洞中，悟空找不到她。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q10" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 鐵扇公主怨恨悟空請菩薩收服了她的兒子紅孩兒，讓他們母子分離。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q10" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 豬八戒不小心把芭蕉扇弄壞了，所以無法借用。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q10" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 鐵扇公主嫌棄孫悟空沒有帶夠借扇子的租金。</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>課文細節推論與因果關係理解（第十課：孫悟空三借芭蕉扇）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              根據課文內容，鐵扇公主一聽見「孫悟空」的名字就非常生氣，因為孫悟空協助觀音菩薩收服了紅孩兒，導致母子分離。因此她視悟空為仇人，不肯借扇子，直接用芭蕉扇把悟空搧飛。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (C) 和 (D) 是編造的錯誤情節。學生若沒仔細讀過課本，只憑一般神話常識，容易被「租金」或「弄壞」等世俗情節干擾。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 11 -->
+      <div class="question-card" data-qindex="11" data-correct="C">
+        <div class="question-header">
+          <span class="question-number">第 11 題</span>
+          <div class="question-text">在《最後一片葉子》中，老畫家在狂風暴雨的夜裡，冒雨在牆上畫下最後一片常春藤葉。關於這個行為的意義，下列敘述何者**最貼切**？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q11" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 老畫家只是想證明自己在惡劣環境下依然能畫出逼真的畫作。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q11" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 老畫家希望能藉由這幅畫獲得大獎，賺取高額的獎金。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q11" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 老畫家用自己的生命完成了這幅「傑作」，給予喬安活下去的希望與勇氣。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q11" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 老畫家是因為睡不著覺，隨意在牆壁上塗鴉。</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(C)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>課文核心主旨與深層意涵理解（第十一課：最後一片葉子）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              老畫家得知喬安因為常春藤葉的掉落而放棄生機，他選擇在風雨交加的夜晚，在牆上畫上一片永遠不落的藤葉。這片葉子重新燃起了喬安對生命的希望，而老畫家卻因此染上肺炎而去世。這片葉子是他用生命創作的、真正偉大的「傑作」，體現了無私的愛與友情。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (A) 和 (B) 均是世俗、利己的動機，考驗學生是否能體會人性的光輝與文學作品所要傳達的「關懷與奉獻」主旨。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 12 -->
+      <div class="question-card" data-qindex="12" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 12 題</span>
+          <div class="question-text">在《閱讀課》這一課中，作者想要傳達的核心想法是什麼？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q12" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 閱讀是為了在國語科考試中得到一百分。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q12" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 閱讀可以讓我們透過故事反思自己，學會熱心助人的精神，並將愛與溫暖傳出去。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q12" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 只有聽老師講課才是學習，看課外書只是在浪費課堂時間。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q12" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 寫閱讀報告時只要抄寫別人的心得就好，不需要自己動腦。</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>單元總結與閱讀素養核心觀念（第十二課：閱讀課）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              本課引導學生體會閱讀與生命的聯結。在閱讀完《最後一片葉子》後，學生反思自己日常中「助人」的經驗。藉由寫下心得報告，體會到「雖然力量很小，但助人的心，卻能給人帶來無比溫暖」的道理。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (A) 混淆了閱讀與考試分數的關係，(C) 和 (D) 則是學習與寫作上的錯誤態度，用以篩選出能理解課文情感核心的學生。
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ==================== PART 5: 閱讀素養題 ==================== -->
+      <h3 class="section-title">
+        <span>伍、閱讀素養綜合評量（每題 8 分，共 24 分）</span>
+      </h3>
+
+      <div class="reading-passage">
+        <h4>風雨中的蒲公英</h4>
+        <p>有一顆小小的蒲公英種子，落在了一片貧瘠的岩石縫隙中。同伴們都勸牠說：「放棄吧！這裡沒有肥沃的泥土，也沒有足夠的陽光，你是不可能開花的。」</p>
+        <p>但小蒲公英並不氣餒。牠對自己說：「只要我的根抓得夠深，總能找到水分；只要我努力向上伸展，總能照到陽光。」</p>
+        <p>日子一天天過去，牠頂著烈日與狂風，努力將根穿透堅硬的岩石，深入地底。有一天，一場可怕的暴風雨襲來，許多長在大地上的嬌嫩花朵都被吹得東倒西歪，甚至被連根拔起。然而，這顆抓緊岩縫的蒲公英，雖然葉子被吹得殘破，卻憑藉著深扎的根，穩穩地挺過了風雨。</p>
+        <p>風雨過後，陽光灑落，小蒲公英在岩縫中綻放出了一朵金黃色的小花。那些曾經不看好牠的同伴，都為牠的堅持感到驚奇與敬佩。</p>
+      </div>
+
+      <!-- Question 13 -->
+      <div class="question-card" data-qindex="13" data-correct="C">
+        <div class="question-header">
+          <span class="question-number">第 13 題</span>
+          <div class="question-text">根據短文內容，小蒲公英種子落在哪裡，並遭到了同伴們的勸阻？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q13" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 肥沃的溫暖泥土中</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q13" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 寬敞的學校教室裡</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q13" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 貧瘠的岩石縫隙中</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q13" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 日月潭的單車道旁</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(C)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>閱讀理解：擷取訊息能力</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              文章第一段開頭即寫到：「有一顆小小的蒲公英種子，落在了一片貧瘠的岩石縫隙中。」同伴們也是因為這個地點惡劣而勸阻牠。因此答案是 (C)。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (D) 結合了第九課的背景「日月潭」進行誘答，考查學生是否能區分本閱讀測驗短文的獨立情境。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 14 -->
+      <div class="question-card" data-qindex="14" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 14 題</span>
+          <div class="question-text">短文中，小蒲公英能夠挺過可怕的暴風雨，最主要的關鍵是什麼？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q14" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 牠的葉子非常嬌嫩，隨風搖擺才不會斷掉。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q14" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 牠平時努力往下扎根，將根緊緊抓在岩縫深處。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q14" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 牠得到了其他高大花草的擋風遮雨。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q14" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 牠向靈吉菩薩借了避風神丹保護自己。</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>閱讀理解：因果關係推論</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              根據第三段所述，小蒲公英「憑藉著深扎的根，穩穩地挺過了風雨。」這說明牠平日努力穿透堅硬岩石往下扎根，成為了風雨中立足的關鍵，故選 (B)。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (D) 選項結合了第十課《西遊記》中的「避風神丹」來混淆學生，非常具有誘答性，考查學生是否會張冠黎戴。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 15 -->
+      <div class="question-card" data-qindex="15" data-correct="A">
+        <div class="question-header">
+          <span class="question-number">第 15 題</span>
+          <div class="question-text">這篇短文中，小蒲公英在惡劣環境中「不氣餒、堅持到底」的精神，最適合用來呼應四年級下學期國語課本中的哪一個人物？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q15" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 《棒球英雄夢》中，即使上場機會微乎其微，仍堅持天天努力練習的主角。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q15" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 《單車遊日月潭》中，優閒騎著腳踏車環湖的遊客。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q15" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 《最後一片葉子》中，因為生病而消極等待常春藤葉子掉落的喬安。</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q15" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 怒氣沖沖站在本壘板上，一手插腰、另一手指著孫子的祖母。</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(A)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>閱讀理解：跨文本分析與概念遷移能力</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              小蒲公英在同伴不看好、生長條件惡劣（岩縫）下，依然堅持努力扎根，最終開花。這與《棒球英雄夢》中的主角在家人反對、球場被排擠、年紀小的不利條件下，依然默默練習、懷抱希望的奮鬥精神完全一致。
+              (C) 喬安一開始是遇到挫折就放棄求生意志，與蒲公英的堅持相反。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              學生容易誤選 (C)，因為《最後一片葉子》同樣提到了「風雨中不掉落的葉子」與「生命力」；但文中的喬安是「被動等待放棄」的一方，而蒲公英與棒球男孩才是「主動奮力前行」的一方，此題可精準考查學生的深度閱讀素養。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- --- Submit Button Container --- -->
+      <div class="exam-actions">
+        <button type="button" id="submit-exam-btn" class="btn btn-primary btn-active">提交考卷</button>
+      </div>
+
+    </form>
+  </main>
+
+  <!-- --- Score Summary Modal overlay --- -->
+  <div class="score-overlay" id="score-overlay">
+    <div class="score-card">
+      <button class="score-card-close" id="close-score-btn">&times;</button>
+      <div class="score-radial">
+        <svg>
+          <circle class="circle-bg" cx="70" cy="70" r="60"></circle>
+          <circle class="circle-progress" id="score-progress" cx="70" cy="70" r="60"></circle>
+        </svg>
+        <span class="score-text" id="score-val">0</span>
+        <span class="score-label">分數</span>
+      </div>
+      <h2 class="score-title" id="score-title">批改完成！</h2>
+      <p class="score-message" id="score-message">完成所有測驗，這是一次精彩的練習！</p>
+      
+      <div class="score-details">
+        <div class="score-detail-item">
+          <span>對題數</span>
+          <span class="score-detail-value" id="correct-count">0 / 15</span>
+        </div>
+        <div class="score-detail-item">
+          <span>測驗時間</span>
+          <span class="score-detail-value" id="time-spent">00:00</span>
+        </div>
+        <div class="score-detail-item">
+          <span>表現評等</span>
+          <span class="score-detail-value" id="score-grade">A</span>
+        </div>
+      </div>
+      
+      <button type="button" class="btn btn-primary" id="retry-btn">重新挑戰</button>
+    </div>
+  </div>
+
+  <!-- --- Toast Notification --- -->
+  <div class="toast" id="toast-message"></div>
+
+  <!-- --- Interactive JS Logic --- -->
+  <script>
+    // Timer Variables
+    let timeRemaining = 40 * 60; // 40 minutes in seconds
+    let timerInterval = null;
+    let examSubmitted = false;
+    let timeElapsed = 0;
+
+    // DOM Elements
+    const timerDisplay = document.getElementById('timer-display');
+    const submitBtn = document.getElementById('submit-exam-btn');
+    const scoreOverlay = document.getElementById('score-overlay');
+    const scoreVal = document.getElementById('score-val');
+    const correctCount = document.getElementById('correct-count');
+    const timeSpent = document.getElementById('time-spent');
+    const scoreGrade = document.getElementById('score-grade');
+    const scoreProgress = document.getElementById('score-progress');
+    const retryBtn = document.getElementById('retry-btn');
+    const closeScoreBtn = document.getElementById('close-score-btn');
+    const toggleViewModeBtn = document.getElementById('toggle-view-mode');
+    const toggleDarkModeBtn = document.getElementById('toggle-dark-mode');
+    const printExamBtn = document.getElementById('print-exam-btn');
+    const toast = document.getElementById('toast-message');
+
+    // Circular progress stroke logic
+    const radius = 60;
+    const circumference = 2 * Math.PI * radius;
+    scoreProgress.style.strokeDasharray = circumference;
+    scoreProgress.style.strokeDashoffset = circumference;
+
+    function setScoreProgress(score) {
+      const offset = circumference - (score / 100) * circumference;
+      scoreProgress.style.strokeDashoffset = offset;
+    }
+
+    // Timer Tick
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          showToast('⏰ 時間到！系統自動提交答案。');
+          submitExam();
+        } else {
+          timeRemaining--;
+          timeElapsed++;
+          const mins = Math.floor(timeRemaining / 60);
+          const secs = timeRemaining % 60;
+          timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+          
+          if (timeRemaining < 5 * 60) {
+            timerDisplay.parentElement.style.color = 'var(--error-color)';
+          }
+        }
+      }, 1000);
+    }
+
+    // Stop Timer
+    function stopTimer() {
+      clearInterval(timerInterval);
+    }
+
+    // Toast Message
+    function showToast(message) {
+      toast.textContent = message;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3000);
+    }
+
+    // Toggle Dark Mode
+    toggleDarkModeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      toggleDarkModeBtn.querySelector('span').textContent = isDark ? '☀️ 淺色模式' : '🌙 暗黑模式';
+      showToast(isDark ? '已切換至暗黑模式 🌙' : '已切換至學術淺色模式 ☀️');
+    });
+
+    // Toggle View Mode (Teacher Mode with Answers vs Student Mode)
+    toggleViewModeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('teacher-mode');
+      const isTeacher = document.body.classList.contains('teacher-mode');
+      toggleViewModeBtn.querySelector('span').textContent = isTeacher ? '👤 學生答題模式' : '⚙️ 教師解析關閉';
+      toggleViewModeBtn.classList.toggle('btn-active', isTeacher);
+      
+      // Auto fill or reset choices
+      const cards = document.querySelectorAll('.question-card');
+      cards.forEach(card => {
+        const correctVal = card.dataset.correct;
+        const correctOption = card.querySelector(`input[value="${correctVal}"]`);
+        
+        if (isTeacher) {
+          // Highlight correct options
+          card.querySelectorAll('.option-item').forEach(opt => {
+            if (opt.querySelector('input').value === correctVal) {
+              opt.classList.add('correct');
+            } else {
+              opt.classList.remove('correct', 'wrong');
+            }
+          });
+        } else {
+          // If not submitted, clean
+          if (!examSubmitted) {
+            card.querySelectorAll('.option-item').forEach(opt => {
+              opt.classList.remove('correct', 'wrong');
+            });
+          }
+        }
+      });
+      showToast(isTeacher ? '已開啟教師模式：顯示所有答案與解析。' : '已回到學生答題模式。');
+    });
+
+    // Print Exam
+    printExamBtn.addEventListener('click', () => {
+      window.print();
+    });
+
+    // Submit Exam Logic
+    function submitExam() {
+      if (examSubmitted) return;
+
+      const cards = document.querySelectorAll('.question-card');
+      let unanswered = [];
+      let score = 0;
+      let correctAnswersCount = 0;
+
+      cards.forEach(card => {
+        const qindex = card.dataset.qindex;
+        const selected = card.querySelector(`input[name="q${qindex}"]:checked`);
+        if (!selected) {
+          unanswered.push(qindex);
+        }
+      });
+
+      // Confirm if student wants to submit with unanswered questions
+      if (unanswered.length > 0 && timeRemaining > 0) {
+        const proceed = confirm(`您還有 ${unanswered.length} 題尚未作答（第 ${unanswered.join(', ')} 題），確定要交卷嗎？`);
+        if (!proceed) return;
+      }
+
+      stopTimer();
+      examSubmitted = true;
+      document.querySelector('.container').classList.add('submitted');
+
+      cards.forEach(card => {
+        const qindex = card.dataset.qindex;
+        const correctVal = card.dataset.correct;
+        const selected = card.querySelector(`input[name="q${qindex}"]:checked`);
+        const selectedVal = selected ? selected.value : null;
+
+        card.querySelectorAll('.option-item').forEach(opt => {
+          const radioVal = opt.querySelector('input').value;
+          opt.classList.remove('correct', 'wrong');
+          
+          if (radioVal === correctVal) {
+            opt.classList.add('correct'); // Marks correct choice green
+          }
+          if (selectedVal === radioVal && selectedVal !== correctVal) {
+            opt.classList.add('wrong'); // Marks chosen incorrect choice red
+          }
+        });
+
+        if (selectedVal === correctVal) {
+          correctAnswersCount++;
+        }
+      });
+
+      // Calculate Score
+      score = 0;
+      for (let i = 1; i <= 15; i++) {
+        const card = document.querySelector(`.question-card[data-qindex="${i}"]`);
+        const correctVal = card.dataset.correct;
+        const selected = card.querySelector(`input[name="q${i}"]:checked`);
+        const isCorrect = selected && selected.value === correctVal;
+        if (isCorrect) {
+          if (i <= 10) {
+            score += 7;
+          } else {
+            score += 6;
+          }
+        }
+      }
+
+      // Grade Calculation
+      let grade = 'C';
+      let title = '再接再厲！';
+      let msg = '多加複習課文，下次一定會更好！';
+      if (score >= 95) {
+        grade = '卓越 A+';
+        title = '棒球英雄！太神了！';
+        msg = '完美解答！你已經完全掌握四下國語第七至十二課的所有精髓！';
+      } else if (score >= 90) {
+        grade = '極佳 A';
+        title = '表現優異！';
+        msg = '非常棒！你對課文大意、詞彙與修辭有很深的理解！';
+      } else if (score >= 80) {
+        grade = '優良 A-';
+        title = '做的好！';
+        msg = '大部分的題目都難不倒你，是個優秀的學習者！';
+      } else if (score >= 60) {
+        grade = '及格 B';
+        title = '通過測驗！';
+        msg = '恭喜及格，但還有部分字音字形與細節需要再注意喔！';
+      }
+
+      // Display Score
+      scoreVal.textContent = score;
+      correctCount.textContent = `${correctAnswersCount} / 15 題`;
+      
+      const elapsedMins = Math.floor(timeElapsed / 60);
+      const elapsedSecs = timeElapsed % 60;
+      timeSpent.textContent = `${elapsedMins.toString().padStart(2, '0')}:${elapsedSecs.toString().padStart(2, '0')}`;
+      scoreGrade.textContent = grade;
+      document.getElementById('score-title').textContent = title;
+      document.getElementById('score-message').textContent = msg;
+
+      setScoreProgress(score);
+      scoreOverlay.style.display = 'flex';
+      submitBtn.style.display = 'none';
+    }
+
+    submitBtn.addEventListener('click', submitExam);
+
+    // Reset / Retry Exam Logic
+    function resetExam() {
+      examSubmitted = false;
+      timeRemaining = 40 * 60;
+      timeElapsed = 0;
+      timerDisplay.textContent = '40:00';
+      timerDisplay.parentElement.style.color = 'var(--accent-color)';
+      
+      document.querySelector('.container').classList.remove('submitted');
+      document.getElementById('exam-form').reset();
+
+      // Clear custom color classes
+      document.querySelectorAll('.option-item').forEach(opt => {
+        opt.classList.remove('correct', 'wrong');
+      });
+
+      // Clear teacher mode if active
+      document.body.classList.remove('teacher-mode');
+      toggleViewModeBtn.classList.remove('btn-active');
+      toggleViewModeBtn.querySelector('span').textContent = '⚙️ 教師解析關閉';
+
+      scoreOverlay.style.display = 'none';
+      submitBtn.style.display = 'inline-block';
+      
+      startTimer();
+      showToast('🔄 測驗已重設，請重新作答。');
+    }
+
+    retryBtn.addEventListener('click', resetExam);
+    closeScoreBtn.addEventListener('click', () => {
+      scoreOverlay.style.display = 'none';
+    });
+
+    // Start timer on load
+    window.addEventListener('DOMContentLoaded', () => {
+      startTimer();
+    });
+  </script>
+</body>
+</html>
