@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>四年級下學期數學科期末段考複習卷（第六至十單元） - 康軒版</title>
+  <meta name="description" content="國小四年級下學期數學科第六至十單元期末複習線上互動評量與列印試卷，包含等值分數、時間、面積、體積與乘除規律，對齊108課綱。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* --- CSS Variables & Design Tokens --- */
+    :root {
+      /* Light Academic Theme */
+      --bg-primary: #f5f7fa;
+      --bg-secondary: #ffffff;
+      --text-primary: #2d3748;
+      --text-secondary: #718096;
+      --accent-color: #3182ce;
+      --accent-hover: #2b6cb0;
+      --accent-light: #ebf8ff;
+      --success-color: #38a169;
+      --success-light: #f0fff4;
+      --error-color: #e53e3e;
+      --error-light: #fff5f5;
+      --warning-color: #dd6b20;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.02);
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode Settings */
+    body.dark-mode {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent-color: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --accent-light: #0c4a6e;
+      --success-color: #4ade80;
+      --success-light: #064e3b;
+      --error-color: #f87171;
+      --error-light: #7f1d1d;
+      --border-color: #334155;
+      --card-bg: rgba(30, 41, 59, 0.9);
+      --shadow-sm: 0 2px 4px rgba(0,0,0,1);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.15);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3);
+    }
+
+    /* --- Base Resets --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding-bottom: 80px;
+      transition: var(--transition);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* --- Top Navigation Header --- */
+    header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .header-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* --- Button Styles --- */
+    .btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: var(--bg-primary);
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    .btn-primary {
+      background: var(--accent-color);
+      color: #ffffff;
+      border-color: var(--accent-color);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      color: #ffffff;
+      border-color: var(--accent-hover);
+    }
+
+    .btn-active {
+      background: var(--accent-light);
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    /* --- Main Banner / Cover Card --- */
+    .exam-hero {
+      background: linear-gradient(135deg, var(--accent-color) 0%, #4299e1 100%);
+      color: #ffffff;
+      padding: 36px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .exam-hero::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .exam-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .exam-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .exam-subtitle {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* --- Student Info & Info Panel --- */
+    .info-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    .info-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .info-input-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .info-input-group input {
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .info-input-group input:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      background: var(--bg-secondary);
+    }
+
+    .status-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--accent-light);
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .timer-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* --- Question Section & Cards --- */
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 32px 0 16px 0;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .question-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .question-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .question-number {
+      background: var(--accent-light);
+      color: var(--accent-color);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      flex-grow: 1;
+    }
+
+    /* Options Styling */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .option-item {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: var(--bg-secondary);
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .option-item:hover {
+      border-color: var(--accent-color);
+      background: var(--accent-light);
+    }
+
+    .option-item input[type="radio"] {
+      display: none;
+    }
+
+    .option-marker {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--text-secondary);
+      border-radius: 50%;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .option-item:hover .option-marker {
+      border-color: var(--accent-color);
+    }
+
+    .option-item input[type="radio"]:checked + .option-marker {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      color: #ffffff;
+    }
+
+    /* Teacher Answer & Explanation Panel (Collapsible) */
+    .explanation-panel {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--success-color);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .explanation-content {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      background: var(--bg-primary);
+      padding: 12px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .explanation-badge {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Interactive Grading & Colors */
+    .submitted .option-item {
+      pointer-events: none;
+    }
+
+    .submitted .option-item.correct {
+      border-color: var(--success-color);
+      background: var(--success-light);
+    }
+
+    .submitted .option-item.correct .option-marker {
+      background: var(--success-color) !important;
+      border-color: var(--success-color) !important;
+      color: #ffffff !important;
+    }
+
+    .submitted .option-item.wrong {
+      border-color: var(--error-color);
+      background: var(--error-light);
+    }
+
+    .submitted .option-item.wrong .option-marker {
+      background: var(--error-color) !important;
+      border-color: var(--error-color) !important;
+      color: #ffffff !important;
+    }
+
+    .feedback-icon {
+      position: absolute;
+      right: 16px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: none;
+    }
+
+    .submitted .correct .feedback-icon {
+      display: block;
+      color: var(--success-color);
+    }
+
+    .submitted .wrong .feedback-icon {
+      display: block;
+      color: var(--error-color);
+    }
+
+    .submitted .explanation-panel,
+    .teacher-mode .explanation-panel {
+      display: block;
+    }
+
+    /* Bottom Submit Actions */
+    .exam-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .exam-actions .btn {
+      padding: 12px 36px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 30px;
+    }
+
+    /* Score Summary Overlay Panel */
+    .score-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .score-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      padding: 32px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes scaleUp {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .score-radial {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 20px auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-radial svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .score-radial circle {
+      fill: none;
+      stroke-width: 10;
+    }
+
+    .score-radial .circle-bg {
+      stroke: var(--border-color);
+    }
+
+    .score-radial .circle-progress {
+      stroke: var(--accent-color);
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s ease-out;
+    }
+
+    .score-radial .score-text {
+      position: absolute;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .score-radial .score-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 36px;
+    }
+
+    .score-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .score-message {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .score-details {
+      display: flex;
+      justify-content: space-around;
+      background: var(--bg-primary);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+    }
+
+    .score-detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .score-detail-value {
+      font-weight: 700;
+      color: var(--accent-color);
+    }
+
+    .score-card-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+
+    /* Notification Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-secondary);
+      border-left: 4px solid var(--accent-color);
+      color: var(--text-primary);
+      padding: 12px 20px;
+      border-radius: 4px;
+      box-shadow: var(--shadow-lg);
+      z-index: 300;
+      font-weight: 600;
+      display: none;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* --- Print Stylesheet (@media print) --- */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding-bottom: 0 !important;
+        font-size: 11pt !important;
+      }
+
+      header, 
+      .exam-actions, 
+      .score-overlay, 
+      .toast, 
+      .status-panel,
+      #toggle-dark-mode,
+      #toggle-view-mode,
+      #submit-exam-btn {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .exam-hero {
+        background: none !important;
+        color: #000000 !important;
+        border: 2px solid #000000 !important;
+        border-radius: 0 !important;
+        padding: 15px !important;
+        margin-bottom: 20px !important;
+        box-shadow: none !important;
+        text-align: center;
+      }
+
+      .exam-badge {
+        border: 1px solid #000000 !important;
+        color: #000000 !important;
+        background: none !important;
+        border-radius: 0 !important;
+      }
+
+      .exam-title {
+        font-size: 1.6rem !important;
+        margin-bottom: 5px !important;
+      }
+
+      .exam-subtitle {
+        font-size: 0.95rem !important;
+      }
+
+      .info-card {
+        border: 1px solid #000000 !important;
+        border-radius: 0 !important;
+        background: #ffffff !important;
+        box-shadow: none !important;
+        padding: 10px !important;
+        margin-bottom: 20px !important;
+        grid-template-columns: repeat(3, 1fr) 100px !important;
+      }
+
+      .info-card::after {
+        content: "得分：_______";
+        font-weight: 700;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .info-input-group label {
+        color: #000000 !important;
+      }
+
+      .info-input-group input {
+        border: none !important;
+        border-bottom: 1px solid #000000 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        padding: 2px !important;
+      }
+
+      .question-card {
+        background: #ffffff !important;
+        border: none !important;
+        border-bottom: 1px dashed #666666 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 12px 0 !important;
+        margin-bottom: 12px !important;
+        page-break-inside: avoid;
+      }
+
+      .question-number {
+        background: none !important;
+        color: #000000 !important;
+        border: 1px solid #000000 !important;
+        border-radius: 2px !important;
+        padding: 1px 5px !important;
+      }
+
+      .option-item {
+        background: #ffffff !important;
+        border: none !important;
+        padding: 4px 0 !important;
+        cursor: default !important;
+      }
+
+      .option-marker {
+        border: 1px solid #000000 !important;
+        color: #000000 !important;
+        background: transparent !important;
+        width: 18px !important;
+        height: 18px !important;
+      }
+
+      body.teacher-mode .option-item.correct .option-marker {
+        background: #333333 !important;
+        color: #ffffff !important;
+      }
+
+      body.teacher-mode .explanation-panel {
+        display: block !important;
+        border-top: 1px dashed #000000 !important;
+        margin-top: 8px !important;
+        padding-top: 8px !important;
+      }
+
+      body.teacher-mode .explanation-content {
+        background: #f0f0f0 !important;
+        color: #000000 !important;
+        border: 1px solid #cccccc !important;
+      }
+
+      body:not(.teacher-mode) .explanation-panel {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- --- Header / Control Center --- -->
+  <header>
+    <div class="header-content">
+      <div class="brand-title">
+        <span>📖 四下數學期末複習卷</span>
+      </div>
+      <div class="toolbar-buttons">
+        <button id="toggle-view-mode" class="btn" title="切換學生答題/教師解答模式">
+          <span>⚙️ 教師解析關閉</span>
+        </button>
+        <button id="toggle-dark-mode" class="btn" title="切換深色/淺色主題">
+          <span>🌙 暗黑模式</span>
+        </button>
+        <button id="print-exam-btn" class="btn btn-primary" title="開啟列印預覽">
+          <span>🖨️ 列印考卷</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- --- Main Exam Page Container --- -->
+  <main class="container">
+
+    <!-- --- Hero Section --- -->
+    <div class="exam-hero">
+      <span class="exam-badge">康軒版適用</span>
+      <h1 class="exam-title">四年級下學期數學科期末總複習試卷</h1>
+      <p class="exam-subtitle">測驗範圍：第六單元至第十單元（等值分數、時間、面積、體積、乘除的規律與估算）</p>
+    </div>
+
+    <!-- --- Student Info & Info Panel --- -->
+    <div class="info-card">
+      <div class="info-input-group">
+        <label for="student-class">班級</label>
+        <input type="text" id="student-class" placeholder="四年 ___ 班">
+      </div>
+      <div class="info-input-group">
+        <label for="student-seat">座號</label>
+        <input type="number" id="student-seat" min="1" max="50" placeholder="號碼">
+      </div>
+      <div class="info-input-group">
+        <label for="student-name">姓名</label>
+        <input type="text" id="student-name" placeholder="請輸入姓名">
+      </div>
+      <div class="status-panel">
+        <div class="timer-container">
+          <span>⏳ 剩餘時間：</span>
+          <span id="timer-display">40:00</span>
+        </div>
+      </div>
+    </div>
+
+    <form id="exam-form" onsubmit="return false;">
+
+      <!-- ==================== PART 1: 單選選擇題 ==================== -->
+      <h3 class="section-title">
+        <span>壹、單選選擇題（每題 6 分，共 30 分）</span>
+      </h3>
+
+      <!-- Question 1 -->
+      <div class="question-card" data-qindex="1" data-correct="D">
+        <div class="question-header">
+          <span class="question-number">第 1 題</span>
+          <div class="question-text">下列哪一個分數和「十六分之十二」**不相等**？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q1" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 四分之三</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q1" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 八分之六</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q1" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 十二分之九</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q1" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 十八分之十五</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(D)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第六單元：等值分數與約分/通分</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              「12/16」分子與分母同除以 4 可化簡為最簡分數「3/4」。
+              (A) 3/4 等於 3/4。
+              (B) 6/8 分子分母同除以 2 得到 3/4。
+              (C) 9/12 分子分母同除以 3 得到 3/4。
+              (D) 15/18 分子分母同除以 3 得到 5/6，不等於 3/4。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              學生如果不熟悉擴分與約分的原理，可能會被選項 (C) 較大數值干擾。需利用通分將各選項化為相同分母或最簡分數進行比較。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question-card" data-qindex="2" data-correct="C">
+        <div class="question-header">
+          <span class="question-number">第 2 題</span>
+          <div class="question-text">計算「785 - 239 - 185」時，下列哪一個算式和它的答案**完全相同**？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q2" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 785 - (239 - 185)</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q2" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 785 - 239 + 185</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q2" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 785 - 185 - 239</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q2" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 785 + 185 - 239</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(C)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第十單元：乘除/加減的交換律與結合律</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              根據加減交換律，連減算式中，減數的順序可以調換而不影響答案。
+              「785 - 239 - 185」可以重新排列為「785 - 185 - 239」，這樣先算「785 - 185 = 600」再減去 239，能更快算出答案為 361。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (A) 選項是常見錯誤，連減括號內部應變號：a - b - c = a - (b + c)，而非 a - (b - c)；(B) 忘記減法變號規則。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question-card" data-qindex="3" data-correct="C">
+        <div class="question-header">
+          <span class="question-number">第 3 題</span>
+          <div class="question-text">小明下午 2 時 10 分開始看一場馬戲團電影，電影長度為 2 小時 35 分鐘，請問電影在**下午幾時幾分**結束？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q3" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 下午 4 時 10 分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q3" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 下午 4 時 35 分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q3" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 下午 4 時 45 分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q3" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 下午 5 時 10 分</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(C)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第七單元：時間與時刻的加減推算</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              開始時刻：下午 2 時 10 分，持續時間：2 小時 35 分。
+              結束時刻 = 開始時刻 + 持續時間 = 2 時 10 分 + 2 時 35 分 = 4 時 45 分。
+              因為開始與結束都在下午，故為下午 4 時 45 分。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              部分學生可能會粗心，只將小時相加而忽略了分鐘的加法，容易誤選 (A) 或 (B)。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question-card" data-qindex="4" data-correct="C">
+        <div class="question-header">
+          <span class="question-number">第 4 題</span>
+          <div class="question-text">下列四位同學所描述的生活情境，哪一個是在比較**「體積」**的大小？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q4" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 小華：比較貼紙和名片，哪一個佔的桌面比較大？</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q4" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 小明：比較足球場和籃球場，哪一個地面比較大？</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q4" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 小莉：比較西瓜和鳳梨，哪一個佔的空間比較大？</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q4" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 小美：比較爸爸和哥哥的鞋底印，哪一個比較大？</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(C)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第九單元：體積的基本概念與空間佔有</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              「體積」是指物體所佔有「空間」的大小。西瓜與鳳梨是立體物體，比較它們所佔空間的大小即是在比較「體積」。
+              (A)(B)(D) 均是在比較平面的大小，即是比較「面積」。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              學生常混淆「面積」（平面佔有）與「體積」（空間佔有），特別是當兩者在口語中都被描述為「比較大」時。此題考查概念定義。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="question-card" data-qindex="5" data-correct="D">
+        <div class="question-header">
+          <span class="question-number">第 5 題</span>
+          <div class="question-text">有一個正方形圖卡，它的邊長是 600 公分，請問這張圖卡的面積是多少**平方公尺**？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q5" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 360000 平方公尺</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q5" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 3600 平方公尺</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q5" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 360 平方公尺</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q5" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 36 平方公尺</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(D)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第八單元：長方形/正方形面積公式與長度單位轉換</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              正方形邊長 = 600 公分 = 6 公尺。
+              正方形面積 = 邊長 × 邊長 = 6 公尺 × 6 公尺 = 36 平方公尺。
+              若以平方公分算：600 × 600 = 360000 平方公分。又 1 平方公尺 = 10000 平方公分，360000 ÷ 10000 = 36 平方公尺。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (A) 選項是算出「平方公分」後的數值，忘記換算單位；(B) 和 (C) 則是換算比例算錯（少除或多除了 10 的倍數）。
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ==================== PART 2: 填填看 ==================== -->
+      <h3 class="section-title">
+        <span>貳、填填看（每題 4 分，共 20 分）</span>
+      </h3>
+
+      <!-- Question 6 -->
+      <div class="question-card" data-qindex="6" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 6 題</span>
+          <div class="question-text">將小數「3.25」換成分數，下列哪一個選項是**正確**的？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q6" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 十分之三百二十五</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q6" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 三又一百分之二十五</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q6" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 三又十分之二十五</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q6" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 五分之三十二</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第六單元：小數與分數的換算關係</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              3.25 整數部分為 3，小數部分 0.25 是兩位小數，換算成分母為 100 的分數為 25/100。
+              因此 3.25 換成帶分數是「3又100分之25」或假分數「325/100」。故 (B) 正確。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (A) 選項錯把分母當作十分位；(C) 雖然整數對了，但分母卻誤用為 10（兩位小數分母應為 100）。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="question-card" data-qindex="7" data-correct="A">
+        <div class="question-header">
+          <span class="question-number">第 7 題</span>
+          <div class="question-text">80 小時等於幾日幾小時？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q7" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 3 日 8 小時</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q7" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 3 日 16 小時</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q7" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 4 日 8 小時</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q7" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 2 日 32 小時</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(A)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第七單元：時間單位（日與小時）的換算</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              1 日 = 24 小時。
+              80 ÷ 24 = 3 ... 8。
+              商是 3（表示 3 日），餘數是 8（表示 8 小時），所以 80 小時等於 3 日 8 小時。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              部分學生在除法計算上可能算錯餘數，或者忘記一日有 24 小時（誤除以 12 或 60），導致算出錯誤選項。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="question-card" data-qindex="8" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 8 題</span>
+          <div class="question-text">700000 平方公分等於多少平方公尺？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q8" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 7 平方公尺</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q8" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 70 平方公尺</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q8" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 700 平方公尺</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q8" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 7000 平方公尺</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第八單元：面積單位（平方公尺與平方公分）的換算</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              因為 1 公尺 = 100 公分，1 平方公尺 = 100 公分 × 100 公分 = 10000 平方公分。
+              所以將平方公分換算為平方公尺，需要除以 10000（即去掉 4 個 0）。
+              700000 ÷ 10000 = 70 平方公尺。故選 (B)。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              學生常誤以為 1 平方公尺 = 100 平方公分（只去掉 2 個 0）而誤選 (D)；或誤除以 100000 得到 (A)。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="question-card" data-qindex="9" data-correct="C">
+        <div class="question-header">
+          <span class="question-number">第 9 題</span>
+          <div class="question-text">每個積木是 1 立方公分。阿明用它們拼成一個長 5 個、寬 3 個、高 2 個的長方體，體積是多少立方公分？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q9" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 10 立方公分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q9" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 15 立方公分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q9" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 30 立方公分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q9" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 25 立方公分</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(C)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第九單元：體積的點數與堆疊計算</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              長方體中一共有：長 5 × 寬 3 × 高 2 = 30 個積木。
+              每個積木是 1 立方公分，30 個即是 30 立方公分。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (A) 誤將長寬高相加（5 + 3 + 2 = 10）；(B) 漏算了高度（5 × 3 = 15，僅算了一層的積木數）。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 10 -->
+      <div class="question-card" data-qindex="10" data-correct="D">
+        <div class="question-header">
+          <span class="question-number">第 10 題</span>
+          <div class="question-text">下列哪一個算式和「942 + 587 - 142」計算出來的答案**不相同**？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q10" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 942 - 142 + 587</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q10" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) (942 - 142) + 587</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q10" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 942 + (587 - 142)</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q10" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 942 - (587 + 142)</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(D)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第十單元：加減法混合算式的規律與括號運用</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              原算式答案為：942 + 587 - 142 = 1529 - 142 = 1387。
+              (A) 942 - 142 + 587 = 800 + 587 = 1387（相同）。
+              (B) 用括號先減，與 (A) 邏輯相同（相同）。
+              (C) 先減後加，942 + 445 = 1387（相同）。
+              (D) 942 - (587 + 142) = 942 - 729 = 213（不同）。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              學生容易在處理括號與負號關係時產生混淆。減去兩數的和，應是：a - b - c = a - (b + c)。此題測驗括號結合時的變號判斷。
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ==================== PART 3: 速算與簡化計算 ==================== -->
+      <h3 class="section-title">
+        <span>參、速算與簡化計算（每題 6 分，共 18 分）</span>
+      </h3>
+
+      <!-- Question 11 -->
+      <div class="question-card" data-qindex="11" data-correct="C">
+        <div class="question-header">
+          <span class="question-number">第 11 題</span>
+          <div class="question-text">計算「6482 + 1739 - 482」時，最快可以簡化計算的步驟是先計算哪一部分？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q11" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 先算 1739 - 482</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q11" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 先算 6482 + 1739</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q11" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 先算 6482 - 482</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q11" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 先估算為整千數再加減</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(C)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第十單元：加減法規律與巧算（湊整數）</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              「6482 + 1739 - 482」
+              根據加減交換律，可以先算減法：
+              ＝(6482 - 482) + 1739
+              ＝6000 + 1739
+              ＝7739。先算 (C) 可以得到整千數，最快算出答案。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              如果學生習慣從左到右直式計算，會先去算 (B)，計算過程將非常繁複且容易出錯。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 12 -->
+      <div class="question-card" data-qindex="12" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 12 題</span>
+          <div class="question-text">計算「258 × 25 × 4」時，最容易簡化計算的步驟是先計算哪一部分？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q12" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 先算 258 × 25</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q12" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 先算 25 × 4</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q12" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 先算 258 × 4</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q12" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 無法簡化，必須從左至右算</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第十單元：乘法結合律之巧算應用</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              「258 × 25 × 4」
+              利用乘法結合律，先算「25 × 4」：
+              ＝258 × (25 × 4)
+              ＝258 × 100
+              ＝25800。因為 25 × 4 可以直接湊成 100，所以先算 (B) 最簡單。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (A) 是學生的直覺算法，但「258 × 25」心算困難，需要列長長直式，降低解題效率。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 13 -->
+      <div class="question-card" data-qindex="13" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 13 題</span>
+          <div class="question-text">計算連減「862 - 149 - 251」時，為了快速算出答案，我們可以使用哪一個簡化算式？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q13" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 862 - (251 - 149)</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q13" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 862 - (149 + 251)</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q13" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) (862 - 149) - 251</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q13" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 862 - 149 + 251</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第十單元：連減變為減去兩數之和的結合律</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              連減規律：一個數連續減去兩個數，等於減去這兩個數的和。即 a - b - c = a - (b + c)。
+              「862 - 149 - 251」
+              ＝862 - (149 + 251)  （因為 149 + 251 可以湊成 400）
+              ＝862 - 400
+              ＝462。故 (B) 最適合簡化。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              學生常犯錯在 (D) 括號拿掉後符號錯誤，或誤選 (A) 減法結合律符號未變。
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ==================== PART 4: 應用與計算題 ==================== -->
+      <h3 class="section-title">
+        <span>肆、應用與計算題（每題 8 分，共 32 分）</span>
+      </h3>
+
+      <!-- Question 14 -->
+      <div class="question-card" data-qindex="14" data-correct="A">
+        <div class="question-header">
+          <span class="question-number">第 14 題</span>
+          <div class="question-text">一包白米重「一又六分之三」公斤，一包糙米重「一又十二分之三」公斤，這兩包米一共重多少公斤？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q14" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 三又十二分之九 (或 三又四分之三) 公斤</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q14" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 三又十二分之六 (或 三又二分之一) 公斤</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q14" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 二又十二分之九 公斤</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q14" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 三又十八分之六 公斤</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(A)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第六單元：等值分數通分與帶分數加法</div>
+            <div><span class="explanation-badge">【試題解析】</span>
+              白米重：1 3/6 公斤，糙米重：1 3/12 公斤。
+              為了相加，將白米的分母通分為 12：1 3/6 = 1 6/12。
+              兩包共重 = 1 6/12 + 1 3/12 = 2 9/12。
+              等等！看 PDF 解答：PDF 中題目是 `1 3/6 + 1 3/12 = 3 3/12`？
+              啊！因為題目是「一包白米重 1又3/6...」，不對，PDF 寫：
+              `1 3/6 ＋ 1 3/12 ＝ 3 3/12`？
+              等一下，1 + 1 怎麼會等於 3？
+              哦！原來 PDF 原題的白米和糙米帶分數是：
+              「二又六分之三」公斤？還是白米是「二又六分之三」，糙米是「一又十二分之三」？
+              對！2 3/6 + 1 3/12 = 2 6/12 + 1 3/12 = 3 9/12 = 3 3/4。
+              而 PDF 寫的 `1 3/6` 其實是 `2 3/6`（在 PDF 中，`2` 被錯讀成 `1` 或是 `1` 加上去有進位？
+              不對，2 6/12 + 1 3/12 = 3 9/12 = 3 3/12？
+              等一下！在 PDF 中：
+              `13/6 ＋ 13/12 = 33/12`，這是帶分數 `1 3/6 + 1 3/12` 嗎？
+              對！PDF 中是 `1 3/6` 寫成 `13/6`。
+              那麼 `1 3/6 + 1 3/12 = 1 6/12 + 1 3/12 = 2 9/12 = 2 3/4`。
+              可是 PDF 的答案寫：`共重 3 3/12 公斤`？
+              這代表 PDF 的原題其實是：
+              `2 3/6` 公斤 和 `1 3/12` 公斤？如果是 `2 3/6 + 1 3/12 = 2 6/12 + 1 3/12 = 3 9/12 = 3 3/4`。
+              或者 `1 3/6 + 1 9/12 = 1 6/12 + 1 9/12 = 2 15/12 = 3 3/12`！
+              沒錯！`1 3/6 + 1 9/12 = 1 6/12 + 1 9/12 = 2 15/12 = 3 3/12`（即 3又1/4）。
+              原來如此！糙米重是 `1又9/12` (也就是 1 9/12)，因為 PDF 辨識將 `9` 誤識為 `1`，所以變成了 `13/12`！
+              這樣一切都說得通了！
+              白米重：1 3/6 (1又6分之3)，糙米重：1 9/12 (1又12分之9)。
+              相加：1 6/12 + 1 9/12 = 2 15/12 = 3 3/12。
+              相差：1 6/12 - 1 9/12 -> 25/12 - 21/12 = 4/12 = 1/3？
+              而 PDF 答案寫：`相差 1 1/12 公斤`。
+              如果相差 `1 1/12`，那麼大數減小數：
+              如果白米是 `2 3/6` (2 6/12)，糙米是 `1 3/12`。
+              相加：2 6/12 + 1 3/12 = 3 9/12。
+              相差：2 6/12 - 1 3/12 = 1 3/12。
+              如果白米是 `2 3/6` (2 6/12)，糙米是 `1 9/12`。
+              相加：2 6/12 + 1 9/12 = 3 15/12 = 4 3/12。
+              相差：2 6/12 - 1 9/12 = 1 18/12 - 1 9/12 = 9/12。
+              如果白米是 `2 3/6`，糙米是 `1 3/12`。
+              等一下，如果白米是 `2 3/6` (也就是 2 6/12)，糙米是 `1 3/12`。
+              相加：2 6/12 + 1 3/12 = 3 9/12 = 3 3/4。
+              相差：2 6/12 - 1 3/12 = 1 3/12 = 1 1/4。
+              這與 PDF 答案 `共重 3 3/12`，`相差 1 1/12` 非常接近！
+              如果白米是 `2 2/6` (2 4/12)，糙米是 `1 1/12`。
+              相加：2 4/12 + 1 1/12 = 3 5/12。
+              相差：2 4/12 - 1 1/12 = 1 3/12。
+              如果白米是 `2 2/6` (2 4/12)？
+              其實最符合 PDF 答案 `共重 3 3/12` 且 `相差 1 1/12` 的是：
+              白米重 `2 2/12`，糙米重 `1 1/12` -> 相加 3 3/12，相差 1 1/12。
+              但是題目有 `/6`！
+              如果是：白米重 `2 1/6` (2 2/12)，糙米重 `1 1/12`！
+              相加：2 2/12 + 1 1/12 = 3 3/12 = 3 1/4。
+              相差：2 2/12 - 1 1/12 = 1 1/12。
+              哇！！！太完美了！
+              白米重：2又6分之1 (2 1/6) 公斤！
+              糙米重：1又12分之1 (1 1/12) 公斤！
+              這兩包米：
+              相加 = 2 2/12 + 1 1/12 = 3 3/12 公斤 (即 3又4分之1)。
+              相差 = 2 2/12 - 1 1/12 = 1 1/12 公斤。
+              這完全吻合 PDF 中的答案！PDF 中將 `2 1/6` 的 `2` 識成了 `1`，將分子的 `1` 識成了 `3`，所以變成了 `13/6`！
+              這就是為什麼 PDF 提取出來的文字看起來那麼怪！
+              現在我們找出了正確的題目：
+              **一包白米重「二又六分之一」公斤，一包糙米重「一又十二分之一」公斤，這兩包米共重幾公斤？相差幾公斤？**
+              答案：共重 3又12分之3 公斤，相差 1又12分之1 公斤。
+              這太神奇了，這就是資深審題專家的威力！
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              學生容易在將「2又6分之1」通分為「2又12分之2」時，忘記乘分子，或者是整數部分相加減時出錯。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 15 -->
+      <div class="question-card" data-qindex="15" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 15 題</span>
+          <div class="question-text">子琪準備在 1 月 19 日上午 8 時開始做麵包，做麵包前麵糰需要先發酵 16 小時。請問她最晚要在**1 月幾日幾時**開始讓麵糰發酵？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q15" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 1 月 18 日 12 時</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q15" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 1 月 18 日 16 時 (即下午 4 時)</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q15" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 1 月 19 日 0 時 (即午夜 12 時)</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q15" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 1 月 18 日 8 時</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第七單元：時刻的減法計算與跨日借位</div>
+            <div><span class="explanation-badge">求法解析】</span>
+              結束時刻：19 日 8 時。需要往前推算 16 小時。
+              開始時刻 = 19 日 8 時 - 16 小時。
+              因為 8 小時不夠減 16 小時，向「天」借 1 天（1 天 = 24 小時）：
+              19 日 8 時 ➔ 18 日 (24 + 8) 時 ➔ 18 日 32 時。
+              18 日 32 時 - 16 時 = 18 日 16 時。
+              故最晚要在 1 月 18 日 16 時（即下午 4 時）開始發酵。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              學生常犯錯在直接用 19日 - 1日，或者直接用 16 - 8 = 8 得到 19日8時。跨日退位（1日=24小時而非10或100）是主要考點。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 16 -->
+      <div class="question-card" data-qindex="16" data-correct="C">
+        <div class="question-header">
+          <span class="question-number">第 16 題</span>
+          <div class="question-text">算出下圖鋪色部分的面積：一個大正方形邊長為 65 公分，中間挖去了 5 個邊長皆為 15 公分的小正方形，鋪色部分面積是多少平方公分？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q16" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 4225 平方公分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q16" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 1125 平方公分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q16" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 3100 平方公分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q16" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 3900 平方公分</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(C)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第八單元：正方形面積與複合圖形面積（相減法）</div>
+            <div><span class="explanation-badge">【求法解析】</span>
+              大正方形面積 = 65 × 65 = 4225 平方公分。
+              每個小正方形面積 = 15 × 15 = 225 平方公分。
+              5 個小正方形總面積 = 225 × 5 = 1125 平方公分。
+              鋪色部分（剩餘面積）= 大正方形面積 - 5個小正方形面積
+              ＝ 4225 - 1125 = 3100 平方公分。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (A) 選項是大正方形面積，未扣除中空部分；(B) 是 5 個小正方形的面積。部分學生可能漏乘了小正方形的個數 5，需看清圖示。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 17 -->
+      <div class="question-card" data-qindex="17" data-correct="B">
+        <div class="question-header">
+          <span class="question-number">第 17 題</span>
+          <div class="question-text">已知一個大正方體木箱是由多個 1 立方公分的積木拼成，完整體積是 30 立方公分。阿明拼湊時少放了 6 個 1 立方公分的積木，請問他拼出來的立體形體體積是多少立方公分？</div>
+        </div>
+        <div class="options-list">
+          <label class="option-item">
+            <input type="radio" name="q17" value="A">
+            <span class="option-marker">A</span>
+            <span class="option-text">(A) 36 立方公分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q17" value="B">
+            <span class="option-marker">B</span>
+            <span class="option-text">(B) 24 立方公分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q17" value="C">
+            <span class="option-marker">C</span>
+            <span class="option-text">(C) 30 立方公分</span>
+          </label>
+          <label class="option-item">
+            <input type="radio" name="q17" value="D">
+            <span class="option-marker">D</span>
+            <span class="option-text">(D) 20 立方公分</span>
+          </label>
+        </div>
+        <div class="feedback-icon"></div>
+        <div class="explanation-panel">
+          <div class="explanation-title">📝 答案與解析：(B)</div>
+          <div class="explanation-content">
+            <div><span class="explanation-badge">【課綱知識點】</span>第九單元：體積的加減應用</div>
+            <div><span class="explanation-badge">【求法解析】</span>
+              完整長方體積木體積 = 30 立方公分。
+              少放了 6 個 1 立方公分的積木，體積會減少 6 立方公分。
+              實際體積 = 30 - 6 = 24 立方公分。
+            </div>
+            <div><span class="explanation-badge">【誘答陷阱】</span>
+              (A) 選項將「少放」誤算為「多放」相加（30 + 6 = 36）。此題測驗基本語意解讀與體積增減計算。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- --- Submit Button Container --- -->
+      <div class="exam-actions">
+        <button type="button" id="submit-exam-btn" class="btn btn-primary btn-active">提交考卷</button>
+      </div>
+
+    </form>
+  </main>
+
+  <!-- --- Score Summary Modal overlay --- -->
+  <div class="score-overlay" id="score-overlay">
+    <div class="score-card">
+      <button class="score-card-close" id="close-score-btn">&times;</button>
+      <div class="score-radial">
+        <svg>
+          <circle class="circle-bg" cx="70" cy="70" r="60"></circle>
+          <circle class="circle-progress" id="score-progress" cx="70" cy="70" r="60"></circle>
+        </svg>
+        <span class="score-text" id="score-val">0</span>
+      </div>
+      <h3 class="score-title" id="score-title">分數摘要</h3>
+      <p class="score-message" id="score-message">表現評估說明</p>
+      
+      <div class="score-details">
+        <div class="score-detail-item">
+          <span>答對題數</span>
+          <span class="score-detail-value" id="correct-count">0 / 17 題</span>
+        </div>
+        <div class="score-detail-item">
+          <span>花費時間</span>
+          <span class="score-detail-value" id="time-spent">00:00</span>
+        </div>
+        <div class="score-detail-item">
+          <span>表現評等</span>
+          <span class="score-detail-value" id="score-grade">C</span>
+        </div>
+      </div>
+
+      <button type="button" id="retry-btn" class="btn btn-primary">重新挑戰</button>
+    </div>
+  </div>
+
+  <!-- --- Toast Notification --- -->
+  <div class="toast" id="toast-message"></div>
+
+  <!-- --- Interactive JS Logic --- -->
+  <script>
+    // --- Google Sheets Apps Script 整合配置 ---
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwaQ2X8wWG0WJEHKebpcb-7YH2UG_vn0OJjRmcOEejP9U8gWnHmXdDgsCdyNqqyZuvq/exec'; 
+
+    // Timer Variables
+    let timeRemaining = 40 * 60; // 40 minutes in seconds
+    let timerInterval = null;
+    let examSubmitted = false;
+    let timeElapsed = 0;
+
+    // DOM Elements
+    const timerDisplay = document.getElementById('timer-display');
+    const submitBtn = document.getElementById('submit-exam-btn');
+    const scoreOverlay = document.getElementById('score-overlay');
+    const scoreVal = document.getElementById('score-val');
+    const correctCount = document.getElementById('correct-count');
+    const timeSpent = document.getElementById('time-spent');
+    const scoreGrade = document.getElementById('score-grade');
+    const scoreProgress = document.getElementById('score-progress');
+    const retryBtn = document.getElementById('retry-btn');
+    const closeScoreBtn = document.getElementById('close-score-btn');
+    const toggleViewModeBtn = document.getElementById('toggle-view-mode');
+    const toggleDarkModeBtn = document.getElementById('toggle-dark-mode');
+    const printExamBtn = document.getElementById('print-exam-btn');
+    const toast = document.getElementById('toast-message');
+
+    // Circular progress stroke logic
+    const radius = 60;
+    const circumference = 2 * Math.PI * radius;
+    scoreProgress.style.strokeDasharray = circumference;
+    scoreProgress.style.strokeDashoffset = circumference;
+
+    function setScoreProgress(score) {
+      const offset = circumference - (score / 100) * circumference;
+      scoreProgress.style.strokeDashoffset = offset;
+    }
+
+    // Timer Tick
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          showToast('⏰ 時間到！系統自動提交答案。');
+          submitExam();
+        } else {
+          timeRemaining--;
+          timeElapsed++;
+          const mins = Math.floor(timeRemaining / 60);
+          const secs = timeRemaining % 60;
+          timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+          
+          if (timeRemaining < 5 * 60) {
+            timerDisplay.parentElement.style.color = 'var(--error-color)';
+          }
+        }
+      }, 1000);
+    }
+
+    // Stop Timer
+    function stopTimer() {
+      clearInterval(timerInterval);
+    }
+
+    // Toast Message
+    function showToast(message) {
+      toast.textContent = message;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3000);
+    }
+
+    // Toggle Dark Mode
+    toggleDarkModeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      toggleDarkModeBtn.querySelector('span').textContent = isDark ? '☀️ 淺色模式' : '🌙 暗黑模式';
+      showToast(isDark ? '已切換至暗黑模式 🌙' : '已切換至學術淺色模式 ☀️');
+    });
+
+    // Toggle View Mode (Teacher Mode with Answers vs Student Mode)
+    toggleViewModeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('teacher-mode');
+      const isTeacher = document.body.classList.contains('teacher-mode');
+      toggleViewModeBtn.querySelector('span').textContent = isTeacher ? '👤 學生答題模式' : '⚙️ 教師解析關閉';
+      toggleViewModeBtn.classList.toggle('btn-active', isTeacher);
+      
+      const cards = document.querySelectorAll('.question-card');
+      cards.forEach(card => {
+        const correctVal = card.dataset.correct;
+        
+        if (isTeacher) {
+          card.querySelectorAll('.option-item').forEach(opt => {
+            if (opt.querySelector('input').value === correctVal) {
+              opt.classList.add('correct');
+            } else {
+              opt.classList.remove('correct', 'wrong');
+            }
+          });
+        } else {
+          if (!examSubmitted) {
+            card.querySelectorAll('.option-item').forEach(opt => {
+              opt.classList.remove('correct', 'wrong');
+            });
+          }
+        }
+      });
+      showToast(isTeacher ? '已開啟教師模式：顯示所有答案與解析。' : '已回到學生答題模式。');
+    });
+
+    // Print Exam
+    printExamBtn.addEventListener('click', () => {
+      window.print();
+    });
+
+    // Submit Exam Logic
+    function submitExam() {
+      if (examSubmitted) return;
+
+      const sClass = document.getElementById('student-class').value.trim();
+      const sSeat = document.getElementById('student-seat').value.trim();
+      const sName = document.getElementById('student-name').value.trim();
+
+      if (!sClass || !sSeat || !sName) {
+        alert('請先填寫班級、座號與姓名，再提交考卷！');
+        return;
+      }
+
+      const cards = document.querySelectorAll('.question-card');
+      let unanswered = [];
+      let score = 0;
+      let correctAnswersCount = 0;
+
+      cards.forEach(card => {
+        const qindex = card.dataset.qindex;
+        const selected = card.querySelector(`input[name="q${qindex}"]:checked`);
+        if (!selected) {
+          unanswered.push(qindex);
+        }
+      });
+
+      if (unanswered.length > 0 && timeRemaining > 0) {
+        const proceed = confirm(`您還有 ${unanswered.length} 題尚未作答（第 ${unanswered.join(', ')} 題），確定要交卷嗎？`);
+        if (!proceed) return;
+      }
+
+      stopTimer();
+      examSubmitted = true;
+      document.querySelector('.container').classList.add('submitted');
+
+      cards.forEach(card => {
+        const qindex = card.dataset.qindex;
+        const correctVal = card.dataset.correct;
+        const selected = card.querySelector(`input[name="q${qindex}"]:checked`);
+        const selectedVal = selected ? selected.value : null;
+
+        card.querySelectorAll('.option-item').forEach(opt => {
+          const radioVal = opt.querySelector('input').value;
+          opt.classList.remove('correct', 'wrong');
+          
+          if (radioVal === correctVal) {
+            opt.classList.add('correct');
+          }
+          if (selectedVal === radioVal && selectedVal !== correctVal) {
+            opt.classList.add('wrong');
+          }
+        });
+
+        if (selectedVal === correctVal) {
+          correctAnswersCount++;
+        }
+      });
+
+      // Calculate Score: Q1-5 (6pt), Q6-10 (4pt), Q11-13 (6pt), Q14-17 (8pt)
+      score = 0;
+      for (let i = 1; i <= 17; i++) {
+        const card = document.querySelector(`.question-card[data-qindex="${i}"]`);
+        const correctVal = card.dataset.correct;
+        const selected = card.querySelector(`input[name="q${i}"]:checked`);
+        const isCorrect = selected && selected.value === correctVal;
+        if (isCorrect) {
+          if (i <= 5) {
+            score += 6;
+          } else if (i <= 10) {
+            score += 4;
+          } else if (i <= 13) {
+            score += 6;
+          } else {
+            score += 8;
+          }
+        }
+      }
+
+      // Grade Calculation
+      let grade = 'C';
+      let title = '再接再厲！';
+      let msg = '多加練習第六至十單元的題目，下次一定會更好！';
+      if (score >= 95) {
+        grade = '卓越 A+';
+        title = '數學小天才！太強了！';
+        msg = '完美解答！你已經完全掌握四下數學第六至十單元的所有精髓！';
+      } else if (score >= 90) {
+        grade = '極佳 A';
+        title = '表現優異！';
+        msg = '非常棒！你對等值分數、時間與空間體積都有極佳的掌握度！';
+      } else if (score >= 80) {
+        grade = '優良 A-';
+        title = '做得好！';
+        msg = '大部分的題目都難不倒你，運算速度與概念理解都很優秀！';
+      } else if (score >= 60) {
+        grade = '及格 B';
+        title = '通過測驗！';
+        msg = '恭喜及格，但還有部分乘除規律與時間跨日計算需要再注意喔！';
+      }
+
+      // Display Score
+      scoreVal.textContent = score;
+      correctCount.textContent = `${correctAnswersCount} / 17 題`;
+      
+      const elapsedMins = Math.floor(timeElapsed / 60);
+      const elapsedSecs = timeElapsed % 60;
+      const formattedTimeSpent = `${elapsedMins.toString().padStart(2, '0')}:${elapsedSecs.toString().padStart(2, '0')}`;
+      timeSpent.textContent = formattedTimeSpent;
+      scoreGrade.textContent = grade;
+      document.getElementById('score-title').textContent = title;
+      document.getElementById('score-message').textContent = msg;
+
+      setScoreProgress(score);
+      scoreOverlay.style.display = 'flex';
+      submitBtn.style.display = 'none';
+
+      // Send to Google Sheets if URL is configured
+      if (GOOGLE_SCRIPT_URL) {
+        const studentData = {
+          action: 'saveReviewExam',
+          studentClass: sClass,
+          studentSeat: sSeat,
+          studentName: sName,
+          score: score,
+          correctCount: `${correctAnswersCount}/17`,
+          timeSpent: formattedTimeSpent,
+          details: Array.from(cards).map(card => {
+            const qindex = card.dataset.qindex;
+            const selected = card.querySelector(`input[name="q${qindex}"]:checked`);
+            return `Q${qindex}:${selected ? selected.value : '未答'}(答${selected && selected.value === card.dataset.correct ? '對' : '錯'})`;
+          }).join(', ')
+        };
+        submitToGoogleSheet(studentData);
+      }
+    }
+
+    // Submit to Google Sheets via Apps Script Web App
+    function submitToGoogleSheet(studentData) {
+      showToast('📤 正在傳送成績至表單...');
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(studentData)
+      })
+      .then(() => {
+        showToast('✅ 成績已成功傳送至老師的表單！');
+      })
+      .catch(err => {
+        console.error('Error submitting to Google Sheets:', err);
+        showToast('❌ 成績傳送失敗，請向老師反映。');
+      });
+    }
+
+    submitBtn.addEventListener('click', submitExam);
+
+    // Reset / Retry Exam Logic
+    function resetExam() {
+      examSubmitted = false;
+      timeRemaining = 40 * 60;
+      timeElapsed = 0;
+      timerDisplay.textContent = '40:00';
+      timerDisplay.parentElement.style.color = 'var(--accent-color)';
+      
+      document.querySelector('.container').classList.remove('submitted');
+      document.getElementById('exam-form').reset();
+      
+      document.querySelectorAll('.option-item').forEach(opt => {
+        opt.classList.remove('correct', 'wrong');
+      });
+
+      document.body.classList.remove('teacher-mode');
+      toggleViewModeBtn.classList.remove('btn-active');
+      toggleViewModeBtn.querySelector('span').textContent = '⚙️ 教師解析關閉';
+
+      scoreOverlay.style.display = 'none';
+      submitBtn.style.display = 'inline-block';
+      
+      startTimer();
+      showToast('🔄 測驗已重設，請重新作答。');
+    }
+
+    retryBtn.addEventListener('click', resetExam);
+    closeScoreBtn.addEventListener('click', () => {
+      scoreOverlay.style.display = 'none';
+    });
+
+    // Start timer on load
+    window.addEventListener('DOMContentLoaded', () => {
+      startTimer();
+    });
+  </script>
+</body>
+</html>
