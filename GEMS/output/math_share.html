@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>四年級下學期數學科期末段考複習卷（第六至十單元） - 康軒版</title>
   <meta name="description" content="國小四年級下學期數學科第六至十單元期末複習線上互動評量與列印試卷，包含等值分數、時間、面積、體積與乘除規律，對齊108課綱。">
+  <!-- Facebook Open Graph Meta Tags -->
+  <meta property="og:title" content="四年級下學期數學期末段考總複習線上評量卷（第六至十單元）">
+  <meta property="og:description" content="對齊 108 課綱康軒版，包含等值分數、時間、面積、體積與巧算。支援即時成績卡與詳細試題解析，點擊立即開始自我檢測！">
+  <meta property="og:image" content="https://g4-exams-review-portal.netlify.app/math_exam_thumbnail.png">
+  <meta property="og:url" content="https://g4-exams-review-portal.netlify.app/math_share.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="四年級期末線上評量系統">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1704,7 +1711,10 @@
         </div>
       </div>
 
-      <button type="button" id="retry-btn" class="btn btn-primary">重新挑戰</button>
+      <div style="display: flex; gap: 12px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
+        <button type="button" id="retry-btn" class="btn btn-primary">重新挑戰</button>
+        <button type="button" id="share-fb-btn" class="btn" style="background: #1877F2; color: white; border: 1px solid #1877F2; font-weight: 600;" onclick="shareToFacebook()">🔵 分享到臉書</button>
+      </div>
     </div>
   </div>
 
@@ -1714,7 +1724,7 @@
   <!-- --- Interactive JS Logic --- -->
   <script>
     // --- Google Sheets Apps Script 整合配置 ---
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwaQ2X8wWG0WJEHKebpcb-7YH2UG_vn0OJjRmcOEejP9U8gWnHmXdDgsCdyNqqyZuvq/exec'; 
+    const GOOGLE_SCRIPT_URL = ''; 
 
     // Timer Variables
     let timeRemaining = 40 * 60; // 40 minutes in seconds
@@ -1961,7 +1971,16 @@
           }).join(', ')
         };
         submitToGoogleSheet(studentData);
+      } else {
+        showToast('📢 本版本為公開分享練習版，成績不寫入班級試算表。');
       }
+    }
+
+    function shareToFacebook() {
+      const score = document.getElementById('score-val').textContent;
+      const text = `我剛剛挑戰了「四年級下學期數學期末段考總複習線上評量卷」，拿到了 ${score} 分！你也來試試看吧！`;
+      const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://g4-exams-review-portal.netlify.app/math_share.html')}&quote=${encodeURIComponent(text)}`;
+      window.open(shareUrl, '_blank', 'width=600,height=400');
     }
 
     // Submit to Google Sheets via Apps Script Web App
