@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>四年級下學期期末總複習線上評量系統</title>
+  <!-- Google Fonts: Outfit, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #1e1b4b 100%);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-color: #6366f1;
+      --accent-gradient: linear-gradient(135deg, #818cf8 0%, #4f46e5 100%);
+      --accent-gradient-math: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      --glass-bg: rgba(30, 41, 59, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', 'Microsoft JhengHei', -apple-system, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+      padding: 2rem 1rem;
+    }
+
+    /* Ambient background glows */
+    .glow-1 {
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-2 {
+      position: absolute;
+      bottom: -10%;
+      right: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(14, 165, 233, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      z-index: 1;
+      position: relative;
+      text-align: center;
+    }
+
+    header {
+      margin-bottom: 3rem;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #a5b4fc;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-family: 'Outfit', 'Microsoft JhengHei', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 30%, #e2e8f0 70%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-family: 'Outfit', 'Microsoft JhengHei', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: left;
+      margin: 3rem 0 1.5rem 0;
+      padding-left: 12px;
+      border-left: 4px solid var(--accent-color);
+      color: #e2e8f0;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    @media (min-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .cards-grid.single {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto 2rem auto;
+      }
+    }
+
+    .portal-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .portal-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(800px circle at var(--x, 0) var(--y, 0), rgba(255, 255, 255, 0.06), transparent 40%);
+      pointer-events: none;
+    }
+
+    .portal-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 30px 60px rgba(99, 102, 241, 0.12);
+    }
+
+    .portal-card.math:hover {
+      border-color: rgba(14, 165, 233, 0.3);
+      box-shadow: 0 30px 60px rgba(14, 165, 233, 0.12);
+    }
+
+    .portal-card.fb-share:hover {
+      border-color: rgba(24, 119, 242, 0.3);
+      box-shadow: 0 30px 60px rgba(24, 119, 242, 0.15);
+    }
+
+    .icon-container {
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .portal-card:hover .icon-container {
+      transform: scale(1.08) rotate(3deg);
+    }
+
+    .chinese .icon-container {
+      background: var(--accent-gradient);
+    }
+
+    .math .icon-container {
+      background: var(--accent-gradient-math);
+    }
+
+    .fb-share .icon-container {
+      background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%);
+    }
+
+    .card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .card-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .enter-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .chinese .enter-btn {
+      background: var(--accent-gradient);
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.25);
+    }
+
+    .math .enter-btn {
+      background: var(--accent-gradient-math);
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.25);
+    }
+
+    .fb-share .enter-btn {
+      background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%);
+      box-shadow: 0 4px 15px rgba(24, 119, 242, 0.25);
+      color: white;
+    }
+
+    .enter-btn:hover {
+      filter: brightness(1.1);
+    }
+
+    .btn-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .portal-card:hover .btn-arrow {
+      transform: translateX(4px);
+    }
+
+    footer {
+      color: #475569;
+      font-size: 0.85rem;
+      margin-top: 3rem;
+      animation: fadeIn 1s ease-out 0.4s both;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <div class="container">
+    <header>
+      <span class="badge">108 課綱期末總複習</span>
+      <h1>四年級期末複習線上評量</h1>
+      <p class="subtitle">為國小四年級學生打造的高品質段考複習試卷。提供線上答題回饋、教師解析模式與雙模實體列印。</p>
+    </header>
+
+    <!-- Section 1: Class Official Exams -->
+    <h2 class="section-title">🏫 班級學生線上評量專區（成績自動寫入老師的試算表）</h2>
+    <div class="cards-grid">
+      <!-- Chinese Portal Card -->
+      <a class='portal-card chinese' href='/chinese'>
+        <div class="icon-container">📖</div>
+        <h2 class="card-title">國語科期末複習卷</h2>
+        <p class="card-desc">翰林版第七至十二課複習。題型包含字音字形、字詞義、成語修辭、課文大意，以及精選課外閱讀素養評量。</p>
+        <span class="enter-btn">
+          進入測驗
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12L10 8L6 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- Math Portal Card -->
+      <a class='portal-card math' href='/math'>
+        <div class="icon-container">📐</div>
+        <h2 class="card-title">數學科期末複習卷</h2>
+        <p class="card-desc">康軒版第六至十單元複習。題型包含等值分數、時間與時刻推算、面積與體積計數、巧算與簡化計算，及情境應用題。</p>
+        <span class="enter-btn">
+          進入測驗
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12L10 8L6 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- Section 2: Public Social Sharing -->
+    <h2 class="section-title">🌐 社群分享公開練習專區（成績不寫入資料庫，適合社群分享）</h2>
+    <div class="cards-grid single">
+      <!-- Math Facebook Share Card -->
+      <a class='portal-card fb-share' href='/math_share'>
+        <div class="icon-container">🔵</div>
+        <h2 class="card-title">數學科期末複習卷 (臉書分享版)</h2>
+        <p class="card-desc">康軒版第六至十單元。本版本為公開練習版，成績不計入班級名單，專為社群與家長分享所設計，適合公開練習！</p>
+        <span class="enter-btn">
+          進入練習
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12L10 8L6 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <footer>
+      <p>© 2026 國小四年級期末線上評量系統 · 點擊卡片直接進入線上評量或練習</p>
+    </footer>
+  </div>
+
+  <script>
+    // Spotlight Hover Effect
+    document.querySelectorAll('.portal-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+      });
+    });
+  </script>
+</body>
+</html>
