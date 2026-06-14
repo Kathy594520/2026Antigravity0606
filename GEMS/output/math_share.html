@@ -770,9 +770,6 @@
         <span>📖 四下數學期末複習卷</span>
       </div>
       <div class="toolbar-buttons">
-        <button id="toggle-view-mode" class="btn" title="切換學生答題/教師解答模式">
-          <span>⚙️ 教師解析關閉</span>
-        </button>
         <button id="toggle-dark-mode" class="btn" title="切換深色/淺色主題">
           <span>🌙 暗黑模式</span>
         </button>
@@ -1740,7 +1737,6 @@
     const scoreProgress = document.getElementById('score-progress');
     const retryBtn = document.getElementById('retry-btn');
     const closeScoreBtn = document.getElementById('close-score-btn');
-    const toggleViewModeBtn = document.getElementById('toggle-view-mode');
     const toggleDarkModeBtn = document.getElementById('toggle-dark-mode');
     const printExamBtn = document.getElementById('print-exam-btn');
     const toast = document.getElementById('toast-message');
@@ -1799,35 +1795,7 @@
       showToast(isDark ? '已切換至暗黑模式 🌙' : '已切換至學術淺色模式 ☀️');
     });
 
-    // Toggle View Mode (Teacher Mode with Answers vs Student Mode)
-    toggleViewModeBtn.addEventListener('click', () => {
-      document.body.classList.toggle('teacher-mode');
-      const isTeacher = document.body.classList.contains('teacher-mode');
-      toggleViewModeBtn.querySelector('span').textContent = isTeacher ? '👤 學生答題模式' : '⚙️ 教師解析關閉';
-      toggleViewModeBtn.classList.toggle('btn-active', isTeacher);
-      
-      const cards = document.querySelectorAll('.question-card');
-      cards.forEach(card => {
-        const correctVal = card.dataset.correct;
-        
-        if (isTeacher) {
-          card.querySelectorAll('.option-item').forEach(opt => {
-            if (opt.querySelector('input').value === correctVal) {
-              opt.classList.add('correct');
-            } else {
-              opt.classList.remove('correct', 'wrong');
-            }
-          });
-        } else {
-          if (!examSubmitted) {
-            card.querySelectorAll('.option-item').forEach(opt => {
-              opt.classList.remove('correct', 'wrong');
-            });
-          }
-        }
-      });
-      showToast(isTeacher ? '已開啟教師模式：顯示所有答案與解析。' : '已回到學生答題模式。');
-    });
+
 
     // Print Exam
     printExamBtn.addEventListener('click', () => {
@@ -2013,8 +1981,6 @@
       });
 
       document.body.classList.remove('teacher-mode');
-      toggleViewModeBtn.classList.remove('btn-active');
-      toggleViewModeBtn.querySelector('span').textContent = '⚙️ 教師解析關閉';
 
       scoreOverlay.style.display = 'none';
       submitBtn.style.display = 'inline-block';
