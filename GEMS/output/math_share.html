@@ -1711,10 +1711,7 @@
         </div>
       </div>
 
-      <div style="display: flex; gap: 12px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
-        <button type="button" id="retry-btn" class="btn btn-primary">重新挑戰</button>
-        <button type="button" id="share-fb-btn" class="btn" style="background: #1877F2; color: white; border: 1px solid #1877F2; font-weight: 600;" onclick="shareToFacebook()">🔵 分享到臉書</button>
-      </div>
+      <button type="button" id="retry-btn" class="btn btn-primary" style="margin-top: 15px;">重新挑戰</button>
     </div>
   </div>
 
@@ -1976,12 +1973,7 @@
       }
     }
 
-    function shareToFacebook() {
-      const score = document.getElementById('score-val').textContent;
-      const text = `我剛剛挑戰了「四年級下學期數學期末段考總複習線上評量卷」，拿到了 ${score} 分！你也來試試看吧！`;
-      const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://g4-exams-review-portal.netlify.app/math_share.html')}&quote=${encodeURIComponent(text)}`;
-      window.open(shareUrl, '_blank', 'width=600,height=400');
-    }
+
 
     // Submit to Google Sheets via Apps Script Web App
     function submitToGoogleSheet(studentData) {
